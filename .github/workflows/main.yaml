@@ -8,5 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
-      - run: bun run build
-      - run: bun x biome check .
+      - name: Build
+        run: |
+          bun install --frozen-lockfile
+          bun run build
+      - name: Check
+        run: bun x biome check .
