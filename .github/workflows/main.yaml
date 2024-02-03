@@ -9,3 +9,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
       - run: bun build --outdir=dist index.ts
+      - run: bun x biome check .
