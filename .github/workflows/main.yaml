@@ -8,5 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
-      - run: bun build --outdir=dist index.ts
+      - run: bun run build
       - run: bun x biome check .

@@ -11,9 +11,26 @@
 	},
 	"javascript": {
 		"formatter": {
+			"indentStyle": "space",
+			"quoteStyle": "single",
 			"semicolons": "asNeeded"
 		}
 	},
+	"json": {
+		"formatter": {
+			"indentStyle": "space"
+		}
+	},
+	"overrides": [
+		{
+			"include": ["./biome.json"],
+			"json": {
+				"formatter": {
+					"indentStyle": "tab"
+				}
+			}
+		}
+	],
 	"files": {
 		"ignore": ["./dist/**/*"]
 	}
