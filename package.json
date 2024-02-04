@@ -1,7 +1,7 @@
 {
   "name": "miani",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,12 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^7.5.1",
     "preact": "^10.19.3"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
-    "@types/bun": "latest",
     "@preact/preset-vite": "^2.7.0",
+    "@types/bun": "latest",
+    "postcss": "^8.4.33",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
