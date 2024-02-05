@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, expect, it } from 'bun:test'
 
 import r from './r'
 
 describe('r`` tag', () => {
   it('returns an empty regex with an empty template', () => {
     const actual = r``
-    const expected = new RegExp('')
+    const expected = /(?:)/
 
     expect(actual).toEqual(expected)
   })

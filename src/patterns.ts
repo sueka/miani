@@ -7,6 +7,7 @@
 import r from './lib/tags/r'
 
 // SAFE-CHAR = WSP / %x21 / %x23-2B / %x2D-39 / %x3C-7E / NON-ASCII
+// biome-ignore lint/suspicious/noControlCharactersInRegex: RFC 2426 mentions control characters
 const safeChar = /[^\x00-\x08\x0A-\x1F\x22\x3B\x3A\x2C]/
 
 // ESCAPED-CHAR = "\\" / "\;" / "\," / "\n" / "\N"

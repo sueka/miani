@@ -3,7 +3,7 @@ import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import { textValue, nValue } from './patterns'
+import { nValue, textValue } from './patterns'
 import vCardState from './recoil/selectors/vCardState'
 
 const VCardForm: React.FC = () => {
@@ -19,7 +19,7 @@ const VCardForm: React.FC = () => {
 
   useEffect(() => {
     setVCard({ fn: fn.value, n: n.value })
-  }, [fn.value, n.value])
+  }, [setVCard, fn.value, n.value]) //
 
   return (
     <Grid>
