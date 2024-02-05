@@ -5,7 +5,7 @@ import NInput from './NInput'
 
 const VCardForm: React.FC = () => (
   <Grid>
-    <Grid.Col span={4}>
+    <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
       <FnInput />
       <NInput />
     </Grid.Col>
