@@ -3,7 +3,7 @@ import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import { textValue } from './patterns'
+import { textValue, nValue } from './patterns'
 import vCardState from './recoil/selectors/vCardState'
 
 const VCardForm: React.FC = () => {
@@ -13,8 +13,12 @@ const VCardForm: React.FC = () => {
     new RegExp(`^${textValue.source}$`).test(value),
   )
 
+  const [n, setN] = useValidatedState(vCard.n, (value) =>
+    new RegExp(`^${nValue.source}$`).test(value),
+  )
+
   useEffect(() => {
-    setVCard({ fn: fn.value })
+    setVCard({ fn: fn.value, n: n.value })
   }, [fn.value])
 
   return (
@@ -39,6 +43,27 @@ const VCardForm: React.FC = () => {
           }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setFn(event.currentTarget.value)
+          }}
+        />
+        <TextInput
+          label="N"
+          description={
+            <>
+              Specifies the components of the <mark>name</mark> of the object
+              the vCard represents.
+            </>
+          }
+          placeholder="Public;John;Quinlan;Mr.;Esq."
+          value={n.value}
+          error={
+            !n.valid && (
+              <>
+                Should be an <i>n-value</i> on p. 30, RFC 2426.
+              </>
+            )
+          }
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setN(event.currentTarget.value)
           }}
         />
       </Grid.Col>

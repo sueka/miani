@@ -14,3 +14,7 @@ const escapedChar = /(?:\\\\|\\;|\\,|\\n|\\N)/
 
 // text-value = *(SAFE-CHAR / ":" / DQUOTE / ESCAPED-CHAR)
 export const textValue = r`(?:${safeChar}|:|"|${escapedChar})*`
+
+// n-value = 0*4(text-value *("," text-value) ";")
+//           text-value *("," text-value)
+export const nValue = r`(?:${textValue}(?:,${textValue})*;){0,4}${textValue}(?:,${textValue})*`

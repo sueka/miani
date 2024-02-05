@@ -1,14 +1,17 @@
 import { DefaultValue, selector } from 'recoil'
 
 import fnState from '../atoms/fnState'
+import nState from '../atoms/nState'
 
 const vCardState = selector<VCard.VCard>({
   key: 'vCard',
   get({ get }) {
     const fn = get(fnState)
+    const n = get(nState)
 
     return {
       fn,
+      n,
     }
   },
   set({ set }, newVCard) {
@@ -19,6 +22,7 @@ const vCardState = selector<VCard.VCard>({
     // TODO: Validate {newVCard} if needed
 
     set(fnState, newVCard.fn)
+    set(nState, newVCard.n)
   },
 })
 
