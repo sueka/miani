@@ -19,7 +19,7 @@ const VCardForm: React.FC = () => {
 
   useEffect(() => {
     setVCard({ fn: fn.value, n: n.value })
-  }, [fn.value])
+  }, [fn.value, n.value])
 
   return (
     <Grid>
