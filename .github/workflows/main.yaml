@@ -13,4 +13,6 @@ jobs:
           bun install --frozen-lockfile
           bun run build
       - name: Check
-        run: bun x biome check .
+        run: |
+          bun x biome check .
+          bun test
