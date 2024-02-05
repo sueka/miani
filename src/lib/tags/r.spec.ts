@@ -5,7 +5,8 @@ import r from './r'
 describe('r`` tag', () => {
   it('returns an empty regex with an empty template', () => {
     const actual = r``
-    const expected = /(?:)/
+    // biome-ignore lint/complexity/useRegexLiterals: Literals cannot be tested well
+    const expected = new RegExp('')
 
     expect(actual).toEqual(expected)
   })
