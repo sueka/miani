@@ -1,6 +1,9 @@
 import assert from '../assert'
 import zip from '../zip'
 
+/**
+ * @throws `Error` if {substitutions} have different flags
+ */
 export default function r(
   [carSegment, ...segments]: TemplateStringsArray,
   ...substitutions: RegExp[]

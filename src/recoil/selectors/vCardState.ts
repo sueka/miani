@@ -14,6 +14,10 @@ const vCardState = selector<VCard.VCard>({
       n,
     }
   },
+
+  /**
+   * @throws `Error` if you try to set this state to a DefaultValue
+   */
   set({ set }, newVCard) {
     if (newVCard instanceof DefaultValue) {
       throw new Error('DefaultValue not supported.')
