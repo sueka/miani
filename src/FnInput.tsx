@@ -10,6 +10,7 @@ const FnInput: React.FC = () => {
 
   return (
     <TextInput
+      required
       label="FN"
       description={
         <>
