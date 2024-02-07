@@ -1,4 +1,4 @@
-interface Validated<T extends string> {
+interface Validated<T> {
   value: T
   valid: boolean
 }
