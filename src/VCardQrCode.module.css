@@ -1,0 +1,4 @@
+.Canvas {
+  max-height: 100vmin; /* portrait */
+  max-width: 100vmin; /* landscape */
+}
