@@ -1,7 +1,7 @@
 {
   "name": "miani",
   "private": true,
-  "version": "0.8.0",
+  "version": "0.8.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mantine/core": "^7.5.1",
+    "@tabler/icons-react": "^2.47.0",
     "@types/qrcode": "^1.5.5",
     "preact": "^10.19.3",
     "qrcode": "^1.5.3",
