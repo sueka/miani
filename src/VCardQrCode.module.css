@@ -1,4 +1,8 @@
-.Canvas {
-  max-height: 100vmin; /* portrait */
-  max-width: 100vmin; /* landscape */
+.Image {
+  width: revert;
+  max-height: calc(100vmin - 2 * var(--mantine-spacing-md)); /* portrait */
+  max-width: calc(100vmin - 2 * var(--mantine-spacing-md)); /* landscape */
+
+  /* Same as input */
+  border: calc(.0625rem * var(--mantine-scale)) solid var(--_input-bd);
 }

@@ -1,5 +1,8 @@
+import { Image, Input } from '@mantine/core'
+import classNames from 'classnames'
 import QRCode from 'qrcode'
-import { useEffect, useRef } from 'react'
+import React from 'react'
+import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import classes from './VCardQrCode.module.css'
@@ -7,14 +10,28 @@ import vCardState from './recoil/selectors/vCardState'
 
 const VCardQrCode: React.FC = () => {
   const vCard = useRecoilValue(vCardState)
-  const canvas = useRef<HTMLCanvasElement>(null)
+  const [qrCode, setQrCode] = useState<string>()
 
   useEffect(() => {
-    QRCode.toCanvas(canvas.current, vCard)
+    QRCode.toDataURL(vCard, (_left, right) => {
+      setQrCode(right)
+    })
   }, [vCard])
 
-  // biome-ignore lint/complexity/useLiteralKeys: See noPropertyAccessFromIndexSignature
-  return <canvas ref={canvas} className={classes['Canvas']} />
+  // This component has been wrapped with <Input> to be drawn boundaries.
+  // TODO: Crop <Input>
+  return (
+    <Input component={React.Fragment}>
+      <Image
+        src={qrCode}
+        radius="sm"
+        classNames={{
+          // biome-ignore lint/complexity/useLiteralKeys: See noPropertyAccessFromIndexSignature
+          root: classNames(classes['Image']),
+        }}
+      />
+    </Input>
+  )
 }
 
 export default VCardQrCode
