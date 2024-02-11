@@ -1,12 +1,21 @@
 import { TextInput } from '@mantine/core'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useValidatedState } from '@mantine/hooks'
+import { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 
+import r from './lib/tags/r'
+import { nValue } from './patterns'
 import nState from './recoil/atoms/nState'
-import validatedNState from './recoil/selectors/validated/validatedNState'
 
 const NInput: React.FC = () => {
-  const n = useRecoilValue(validatedNState)
-  const setN = useSetRecoilState(nState)
+  const [recoilN, setRecoilN] = useRecoilState(nState)
+
+  const [n, setN] = useValidatedState<string>(recoilN, (value) =>
+    r`^${nValue}$`.test(value),
+  )
+  useEffect(() => {
+    setRecoilN(n.value)
+  }, [setRecoilN, n])
 
   return (
     <TextInput

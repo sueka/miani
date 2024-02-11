@@ -3,11 +3,9 @@ import { IconCheck, IconCopy } from '@tabler/icons-react'
 import { useRecoilValue } from 'recoil'
 
 import vCardState from './recoil/selectors/vCardState'
-import validatedVCardObjectState from './recoil/selectors/validated/validatedVCardObjectState'
 
 const VCardTextarea: React.FC = () => {
   const vCard = useRecoilValue(vCardState)
-  const { valid } = useRecoilValue(validatedVCardObjectState)
 
   return (
     <Textarea
@@ -15,7 +13,6 @@ const VCardTextarea: React.FC = () => {
       readOnly
       label="vCard"
       value={vCard}
-      error={!valid}
       rightSection={
         <CopyButton value={vCard}>
           {({ copied, copy }) => (
