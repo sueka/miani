@@ -1,2 +1,5 @@
 /node_modules/
 /dist/
+
+# Vite PWA
+/dev-dist/
