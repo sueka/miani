@@ -25,7 +25,7 @@ export default function r(
   }
 
   for (const [substitution, segment] of zip(substitutions, segments)) {
-    pattern += substitution.source
+    pattern += `(?:${substitution.source})`
     pattern += segment
   }
 

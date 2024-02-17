@@ -22,7 +22,7 @@ describe('r`` tag', () => {
     const letter = /[A-Za-z]/
     const numeral = /\d/
     const actual = r`(?:${letter}|_)(?:${letter}|_|${numeral})*`
-    const expected = /(?:[A-Za-z]|_)(?:[A-Za-z]|_|\d)*/
+    const expected = /(?:(?:[A-Za-z])|_)(?:(?:[A-Za-z])|_|(?:\d))*/
 
     expect(actual).toEqual(expected)
   })

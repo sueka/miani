@@ -11,7 +11,7 @@ import r from './lib/tags/r'
 const safeChar = /[^\x00-\x08\x0A-\x1F\x22\x3B\x3A\x2C]/
 
 // ESCAPED-CHAR = "\\" / "\;" / "\," / "\n" / "\N"
-const escapedChar = /(?:\\\\|\\;|\\,|\\n|\\N)/
+const escapedChar = /\\\\|\\;|\\,|\\n|\\N/
 
 // text-value = *(SAFE-CHAR / ":" / DQUOTE / ESCAPED-CHAR)
 export const textValue = r`(?:${safeChar}|:|"|${escapedChar})*`
