@@ -1,5 +1,6 @@
 import { selector } from 'recoil'
 
+import bdayState from '../atoms/bdayState'
 import fnState from '../atoms/fnState'
 import nState from '../atoms/nState'
 
@@ -8,10 +9,12 @@ const vCardObjectState = selector<VCard.VCard>({
   get({ get }) {
     const fn = get(fnState)
     const n = get(nState)
+    const bday = get(bdayState)
 
     return {
       fn,
       n,
+      bday,
     }
   },
 })
