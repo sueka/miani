@@ -4,6 +4,7 @@ import { render } from 'react'
 import { RecoilRoot } from 'recoil'
 
 import App from './App'
+import './lib/Iso8601DateTime/String.prototype.toDate'
 import exit from './lib/exit'
 
 render(
