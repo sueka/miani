@@ -9,7 +9,7 @@ const second = /[0-5]\d/ // doesn't accept leap seconds.
 const milliseconds = /\d+/
 const offset = r`${hour}(?::?${minute})?`
 const date = r`${year}-${month}-${day}`
-const time = r`T${hour}:${minute}(?::${second}(?:.${milliseconds})?)?` // If you omit seconds, you can also omit milliseconds.
+const time = r`T${hour}:${minute}(?::${second}(?:.${milliseconds})?)?` // If you omit seconds, you must also omit milliseconds.
 const timeZone = r`Z|[+-]${offset}`
 const dateTime = r`^${date}${time}?${timeZone}?$`
 
