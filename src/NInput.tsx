@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil'
 
 import r from './lib/tags/r'
 import { nValue } from './patterns'
-import nState from './recoil/atoms/nState'
+import nState from './recoil/selectors/nState'
 
 const NInput: React.FC = () => {
   const [recoilN, setRecoilN] = useRecoilState(nState)
