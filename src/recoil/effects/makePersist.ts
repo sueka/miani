@@ -9,8 +9,13 @@ interface Options<K extends string, V> {
 
 export const key = 'recoil-atoms'
 
-// TODO: Delete this overload if https://github.com/microsoft/TypeScript/issues/26242 is fixed
+// TODO: Delete this overloads if https://github.com/microsoft/TypeScript/issues/26242 is fixed
 export default function makePersist<V, K extends string = string>(
+  atomKey: K,
+  options?: Options<K, V>,
+): { persist: AtomEffect<V>; restore: AtomEffect<V> }
+
+export default function makePersist<K extends string, V>(
   atomKey: K,
   options?: Options<K, V>,
 ): { persist: AtomEffect<V>; restore: AtomEffect<V> }
