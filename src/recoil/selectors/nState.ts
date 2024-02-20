@@ -13,9 +13,9 @@ const nState = selector<string>({
   get({ get }) {
     const familyName = get(familyNameState)
     const givenName = get(givenNameState)
-    const additionalNames = get(additionalNamesState)?.join(',') ?? null
-    const honorificPrefixes = get(honorificPrefixesState)?.join(',') ?? null
-    const honorificSuffixes = get(honorificSuffixesState)?.join(',') ?? null
+    const additionalNames = get(additionalNamesState)
+    const honorificPrefixes = get(honorificPrefixesState)
+    const honorificSuffixes = get(honorificSuffixesState)
 
     return build({
       familyName,
@@ -40,9 +40,9 @@ const nState = selector<string>({
 
     set(familyNameState, familyName)
     set(givenNameState, givenName)
-    set(additionalNamesState, additionalNames?.split(',') ?? null)
-    set(honorificPrefixesState, honorificPrefixes?.split(',') ?? null)
-    set(honorificSuffixesState, honorificSuffixes?.split(',') ?? null)
+    set(additionalNamesState, additionalNames)
+    set(honorificPrefixesState, honorificPrefixes)
+    set(honorificSuffixesState, honorificSuffixes)
   },
 })
 
@@ -61,9 +61,9 @@ function build(n: Partial<VCard.N>): string {
   const textComponents = [
     familyName,
     givenName,
-    additionalNames,
-    honorificPrefixes,
-    honorificSuffixes,
+    additionalNames?.join(','),
+    honorificPrefixes?.join(','),
+    honorificSuffixes?.join(','),
   ]
 
   return textComponents.join(';').replace(/;+$/, '')
@@ -76,10 +76,14 @@ function extract(n: string): VCard.N {
   const {
     familyName = null,
     givenName = null,
-    additionalNames = null,
-    honorificPrefixes = null,
-    honorificSuffixes = null,
+    additionalNames: additionalNamesJoined,
+    honorificPrefixes: honorificPrefixesJoined,
+    honorificSuffixes: honorificSuffixesJoined,
   } = matched.groups
+
+  const additionalNames = additionalNamesJoined?.split(',') ?? null
+  const honorificPrefixes = honorificPrefixesJoined?.split(',') ?? null
+  const honorificSuffixes = honorificSuffixesJoined?.split(',') ?? null
 
   return {
     familyName,
