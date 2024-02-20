@@ -13,6 +13,7 @@ const NInput: React.FC = () => {
   const [n, setN] = useValidatedState<string>(recoilN, (value) =>
     r`^${nValue}$`.test(value),
   )
+
   useEffect(() => {
     setRecoilN(n.value)
   }, [setRecoilN, n])
