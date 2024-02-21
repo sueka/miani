@@ -1,5 +1,7 @@
 import { type AtomEffect } from 'recoil'
-import assert from '../../lib/assert'
+import assert, { AssertionError } from '../../lib/assert'
+
+type FamilyKey<K extends string> = `${K}__${string}`
 
 interface Options<K extends string, V> {
   serialize?(value: Record<K, V>): string
@@ -12,18 +14,18 @@ export const key = 'recoil-atoms'
 // TODO: Delete this overloads if https://github.com/microsoft/TypeScript/issues/26242 is fixed
 export default function makePersist<V, K extends string = string>(
   atomKey: K,
-  options?: Options<K, V>,
+  options?: Options<K | FamilyKey<K>, V>,
 ): { persist: AtomEffect<V>; restore: AtomEffect<V> }
 
 export default function makePersist<K extends string, V>(
   atomKey: K,
-  options?: Options<K, V>,
+  options?: Options<K | FamilyKey<K>, V>,
 ): { persist: AtomEffect<V>; restore: AtomEffect<V> }
 
 // TODO: Make persist() be invoked when the atom is initialized or reset
 export default function makePersist<K extends string, V>(
   atomKey: K,
-  options?: Options<K, V>,
+  options?: Options<K | FamilyKey<K>, V>,
 ): {
   persist: AtomEffect<V>
   restore: AtomEffect<V>
@@ -32,21 +34,21 @@ export default function makePersist<K extends string, V>(
     serialize = JSON.stringify,
     deserialize = JSON.parse,
     storage = localStorage,
-  }: Options<K, V> = options ?? {}
+  }: Options<K | FamilyKey<K>, V> = options ?? {}
 
   return {
     persist({ onSet, node }) {
-      assert(node.key === atomKey)
-
       onSet((newValue) => {
+        checkKey(node.key, atomKey)
+
         const store = storage.getItem(key)
 
         const deserialized: Partial<Record<K, V>> =
           store !== null ? deserialize(store) : {}
 
         const newEntry = {
-          [atomKey]: newValue,
-        } as Record<K, V>
+          [node.key]: newValue,
+        } as Record<K | FamilyKey<K>, V>
 
         const serialized = serialize({
           ...deserialized,
@@ -58,7 +60,7 @@ export default function makePersist<K extends string, V>(
     },
 
     restore({ setSelf, node }) {
-      assert(node.key === atomKey)
+      checkKey(node.key, atomKey)
 
       const store = storage.getItem(key)
 
@@ -67,7 +69,7 @@ export default function makePersist<K extends string, V>(
       }
 
       const deserialized = deserialize(store)
-      const persisted = deserialized[atomKey]
+      const persisted = deserialized[node.key]
 
       if (persisted === undefined) {
         return
@@ -76,4 +78,29 @@ export default function makePersist<K extends string, V>(
       setSelf(persisted)
     },
   }
+}
+
+// TODO: Remove it
+function checkKey<K extends string>(
+  nodeKey: string,
+  atomKey: K,
+): asserts nodeKey is K | FamilyKey<K> {
+  const familyKey = /^(?<key>.*)__(?<param>.*)$/
+
+  // atom
+  if (nodeKey === atomKey) {
+    return
+  }
+
+  // atomFamily
+  const matched = nodeKey.match(familyKey)
+  assert(matched?.groups != null)
+
+  const { key } = matched.groups
+
+  if (key === atomKey) {
+    return
+  }
+
+  throw new AssertionError()
 }

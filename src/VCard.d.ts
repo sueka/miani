@@ -3,6 +3,7 @@ namespace VCard {
     fn: string
     n: string
     bday: Date | null
+    any: Record<string, string>
   }
 
   interface N {

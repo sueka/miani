@@ -1,4 +1,4 @@
-class AssertionError extends Error {}
+export class AssertionError extends Error {}
 
 /**
  * @throws `AssertionError` if {cond} is a false proposition

@@ -19,5 +19,13 @@ export default function* vCardLines(vCardObject: VCard.VCard) {
     yield `BDAY:${plain.toString()}`
   }
 
+  for (const [type, value] of Object.entries(vCardObject.any)) {
+    if (value === '') {
+      continue
+    }
+
+    yield `${type}:${value}`
+  }
+
   yield 'END:VCARD'
 }
