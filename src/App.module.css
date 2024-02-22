@@ -1,0 +1,8 @@
+.GridColSticky {
+  position: relative;
+}
+
+.Sticky {
+  position: sticky;
+  top: 0;
+}

@@ -1,5 +1,5 @@
-import { Image, Input } from '@mantine/core'
-import classNames from 'classnames'
+import { Image, Input, type InputProps } from '@mantine/core'
+import cls from 'classnames'
 import QRCode from 'qrcode'
 import React from 'react'
 import { useEffect, useState } from 'react'
@@ -8,7 +8,9 @@ import { useRecoilValue } from 'recoil'
 import classes from './VCardQrCode.module.css'
 import vCardState from './recoil/selectors/vCardState'
 
-const VCardQrCode: React.FC = () => {
+type Props = Pick<InputProps, 'classNames'>
+
+const VCardQrCode: React.FC<Props> = ({ classNames }) => {
   const vCard = useRecoilValue(vCardState)
   const [qrCode, setQrCode] = useState<string>()
 
@@ -21,12 +23,12 @@ const VCardQrCode: React.FC = () => {
   // This component has been wrapped with <Input> to be drawn boundaries.
   // TODO: Crop <Input>
   return (
-    <Input component={React.Fragment}>
+    <Input component={React.Fragment} classNames={classNames}>
       <Image
         src={qrCode}
         radius="sm"
         classNames={{
-          root: classNames(classes['Image']),
+          root: cls(classes['Image']),
         }}
       />
     </Input>

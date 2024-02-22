@@ -1,10 +1,19 @@
-import { ActionIcon, CopyButton, Textarea, Tooltip, rem } from '@mantine/core'
+import {
+  ActionIcon,
+  CopyButton,
+  Textarea,
+  type TextareaProps,
+  Tooltip,
+  rem,
+} from '@mantine/core'
 import { IconCheck, IconCopy } from '@tabler/icons-react'
 import { useRecoilValue } from 'recoil'
 
 import vCardState from './recoil/selectors/vCardState'
 
-const VCardTextarea: React.FC = () => {
+type Props = Pick<TextareaProps, 'classNames'>
+
+const VCardTextarea: React.FC<Props> = ({ classNames }) => {
   const vCard = useRecoilValue(vCardState)
 
   return (
@@ -13,6 +22,7 @@ const VCardTextarea: React.FC = () => {
       readOnly
       label="vCard"
       value={vCard}
+      classNames={classNames}
       rightSection={
         <CopyButton value={vCard}>
           {({ copied, copy }) => (
