@@ -26,7 +26,6 @@ const VCardQrCode: React.FC = () => {
         src={qrCode}
         radius="sm"
         classNames={{
-          // biome-ignore lint/complexity/useLiteralKeys: See noPropertyAccessFromIndexSignature
           root: classNames(classes['Image']),
         }}
       />
