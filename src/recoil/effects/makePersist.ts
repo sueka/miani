@@ -85,7 +85,7 @@ function checkKey<K extends string>(
   nodeKey: string,
   atomKey: K,
 ): asserts nodeKey is K | FamilyKey<K> {
-  const familyKey = /^(?<key>.*)__(?<param>.*)$/
+  const familyKey = /^(?<key>.*?)__(?<param>.*)$/
 
   // atom
   if (nodeKey === atomKey) {
@@ -101,6 +101,8 @@ function checkKey<K extends string>(
   if (key === atomKey) {
     return
   }
+
+  console.log(key, atomKey, nodeKey)
 
   throw new AssertionError()
 }
