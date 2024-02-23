@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil'
 import bdayState from './recoil/atoms/bdayState'
 import sharedState from './recoil/atoms/sharedState'
 
-const BdayPicker: React.FC = () => {
+const BdayInput: React.FC = () => {
   const [bday, setBday] = useRecoilState(bdayState)
   const [shared, setShared] = useRecoilState(sharedState(bdayState.key))
 
@@ -46,4 +46,4 @@ const BdayPicker: React.FC = () => {
   )
 }
 
-export default BdayPicker
+export default BdayInput
