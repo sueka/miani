@@ -36,7 +36,8 @@ export default function* vCardLines(
 
       const { month, day } = matched.groups
 
-      yield `BDAY:--${month}-${day}`
+      // TODO: Support for non-Apple devices
+      yield `BDAY;X-APPLE-OMIT-YEAR=1604:1604-${month}-${day}`
     }
   }
 
