@@ -6,6 +6,10 @@ namespace VCard {
     any: Record<string, string>
   }
 
+  interface Options {
+    noYear: boolean // omits year of bday if true
+  }
+
   interface N {
     familyName: string | null
     givenName: string | null

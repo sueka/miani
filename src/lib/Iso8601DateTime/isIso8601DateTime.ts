@@ -1,8 +1,8 @@
 import r from '../tags/r'
 
-const year = /\d{4}/
-const month = /0[1-9]|1[0-2]/
-const day = /0[1-9]|[12]\d|3[0-1]/
+export const year = /\d{4}/
+export const month = /0[1-9]|1[0-2]/
+export const day = /0[1-9]|[12]\d|3[0-1]/
 const hour = /[0-1]\d|2[0-3]/
 const minute = /[0-5]\d/
 const second = /[0-5]\d/ // doesn't accept leap seconds.

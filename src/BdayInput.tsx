@@ -3,12 +3,14 @@ import { DatePickerInput } from '@mantine/dates'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 
+import noYearState from './recoil/atoms/bday/noYearState'
 import bdayState from './recoil/atoms/bdayState'
 import sharedState from './recoil/atoms/sharedState'
 
 const BdayInput: React.FC = () => {
   const [bday, setBday] = useRecoilState(bdayState)
   const [shared, setShared] = useRecoilState(sharedState(bdayState.key))
+  const [noYear, setMonthDay] = useRecoilState(noYearState)
 
   return (
     <Input.Wrapper
@@ -42,6 +44,13 @@ const BdayInput: React.FC = () => {
           }}
         />
       </Group>
+      <Checkbox
+        checked={noYear}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          setMonthDay(event.currentTarget.checked)
+        }}
+        label="Omits the year of birth of the object the vCard represents."
+      />
     </Input.Wrapper>
   )
 }
