@@ -20,7 +20,7 @@ const BdayPicker: React.FC = () => {
         </>
       }
     >
-      <Group>
+      <Group gap="sm">
         <Checkbox
           checked={shared}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

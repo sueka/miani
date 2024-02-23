@@ -7,7 +7,7 @@ const OtherInputs: React.FC = () => {
   const [anyTypes, setAnyTypes] = useRecoilState(anyTypesState)
 
   return (
-    <Fieldset legend="Others">
+    <Fieldset legend="Others" px={{ base: 'md' }} pb={{ base: 'md' }}>
       <TagsInput value={anyTypes} onChange={setAnyTypes} />
       {anyTypes.map((type) => (
         <AnyInput {...{ type }} />
