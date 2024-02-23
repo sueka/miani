@@ -9,6 +9,7 @@ import 'temporal-polyfill/global'
 import App from './App'
 import './lib/Iso8601DateTime/String.prototype.toDate'
 import exit from './lib/exit'
+import './main.layer.css'
 
 render(
   <React.StrictMode>
