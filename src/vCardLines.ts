@@ -1,4 +1,4 @@
-import { day, month, year } from './lib/Iso8601DateTime/isIso8601DateTime'
+import { day, month, year } from './lib/Iso8601DateTime/isIso8601Date'
 import assert from './lib/assert'
 import r from './lib/tags/r'
 
