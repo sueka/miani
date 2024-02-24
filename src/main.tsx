@@ -7,7 +7,8 @@ import { RecoilRoot } from 'recoil'
 import 'temporal-polyfill/global'
 
 import App from './App'
-import './lib/Iso8601DateTime/String.prototype.toDate'
+import './lib/Temporal/String.prototype.toLegacyDate'
+import './lib/Temporal/String.prototype.toPlainDate'
 import exit from './lib/exit'
 import './main.layer.css'
 

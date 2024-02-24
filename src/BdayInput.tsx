@@ -31,9 +31,9 @@ const BdayInput: React.FC = () => {
         />
         <DatePicker
           allowDeselect
-          value={bday}
+          value={bday?.toLegacyDate() ?? null}
           onChange={(newDate: Date | null) => {
-            setBday(newDate)
+            setBday(newDate?.toPlainDate() ?? null)
           }}
         />
       </Group>

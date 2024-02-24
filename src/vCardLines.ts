@@ -22,16 +22,11 @@ export default function* vCardLines(
   }
 
   if (vCardObject.bday !== null) {
-    const tz = Temporal.TimeZone.from('UTC')
-    const instant = vCardObject.bday.toTemporalInstant()
-    const zoned = instant.toZonedDateTimeISO(tz)
-    const plain = zoned.toPlainDate()
-
     if (!noYear) {
-      yield `BDAY:${plain.toString()}`
+      yield `BDAY:${vCardObject.bday.toString()}`
     } else {
       // TODO: Do it in more normal ways
-      const matched = plain.toString().match(dateGrouped)
+      const matched = vCardObject.bday.toString().match(dateGrouped)
       assert(matched?.groups !== undefined)
 
       const { month, day } = matched.groups

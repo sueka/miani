@@ -1,17 +1,19 @@
 import { atom } from 'recoil'
 
-import isIso8601DateTime from '../../lib/Iso8601DateTime/isIso8601DateTime'
+import isIso8601Date from '../../lib/Iso8601DateTime/isIso8601Date'
 import assert from '../../lib/assert'
 import makePersist from '../effects/makePersist'
 
-const { persist, restore } = makePersist<Date | null>('bday', {
+const { persist, restore } = makePersist<Temporal.PlainDate | null>('bday', {
   deserialize(text) {
-    return JSON.parse(text, (key, value: unknown) => {
+    return JSON.parse(text, (key, value: Json) => {
       if (key === 'bday') {
-        assert(typeof value === 'string' || value === null)
-        assert(value === null || isIso8601DateTime(value))
+        assert(value === null || typeof value === 'string')
+        assert(value === null || isIso8601Date(value))
 
-        return value?.toDate()
+        return value !== null
+          ? Temporal.PlainDate.from(value, { overflow: 'reject' })
+          : null
       }
 
       return value
@@ -19,7 +21,7 @@ const { persist, restore } = makePersist<Date | null>('bday', {
   },
 })
 
-const bdayState = atom<Date | null>({
+const bdayState = atom<Temporal.PlainDate | null>({
   key: 'bday',
   default: null,
   effects: [persist, restore],

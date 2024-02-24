@@ -2,7 +2,7 @@ namespace VCard {
   interface VCard {
     fn: string
     n: string
-    bday: Date | null
+    bday: Temporal.PlainDate | null
     any: Record<string, string>
   }
 
