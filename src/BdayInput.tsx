@@ -1,5 +1,5 @@
 import { Checkbox, Group, Input } from '@mantine/core'
-import { DatePickerInput } from '@mantine/dates'
+import { DatePicker } from '@mantine/dates'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 
@@ -22,21 +22,14 @@ const BdayInput: React.FC = () => {
         </>
       }
     >
-      <Group
-        // TODO: Delete this styles if <DatePickerInput> supports <Input.Wrapper> completely.
-        mb={{ base: -5 }} // half of xs
-        gap="xs"
-      >
+      <Group gap="sm">
         <Checkbox
           checked={shared}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setShared(event.currentTarget.checked)
           }}
         />
-        <DatePickerInput
-          // TODO: Delete this styles if <DatePickerInput> supports <Input.Wrapper> completely.
-          my={{ base: 5 }} // half of xs
-          flex={1}
+        <DatePicker
           allowDeselect
           value={bday}
           onChange={(newDate: Date | null) => {
