@@ -20,7 +20,6 @@ render(
           settings={{
             firstDayOfWeek: 0,
             weekendDays: [0],
-            timezone: 'UTC',
           }}
         >
           <App />

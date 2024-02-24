@@ -1,6 +1,6 @@
 import { Checkbox, Group, Input } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
-import React from 'react'
+import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 
 import noYearState from './recoil/atoms/bday/noYearState'
@@ -9,6 +9,7 @@ import sharedState from './recoil/atoms/sharedState'
 
 const BdayInput: React.FC = () => {
   const [bday, setBday] = useRecoilState(bdayState)
+  const [date, setDate] = useState(bday?.toLegacyDate() ?? null)
   const [shared, setShared] = useRecoilState(sharedState(bdayState.key))
   const [noYear, setMonthDay] = useRecoilState(noYearState)
 
@@ -31,6 +32,10 @@ const BdayInput: React.FC = () => {
         />
         <DatePicker
           allowDeselect
+          date={date ?? undefined}
+          onDateChange={(date: Date | undefined) => {
+            setDate(date ?? null)
+          }}
           value={bday?.toLegacyDate() ?? null}
           onChange={(newBday: Date | null) => {
             setBday(newBday?.toPlainDate() ?? null)

@@ -3,6 +3,6 @@
 export default function toPlainDate(date: Date): Temporal.PlainDate {
   return date
     .toTemporalInstant()
-    .toZonedDateTimeISO(Temporal.TimeZone.from('UTC'))
+    .toZonedDateTimeISO(Temporal.Now.timeZoneId())
     .toPlainDate()
 }
