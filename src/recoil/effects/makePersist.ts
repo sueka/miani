@@ -81,7 +81,7 @@ export default function makePersist<K extends string, V>(
 }
 
 // TODO: Remove it
-function checkKey<K extends string>(
+export function checkKey<K extends string>(
   nodeKey: string,
   atomKey: K,
 ): asserts nodeKey is K | FamilyKey<K> {
