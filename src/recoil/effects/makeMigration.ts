@@ -64,13 +64,13 @@ export default function makeMigration<J extends string, K extends string, U, V>(
         const newDeserialized =
           newStore !== null ? newDeserialize(newStore) : {}
 
-        const moved = translate(oldDeserialized)
+        const translated = translate(oldDeserialized)
 
-        setSelf(moved[atomKey])
+        setSelf(translated[atomKey])
 
         const newSerialized = newSerialize({
           ...newDeserialized,
-          ...moved,
+          ...translated,
         })
 
         newStorage.setItem(key, newSerialized)
