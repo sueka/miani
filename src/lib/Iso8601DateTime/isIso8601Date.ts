@@ -6,5 +6,5 @@ export const day = /0[1-9]|[12]\d|3[0-1]/
 const date = r`${year}-${month}-${day}`
 
 export default function isIso8601Date(text: string): text is Iso8601Date {
-  return date.test(text)
+  return r`^${date}$`.test(text)
 }

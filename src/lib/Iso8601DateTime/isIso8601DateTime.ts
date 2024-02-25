@@ -11,10 +11,10 @@ const offset = r`${hour}(?::?${minute})?`
 const date = r`${year}-${month}-${day}`
 const time = r`T${hour}:${minute}(?::${second}(?:.${milliseconds})?)?` // If you omit seconds, you must also omit milliseconds.
 const timeZone = r`Z|[+-]${offset}`
-const dateTime = r`^${date}${time}?${timeZone}?$`
+const dateTime = r`${date}${time}?${timeZone}?`
 
 export default function isIso8601DateTime(
   text: string,
 ): text is Iso8601DateTime {
-  return dateTime.test(text)
+  return r`^${dateTime}$`.test(text)
 }
