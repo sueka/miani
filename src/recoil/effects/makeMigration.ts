@@ -14,7 +14,12 @@ interface Options<J extends string, K extends string, U, V> {
 
 export const key = 'recoil-atoms'
 
-export default function makeMigration<J extends string, K extends string, U, V>(
+export default function makeMigration<
+  J extends string,
+  K extends string,
+  U extends undefined,
+  V,
+>(
   atomKey: K,
   translate: (a: Record<J, U>) => Record<K, V>,
   options?: Options<J, K, U, V>,
@@ -23,9 +28,9 @@ export default function makeMigration<J extends string, K extends string, U, V>(
 }
 
 /**
- * @implNote `translate()` should accept `V` if `oldAtomKey` is equal to `atomKey`.
+ * @implNote `translate()` should accept `V` if the key does not change.
  */
-export default function makeMigration<K extends string, U, V>(
+export default function makeMigration<K extends string, U extends undefined, V>(
   atomKey: K,
   translate: (a: Record<K, U | V>) => Record<K, V>,
   options?: Options<K, K, U, V>,
@@ -33,7 +38,13 @@ export default function makeMigration<K extends string, U, V>(
   migrate: AtomEffect<V>
 }
 
-export default function makeMigration<J extends string, K extends string, U, V>(
+// NOTE: U may be undefined because persist() is not invoked when the atom is initialized.
+export default function makeMigration<
+  J extends string,
+  K extends string,
+  U extends undefined,
+  V,
+>(
   atomKey: K,
   translate: (a: Record<J, U>) => Record<K, V>,
   options?: Options<J, K, U, V>,

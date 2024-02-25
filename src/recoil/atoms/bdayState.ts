@@ -36,12 +36,12 @@ const { persist, restore } = makePersist<Temporal.PlainDate | null>('bday', {
 
 const { migrate } = makeMigration(
   'bday',
-  ({ bday }: { bday: Date | Temporal.PlainDate | null }) => {
+  ({ bday }: { bday?: Date | Temporal.PlainDate | null }) => {
     if (bday instanceof Date) {
       return { bday: toPlainDate(bday) }
     }
 
-    return { bday }
+    return { bday: bday ?? null }
   },
   {
     oldDeserialize(text) {
@@ -58,7 +58,7 @@ const { migrate } = makeMigration(
           }
 
           if (isIso8601Date(value)) {
-            return Temporal.PlainDate.from(value)
+            return Temporal.PlainDate.from(value, { overflow: 'reject' })
           }
         }
 
