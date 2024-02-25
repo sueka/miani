@@ -3,13 +3,15 @@ import { DatePicker } from '@mantine/dates'
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 
+import toLegacyDate from './lib/Temporal/toLegacyDate'
+import toPlainDate from './lib/Temporal/toPlainDate'
 import noYearState from './recoil/atoms/bday/noYearState'
 import bdayState from './recoil/atoms/bdayState'
 import sharedState from './recoil/atoms/sharedState'
 
 const BdayInput: React.FC = () => {
   const [bday, setBday] = useRecoilState(bdayState)
-  const [date, setDate] = useState(bday?.toLegacyDate() ?? null)
+  const [date, setDate] = useState(bday !== null ? toLegacyDate(bday) : null)
   const [shared, setShared] = useRecoilState(sharedState(bdayState.key))
   const [noYear, setMonthDay] = useRecoilState(noYearState)
 
@@ -36,9 +38,9 @@ const BdayInput: React.FC = () => {
           onDateChange={(date: Date | undefined) => {
             setDate(date ?? null)
           }}
-          value={bday?.toLegacyDate() ?? null}
+          value={bday !== null ? toLegacyDate(bday) : null}
           onChange={(newBday: Date | null) => {
-            setBday(newBday?.toPlainDate() ?? null)
+            setBday(newBday !== null ? toPlainDate(newBday) : null)
           }}
         />
       </Group>
