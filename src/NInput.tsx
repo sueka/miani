@@ -15,6 +15,7 @@ const NInput: React.FC = () => {
 
   return (
     <Input.Wrapper
+      withAsterisk
       label="N"
       description={
         <>
