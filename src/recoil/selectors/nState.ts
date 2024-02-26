@@ -1,12 +1,14 @@
 import { DefaultValue, selector } from 'recoil'
 
 import assert from '../../lib/assert'
+import r from '../../lib/tags/r'
 import { nValueGrouped } from '../../patterns'
 import additionalNamesState from '../atoms/n/additionalNamesState'
 import familyNameState from '../atoms/n/familyNameState'
 import givenNameState from '../atoms/n/givenNameState'
 import honorificPrefixesState from '../atoms/n/honorificPrefixesState'
 import honorificSuffixesState from '../atoms/n/honorificSuffixesState'
+import restState from '../atoms/n/restState'
 
 const nState = selector<string>({
   key: 'n',
@@ -16,6 +18,7 @@ const nState = selector<string>({
     const additionalNames = get(additionalNamesState)
     const honorificPrefixes = get(honorificPrefixesState)
     const honorificSuffixes = get(honorificSuffixesState)
+    const rest = get(restState) ?? undefined
 
     return build({
       familyName,
@@ -23,6 +26,7 @@ const nState = selector<string>({
       additionalNames,
       honorificPrefixes,
       honorificSuffixes,
+      rest,
     })
   },
   set({ set }, newValue) {
@@ -36,6 +40,7 @@ const nState = selector<string>({
       additionalNames,
       honorificPrefixes,
       honorificSuffixes,
+      rest,
     } = extract(newValue)
 
     set(familyNameState, familyName)
@@ -43,6 +48,7 @@ const nState = selector<string>({
     set(additionalNamesState, additionalNames)
     set(honorificPrefixesState, honorificPrefixes)
     set(honorificSuffixesState, honorificSuffixes)
+    set(restState, rest ?? null)
   },
 })
 
@@ -56,6 +62,7 @@ function build(n: Partial<VCard.N>): string {
     additionalNames,
     honorificPrefixes,
     honorificSuffixes,
+    rest,
   } = n
 
   const textComponents = [
@@ -66,11 +73,15 @@ function build(n: Partial<VCard.N>): string {
     honorificSuffixes?.join(','),
   ]
 
-  return textComponents.join(';').replace(/;+$/, '')
+  return (
+    textComponents
+      .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
+      .join(';') + (rest ?? '')
+  )
 }
 
 function extract(n: string): VCard.N {
-  const matched = n.match(nValueGrouped)
+  const matched = n.match(r`^${nValueGrouped}(?<rest>.*)$`)
   assert(matched?.groups != null)
 
   const {
@@ -79,6 +90,7 @@ function extract(n: string): VCard.N {
     additionalNames: additionalNamesJoined,
     honorificPrefixes: honorificPrefixesJoined,
     honorificSuffixes: honorificSuffixesJoined,
+    rest,
   } = matched.groups
 
   const additionalNames = additionalNamesJoined?.split(',') ?? null
@@ -91,5 +103,6 @@ function extract(n: string): VCard.N {
     additionalNames,
     honorificPrefixes,
     honorificSuffixes,
+    rest,
   }
 }

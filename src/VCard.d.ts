@@ -16,5 +16,6 @@ namespace VCard {
     additionalNames: string[] | null
     honorificPrefixes: string[] | null
     honorificSuffixes: string[] | null
+    rest?: string // Substring to the right of the fifth semicolon (if any)
   }
 }
