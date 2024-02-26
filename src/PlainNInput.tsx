@@ -16,7 +16,7 @@ const PlainNInput: React.FC = () => {
 
   useEffect(() => {
     setN(recoilN)
-  }, [recoilN])
+  }, [setN, recoilN])
 
   return (
     <TextInput

@@ -16,7 +16,7 @@ const FnInput: React.FC = () => {
 
   useEffect(() => {
     setFn(recoilFn)
-  }, [recoilFn])
+  }, [setFn, recoilFn])
 
   return (
     <TextInput
