@@ -15,8 +15,8 @@ const PlainNInput: React.FC = () => {
   )
 
   useEffect(() => {
-    setRecoilN(n.value)
-  }, [setRecoilN, n])
+    setN(recoilN)
+  }, [recoilN])
 
   return (
     <TextInput
@@ -39,6 +39,7 @@ const PlainNInput: React.FC = () => {
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
         setN(event.currentTarget.value)
+        setRecoilN(event.currentTarget.value)
       }}
     />
   )

@@ -15,8 +15,8 @@ const FnInput: React.FC = () => {
   )
 
   useEffect(() => {
-    setRecoilFn(fn.value)
-  }, [setRecoilFn, fn])
+    setFn(recoilFn)
+  }, [recoilFn])
 
   return (
     <TextInput
@@ -39,6 +39,7 @@ const FnInput: React.FC = () => {
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
         setFn(event.currentTarget.value)
+        setRecoilFn(event.currentTarget.value)
       }}
     />
   )
