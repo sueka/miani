@@ -21,13 +21,6 @@ const PlainNInput: React.FC = () => {
   return (
     <TextInput
       required
-      label="N"
-      description={
-        <>
-          Specifies the components of the <mark>name</mark> of the object the
-          vCard represents.
-        </>
-      }
       placeholder="Public;John;Quinlan;Mr.;Esq."
       value={n.value}
       error={
