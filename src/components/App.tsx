@@ -1,7 +1,7 @@
 import { Container, Grid } from '@mantine/core'
 
 import classes from './App.module.css'
-import VCardForm from './VCardForm'
+import VCardForm from './VCardForm/VCardForm'
 import VCardQrCode from './VCardQrCode'
 import VCardTextarea from './VCardTextarea'
 

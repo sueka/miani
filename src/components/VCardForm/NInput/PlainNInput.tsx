@@ -3,9 +3,9 @@ import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import r from './lib/tags/r'
-import { nValue } from './patterns'
-import nState from './recoil/selectors/nState'
+import r from '../../../lib/tags/r'
+import { nValue } from '../../../patterns'
+import nState from '../../../recoil/selectors/nState'
 
 const PlainNInput: React.FC = () => {
   const [recoilN, setRecoilN] = useRecoilState(nState)

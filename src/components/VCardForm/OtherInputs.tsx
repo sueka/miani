@@ -1,7 +1,7 @@
 import { Fieldset, Stack, TagsInput } from '@mantine/core'
 import { useRecoilState } from 'recoil'
+import anyTypesState from '../../recoil/atoms/anyTypesState'
 import AnyInput from './AnyInput'
-import anyTypesState from './recoil/atoms/anyTypesState'
 
 const OtherInputs: React.FC = () => {
   const [anyTypes, setAnyTypes] = useRecoilState(anyTypesState)

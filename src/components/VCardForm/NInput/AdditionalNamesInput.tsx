@@ -3,9 +3,9 @@ import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import r from './lib/tags/r'
-import { textValues } from './patterns'
-import additionalNamesState from './recoil/atoms/n/additionalNamesState'
+import r from '../../../lib/tags/r'
+import { textValues } from '../../../patterns'
+import additionalNamesState from '../../../recoil/atoms/n/additionalNamesState'
 
 const AdditionalNamesInput: React.FC = () => {
   const [recoilAdditionalNames, setRecoilAdditionalNames] =

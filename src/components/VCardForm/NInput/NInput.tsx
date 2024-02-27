@@ -1,14 +1,14 @@
 import { Input, SegmentedControl, Stack } from '@mantine/core'
 import { useRecoilState } from 'recoil'
 
+import assert from '../../../lib/assert'
+import variantState from '../../../recoil/atoms/n/variantState'
 import AdditionalNamesInput from './AdditionalNamesInput'
 import FamilyNameInput from './FamilyNameInput'
 import GivenNameInput from './GivenNameInput'
 import HonorificPrefixesInput from './HonorificPrefixesInput'
 import HonorificSuffixesInput from './HonorificSuffixesInput'
 import PlainNInput from './PlainNInput'
-import assert from './lib/assert'
-import variantState from './recoil/atoms/n/variantState'
 
 const NInput: React.FC = () => {
   const [variant, setVariant] = useRecoilState(variantState)

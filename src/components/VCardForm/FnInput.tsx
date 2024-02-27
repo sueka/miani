@@ -3,9 +3,9 @@ import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import r from './lib/tags/r'
-import { textValue } from './patterns'
-import fnState from './recoil/atoms/fnState'
+import r from '../../lib/tags/r'
+import { textValue } from '../../patterns'
+import fnState from '../../recoil/atoms/fnState'
 
 const FnInput: React.FC = () => {
   const [recoilFn, setRecoilFn] = useRecoilState(fnState)

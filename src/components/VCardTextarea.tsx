@@ -9,7 +9,7 @@ import {
 import { IconCheck, IconCopy } from '@tabler/icons-react'
 import { useRecoilValue } from 'recoil'
 
-import vCardState from './recoil/selectors/vCardState'
+import vCardState from '../recoil/selectors/vCardState'
 
 type Props = Pick<TextareaProps, 'classNames'>
 

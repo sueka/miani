@@ -3,9 +3,9 @@ import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import r from './lib/tags/r'
-import { textValues } from './patterns'
-import honorificSuffixesState from './recoil/atoms/n/honorificSuffixesState'
+import r from '../../../lib/tags/r'
+import { textValues } from '../../../patterns'
+import honorificSuffixesState from '../../../recoil/atoms/n/honorificSuffixesState'
 
 const HonorificSuffixesInput: React.FC = () => {
   const [recoilHonorificSuffixes, setRecoilHonorificSuffixes] = useRecoilState(

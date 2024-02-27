@@ -1,12 +1,11 @@
 import { Image, Input, type InputProps } from '@mantine/core'
 import cls from 'classnames'
 import QRCode from 'qrcode'
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
+import vCardState from '../recoil/selectors/vCardState'
 import classes from './VCardQrCode.module.css'
-import vCardState from './recoil/selectors/vCardState'
 
 type Props = Pick<InputProps, 'classNames'>
 

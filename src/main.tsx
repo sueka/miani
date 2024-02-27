@@ -6,7 +6,7 @@ import React, { render } from 'react'
 import { RecoilRoot } from 'recoil'
 import 'temporal-polyfill/global'
 
-import App from './App'
+import App from './components/App'
 import exit from './lib/exit'
 import './main.layer.css'
 

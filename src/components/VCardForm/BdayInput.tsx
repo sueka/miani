@@ -3,11 +3,11 @@ import { DatePicker } from '@mantine/dates'
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 
-import toLegacyDate from './lib/Temporal/toLegacyDate'
-import toPlainDate from './lib/Temporal/toPlainDate'
-import noYearState from './recoil/atoms/bday/noYearState'
-import bdayState from './recoil/atoms/bdayState'
-import sharedState from './recoil/atoms/sharedState'
+import toLegacyDate from '../../lib/Temporal/toLegacyDate'
+import toPlainDate from '../../lib/Temporal/toPlainDate'
+import noYearState from '../../recoil/atoms/bday/noYearState'
+import bdayState from '../../recoil/atoms/bdayState'
+import sharedState from '../../recoil/atoms/sharedState'
 
 const BdayInput: React.FC = () => {
   const [bday, setBday] = useRecoilState(bdayState)
