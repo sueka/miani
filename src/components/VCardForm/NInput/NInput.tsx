@@ -27,16 +27,16 @@ const NInput: React.FC = () => {
       <Stack gap="xs">
         <SegmentedControl
           data={[
-            { value: 'plain', label: 'Plain' },
+            { value: 'plainText', label: 'Plain text' },
             { value: 'components', label: 'Components' },
           ]}
           value={variant}
           onChange={(value) => {
-            assert(value === 'plain' || value === 'components')
+            assert(value === 'plainText' || value === 'components')
             setVariant(value)
           }}
         />
-        {variant === 'plain' && <PlainNInput />}
+        {variant === 'plainText' && <PlainNInput />}
         {variant === 'components' && (
           <>
             <FamilyNameInput />

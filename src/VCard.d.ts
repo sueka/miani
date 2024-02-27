@@ -10,7 +10,7 @@ namespace VCard {
     noYear: boolean // omits year of bday if true
   }
 
-  type NVariant = 'plain' | 'components'
+  type NVariant = 'plainText' | 'components'
 
   interface N {
     familyName: string | null
