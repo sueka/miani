@@ -1,5 +1,3 @@
-/// <reference path="../../../VCard.d.ts" />
-
 import { atom } from 'recoil'
 
 const variantState = atom<VCard.NVariant>({
