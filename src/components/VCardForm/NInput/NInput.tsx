@@ -1,5 +1,7 @@
 import { Input, SegmentedControl, Stack } from '@mantine/core'
+import { useMemo } from 'react'
 import { useRecoilState } from 'recoil'
+import { v4 } from 'uuid'
 
 import assert from '../../../lib/assert'
 import variantState from '../../../recoil/atoms/n/variantState'
@@ -12,11 +14,13 @@ import PlainNInput from './PlainNInput'
 
 const NInput: React.FC = () => {
   const [variant, setVariant] = useRecoilState(variantState)
+  const inputId = useMemo(v4, [])
 
   return (
     <Input.Wrapper
       withAsterisk
       label="N"
+      labelProps={{ htmlFor: inputId }}
       description={
         <>
           Specifies the components of the <mark>name</mark> of the object the
@@ -36,10 +40,10 @@ const NInput: React.FC = () => {
             setVariant(value)
           }}
         />
-        {variant === 'plainText' && <PlainNInput />}
+        {variant === 'plainText' && <PlainNInput id={inputId} />}
         {variant === 'components' && (
           <>
-            <FamilyNameInput />
+            <FamilyNameInput id={inputId} />
             <GivenNameInput />
             <AdditionalNamesInput />
             <HonorificPrefixesInput />

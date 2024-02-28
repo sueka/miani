@@ -1,4 +1,4 @@
-import { TextInput } from '@mantine/core'
+import { TextInput, type TextInputProps } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
@@ -7,7 +7,9 @@ import r from '../../../lib/tags/r'
 import { nValue } from '../../../patterns'
 import nState from '../../../recoil/selectors/nState'
 
-const PlainNInput: React.FC = () => {
+type Props = Pick<TextInputProps, 'id'>
+
+const PlainNInput: React.FC<Props> = ({ id }) => {
   const [recoilN, setRecoilN] = useRecoilState(nState)
 
   const [n, setN] = useValidatedState<string>(recoilN, (value) =>
@@ -20,6 +22,7 @@ const PlainNInput: React.FC = () => {
 
   return (
     <TextInput
+      id={id}
       required
       placeholder="Public;John;Quinlan;Mr.;Esq."
       value={n.value}

@@ -1,4 +1,4 @@
-import { TextInput } from '@mantine/core'
+import { TextInput, type TextInputProps } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
@@ -7,7 +7,9 @@ import r from '../../../lib/tags/r'
 import { textValues } from '../../../patterns'
 import familyNameState from '../../../recoil/atoms/n/familyNameState'
 
-const FamilyNameInput: React.FC = () => {
+type Props = Pick<TextInputProps, 'id'>
+
+const FamilyNameInput: React.FC<Props> = ({ id }) => {
   const [recoilFamilyName, setRecoilFamilyName] =
     useRecoilState(familyNameState)
 
@@ -22,6 +24,7 @@ const FamilyNameInput: React.FC = () => {
 
   return (
     <TextInput
+      id={id}
       label="Family Name"
       placeholder="Public"
       value={familyName.value}
