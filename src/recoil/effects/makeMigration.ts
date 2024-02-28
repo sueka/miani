@@ -21,7 +21,7 @@ export default function makeMigration<
   V,
 >(
   atomKey: K,
-  translate: (a: Record<J, U>) => Record<K, V>,
+  translate: (oldValue: Record<J, U>) => Record<K, V>,
   options?: Options<J, K, U, V>,
 ): {
   migrate: AtomEffect<V>
@@ -32,7 +32,7 @@ export default function makeMigration<
  */
 export default function makeMigration<K extends string, U extends undefined, V>(
   atomKey: K,
-  translate: (a: Record<K, U | V>) => Record<K, V>,
+  translate: (oldValue: Record<K, U | V>) => Record<K, V>,
   options?: Options<K, K, U, V>,
 ): {
   migrate: AtomEffect<V>
@@ -46,7 +46,7 @@ export default function makeMigration<
   V,
 >(
   atomKey: K,
-  translate: (a: Record<J, U>) => Record<K, V>,
+  translate: (oldValue: Record<J, U>) => Record<K, V>,
   options?: Options<J, K, U, V>,
 ): {
   migrate: AtomEffect<V>
