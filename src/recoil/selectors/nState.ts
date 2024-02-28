@@ -2,7 +2,7 @@ import { DefaultValue, selector } from 'recoil'
 
 import assert from '../../lib/assert'
 import r from '../../lib/tags/r'
-import { nValueGrouped } from '../../patterns'
+import { nValue } from '../../patterns'
 import additionalNamesState from '../atoms/n/additionalNamesState'
 import familyNameState from '../atoms/n/familyNameState'
 import givenNameState from '../atoms/n/givenNameState'
@@ -81,7 +81,7 @@ function build(n: Partial<VCard.N>): string {
 }
 
 function extract(n: string): VCard.N {
-  const matched = n.match(r`^${nValueGrouped}(?<rest>.*)$`)
+  const matched = n.match(r`^${nValue}(?<rest>.*)$`)
   assert(matched?.groups != null)
 
   const {

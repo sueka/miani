@@ -18,7 +18,5 @@ export const textValue = r`(?:${safeChar}|:|"|${escapedChar})*`
 
 // n-value = 0*4(text-value *("," text-value) ";")
 //           text-value *("," text-value)
-export const nValue = r`(?:${textValue}(?:,${textValue})*;){0,4}${textValue}(?:,${textValue})*`
-
 export const textValues = r`${textValue}(?:,${textValue})*`
-export const nValueGrouped = r`(?<familyName>${textValues})(?:;(?<givenName>${textValues})(?:;(?<additionalNames>${textValues})(?:;(?<honorificPrefixes>${textValues})(?:;(?<honorificSuffixes>${textValues}))?)?)?)?`
+export const nValue = r`(?<familyName>${textValues})(?:;(?<givenName>${textValues})(?:;(?<additionalNames>${textValues})(?:;(?<honorificPrefixes>${textValues})(?:;(?<honorificSuffixes>${textValues}))?)?)?)?`
