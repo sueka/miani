@@ -1,6 +1,6 @@
 import { TextInput, type TextInputProps } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
 import r from '../../../lib/tags/r'
@@ -16,7 +16,7 @@ const PlainNInput: React.FC<Props> = ({ id }) => {
     r`^${nValue}$`.test(value),
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setN(recoilN)
   }, [setN, recoilN])
 

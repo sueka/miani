@@ -1,6 +1,6 @@
 import { TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
 import r from '../../lib/tags/r'
@@ -14,7 +14,7 @@ const FnInput: React.FC = () => {
     r`^${textValue}$`.test(value),
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setFn(recoilFn)
   }, [setFn, recoilFn])
 
