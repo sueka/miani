@@ -22,7 +22,7 @@ const TelInput: React.FC<Props> = ({ telId }) => {
 
   const [tel, setTel] = useValidatedState<string | null>(
     recoilTel,
-    (value) => value === null || r`^${phoneNumberValue}$`.test(value),
+    (value) => !shared || value === null || value === '' || r`^${phoneNumberValue}$`.test(value),
   )
 
   useEffect(() => {
