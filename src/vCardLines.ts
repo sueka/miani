@@ -36,6 +36,12 @@ export default function* vCardLines(
     }
   }
 
+  if (vCardObject.tels !== null) {
+    for (const tel of vCardObject.tels) {
+      yield `TEL:${tel.value}`
+    }
+  }
+
   for (const [type, value] of Object.entries(vCardObject.any)) {
     if (value === '') {
       continue

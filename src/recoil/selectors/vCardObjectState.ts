@@ -6,6 +6,8 @@ import anyTypesState from '../atoms/anyTypesState'
 import bdayState from '../atoms/bdayState'
 import fnState from '../atoms/fnState'
 import sharedState from '../atoms/sharedState'
+import telIdsState from '../atoms/telIdsState'
+import telState from '../atoms/telState'
 import nState from './nState'
 
 const vCardObjectState = selector<VCard.VCard>({
@@ -17,6 +19,13 @@ const vCardObjectState = selector<VCard.VCard>({
     const fn = get(fnState)
     const n = get(nState)
     const bday = getOrNull(bdayState)
+    const telIds = get(telIdsState)
+    const tels = compact(
+      telIds.map<VCard.Tel | null>((telId) => {
+        const tel = getOrNull(telState(telId))
+        return tel !== null ? { value: tel } : null
+      }),
+    )
     const anyTypes = get(anyTypesState)
     const any = Object.fromEntries(
       compact(
@@ -32,6 +41,7 @@ const vCardObjectState = selector<VCard.VCard>({
       fn,
       n,
       bday,
+      tels,
       any,
     }
   },

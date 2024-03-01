@@ -20,3 +20,6 @@ export const textValue = r`(?:${safeChar}|:|"|${escapedChar})*`
 //           text-value *("," text-value)
 export const textValues = r`${textValue}(?:,${textValue})*`
 export const nValue = r`(?<familyName>${textValues})(?:;(?<givenName>${textValues})(?:;(?<additionalNames>${textValues})(?:;(?<honorificPrefixes>${textValues})(?:;(?<honorificSuffixes>${textValues}))?)?)?)?`
+
+// phone-number-value = <A single text value as defined in [CCITT E.163] and [CCITT X.121]>
+export const phoneNumberValue = /(?:\+(?<cc>[1-9]\d*)-?)?(?<nsn>(?:\d+-)*\d+)/

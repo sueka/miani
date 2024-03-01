@@ -3,6 +3,7 @@ namespace VCard {
     fn: string
     n: string
     bday: Temporal.PlainDate | null
+    tels: Tel[] | null
     any: Record<string, string>
   }
 
@@ -19,5 +20,9 @@ namespace VCard {
     honorificPrefixes: string[] | null
     honorificSuffixes: string[] | null
     rest?: string // Substring to the right of the fifth semicolon (if any)
+  }
+
+  interface Tel {
+    value: string // phone number
   }
 }
