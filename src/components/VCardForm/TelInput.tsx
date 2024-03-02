@@ -72,6 +72,7 @@ const TelInput: React.FC<Props> = ({ telId }) => {
           variant="light"
           onClick={() => {
             if (
+              (tel.value ?? '').match(/^\s*$/) ||
               confirm(
                 formatMessage(
                   { defaultMessage: 'Delete the phone number: {tel}' },
