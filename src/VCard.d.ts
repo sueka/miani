@@ -4,6 +4,7 @@ namespace VCard {
     n: string
     bday: Temporal.PlainDate | null
     tels: Tel[] | null
+    x: Record<string, string> // non-standard types
     any: Record<string, string>
   }
 

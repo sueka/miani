@@ -42,6 +42,14 @@ export default function* vCardLines(
     }
   }
 
+  for (const [name, value] of Object.entries(vCardObject.x)) {
+    if (value === '') {
+      continue
+    }
+
+    yield `${name}:${value}`
+  }
+
   for (const [type, value] of Object.entries(vCardObject.any)) {
     if (value === '') {
       continue
