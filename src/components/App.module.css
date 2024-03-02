@@ -1,5 +1,9 @@
-.GridColSticky {
-  position: relative;
+.FormStack {
+  flex: calc(1.0 * 960 / 0.005 - 1.0) 1 content;
+}
+
+.VCardStack {
+  flex: 1.0 1 calc(50% - var(--group-gap) * 1 / 2);
 }
 
 .Sticky {

@@ -19,7 +19,7 @@ const BdayInput: React.FC = () => {
 
   return (
     <Input.Wrapper label={<FormattedMessage defaultMessage="Birth date" />}>
-      <Group gap="sm">
+      <Group gap="sm" wrap="nowrap">
         <Checkbox
           checked={shared}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

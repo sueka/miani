@@ -1,4 +1,5 @@
-import { Container, Grid } from '@mantine/core'
+import { Container, Group, Stack } from '@mantine/core'
+import cls from 'classnames'
 
 import classes from './App.module.css'
 import VCardForm from './VCardForm/VCardForm'
@@ -7,23 +8,19 @@ import VCardTextarea from './VCardTextarea'
 
 const App = () => (
   <Container>
-    <Grid>
-      <Grid.Col span={{ xs: 12, sm: 6, md: 4 }}>
+    <Group align="start">
+      <Stack classNames={{ root: classes['FormStack'] }}>
         <VCardForm />
-      </Grid.Col>
-      <Grid.Col
-        span={{ xs: 12, sm: 6, md: 4 }}
-        className={classes['GridColSticky']}
+      </Stack>
+      <Stack
+        classNames={{
+          root: cls(classes['VCardStack'], classes['Sticky']),
+        }}
       >
-        <VCardTextarea classNames={{ root: classes['Sticky'] }} />
-      </Grid.Col>
-      <Grid.Col
-        span={{ xs: 12, sm: 12, md: 4 }}
-        className={classes['GridColSticky']}
-      >
-        <VCardQrCode classNames={{ wrapper: classes['Sticky'] }} />
-      </Grid.Col>
-    </Grid>
+        <VCardTextarea />
+        <VCardQrCode />
+      </Stack>
+    </Group>
   </Container>
 )
 
