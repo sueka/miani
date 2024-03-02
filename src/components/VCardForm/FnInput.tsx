@@ -21,13 +21,7 @@ const FnInput: React.FC = () => {
   return (
     <TextInput
       required
-      label="FN"
-      description={
-        <>
-          Specifies the <mark>formatted</mark> text corresponding to the{' '}
-          <mark>name</mark> of the object the vCard represents.
-        </>
-      }
+      label="Formatted name"
       placeholder="Mr. John Q. Public\, Esq."
       value={fn.value}
       error={

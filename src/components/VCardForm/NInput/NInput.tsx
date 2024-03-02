@@ -17,17 +17,7 @@ const NInput: React.FC = () => {
   const inputId = useMemo(v4, [])
 
   return (
-    <Input.Wrapper
-      withAsterisk
-      label="N"
-      labelProps={{ htmlFor: inputId }}
-      description={
-        <>
-          Specifies the components of the <mark>name</mark> of the object the
-          vCard represents.
-        </>
-      }
-    >
+    <Input.Wrapper withAsterisk label="Name" labelProps={{ htmlFor: inputId }}>
       <Stack gap="xs">
         <SegmentedControl
           data={[

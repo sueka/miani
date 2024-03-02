@@ -16,15 +16,7 @@ const BdayInput: React.FC = () => {
   const [noYear, setMonthDay] = useRecoilState(noYearState)
 
   return (
-    <Input.Wrapper
-      label="BDAY"
-      description={
-        <>
-          Specifies the <mark>birth date</mark> of the object the vCard
-          represents.
-        </>
-      }
-    >
+    <Input.Wrapper label="Birth date">
       <Group gap="sm">
         <Checkbox
           checked={shared}

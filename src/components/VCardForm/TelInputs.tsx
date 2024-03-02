@@ -8,15 +8,7 @@ const TelInputs: React.FC = () => {
   const [telIds, setTelIds] = useRecoilState(telIdsState)
 
   return (
-    <Input.Wrapper
-      label="TEL"
-      description={
-        <>
-          Specifies the <mark>telephone</mark> number for telephony
-          communication with the object the vCard represents.
-        </>
-      }
-    >
+    <Input.Wrapper label="Telephone numbers">
       <Stack gap="xs">
         {telIds.map((telId) => (
           <TelInput {...{ telId }} />
