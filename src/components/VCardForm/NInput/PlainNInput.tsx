@@ -1,6 +1,7 @@
 import { TextInput, type TextInputProps } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import r from '../../../lib/tags/r'
@@ -10,6 +11,7 @@ import nState from '../../../recoil/selectors/nState'
 type Props = Pick<TextInputProps, 'id'>
 
 const PlainNInput: React.FC<Props> = ({ id }) => {
+  const { formatMessage } = useIntl()
   const [recoilN, setRecoilN] = useRecoilState(nState)
 
   const [n, setN] = useValidatedState<string>(recoilN, (value) =>
@@ -28,9 +30,14 @@ const PlainNInput: React.FC<Props> = ({ id }) => {
       value={n.value}
       error={
         !n.valid && (
-          <>
-            Should be an <i>n-value</i> on p. 30, RFC 2426.
-          </>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: formatMessage({
+                defaultMessage:
+                  'Should be an <i>n-value</i> on p. 30, RFC 2426.',
+              }),
+            }}
+          />
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

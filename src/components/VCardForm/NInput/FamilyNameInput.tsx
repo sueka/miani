@@ -1,6 +1,7 @@
 import { TextInput, type TextInputProps } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import r from '../../../lib/tags/r'
@@ -10,6 +11,7 @@ import familyNameState from '../../../recoil/atoms/n/familyNameState'
 type Props = Pick<TextInputProps, 'id'>
 
 const FamilyNameInput: React.FC<Props> = ({ id }) => {
+  const { formatMessage } = useIntl()
   const [recoilFamilyName, setRecoilFamilyName] =
     useRecoilState(familyNameState)
 
@@ -25,14 +27,19 @@ const FamilyNameInput: React.FC<Props> = ({ id }) => {
   return (
     <TextInput
       id={id}
-      label="Family Name"
+      label={<FormattedMessage defaultMessage="Family Name" />}
       placeholder="Public"
       value={familyName.value}
       error={
         !familyName.valid && (
-          <>
-            Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.
-          </>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: formatMessage({
+                defaultMessage:
+                  'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
+              }),
+            }}
+          />
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

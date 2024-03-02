@@ -1,7 +1,7 @@
 {
   "name": "miani",
   "private": true,
-  "version": "0.31.0",
+  "version": "0.32.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,10 +13,13 @@
     "@mantine/dates": "^7.5.3",
     "@tabler/icons-react": "^2.47.0",
     "@types/qrcode": "^1.5.5",
+    "@types/react-intl": "^3.0.0",
     "@types/uuid": "^9.0.8",
+    "babel-plugin-formatjs": "^10.5.13",
     "classnames": "^2.5.1",
     "preact": "^10.19.3",
     "qrcode": "^1.5.3",
+    "react-intl": "^6.6.2",
     "recoil": "^0.7.7",
     "temporal-polyfill": "^0.2.1",
     "ulid": "^2.3.0",
@@ -24,6 +27,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
+    "@formatjs/cli": "^6.2.7",
     "@happy-dom/global-registrator": "^13.3.8",
     "@preact/preset-vite": "^2.7.0",
     "@types/bun": "latest",

@@ -1,5 +1,6 @@
 import { Input, SegmentedControl, Stack } from '@mantine/core'
 import { useMemo } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
 
@@ -17,12 +18,22 @@ const NInput: React.FC = () => {
   const inputId = useMemo(v4, [])
 
   return (
-    <Input.Wrapper withAsterisk label="Name" labelProps={{ htmlFor: inputId }}>
+    <Input.Wrapper
+      withAsterisk
+      label={<FormattedMessage defaultMessage="Name" />}
+      labelProps={{ htmlFor: inputId }}
+    >
       <Stack gap="xs">
         <SegmentedControl
           data={[
-            { value: 'plainText', label: 'Plain text' },
-            { value: 'components', label: 'Components' },
+            {
+              value: 'plainText',
+              label: <FormattedMessage defaultMessage="Plain text" />,
+            },
+            {
+              value: 'components',
+              label: <FormattedMessage defaultMessage="Components" />,
+            },
           ]}
           value={variant}
           onChange={(value) => {

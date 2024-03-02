@@ -1,6 +1,7 @@
 import { Checkbox, Group, Input } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
 import React, { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import toLegacyDate from '../../lib/Temporal/toLegacyDate'
@@ -10,13 +11,14 @@ import bdayState from '../../recoil/atoms/bdayState'
 import sharedState from '../../recoil/atoms/sharedState'
 
 const BdayInput: React.FC = () => {
+  const { locale } = useIntl()
   const [bday, setBday] = useRecoilState(bdayState)
   const [date, setDate] = useState(bday !== null ? toLegacyDate(bday) : null)
   const [shared, setShared] = useRecoilState(sharedState(bdayState.key))
   const [noYear, setMonthDay] = useRecoilState(noYearState)
 
   return (
-    <Input.Wrapper label="Birth date">
+    <Input.Wrapper label={<FormattedMessage defaultMessage="Birth date" />}>
       <Group gap="sm">
         <Checkbox
           checked={shared}
@@ -34,6 +36,7 @@ const BdayInput: React.FC = () => {
           onChange={(newBday: Date | null) => {
             setBday(newBday !== null ? toPlainDate(newBday) : null)
           }}
+          locale={locale}
         />
       </Group>
       <Checkbox
@@ -41,7 +44,7 @@ const BdayInput: React.FC = () => {
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setMonthDay(event.currentTarget.checked)
         }}
-        label="Omits the year of birth of the object the vCard represents."
+        label={<FormattedMessage defaultMessage="Omits the year of birth." />}
       />
     </Input.Wrapper>
   )

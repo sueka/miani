@@ -9,6 +9,9 @@
 			"recommended": true,
 			"complexity": {
 				"useLiteralKeys": "off"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "off"
 			}
 		}
 	},
@@ -31,6 +34,12 @@
 				"formatter": {
 					"indentStyle": "tab"
 				}
+			}
+		},
+		{
+			"include": ["./src/messages/**/*"],
+			"formatter": {
+				"enabled": false
 			}
 		}
 	],

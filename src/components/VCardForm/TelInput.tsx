@@ -2,6 +2,7 @@ import { ActionIcon, Checkbox, Group, Input, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { IconBackspace } from '@tabler/icons-react'
 import { useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import r from '../../lib/tags/r'
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const TelInput: React.FC<Props> = ({ telId }) => {
+  const { formatMessage } = useIntl()
   const [recoilTel, setRecoilTel] = useRecoilState(telState(telId))
   const [shared, setShared] = useRecoilState(sharedState(telState(telId).key))
   const resetTel = useResetRecoilState(telState(telId))
@@ -37,9 +39,14 @@ const TelInput: React.FC<Props> = ({ telId }) => {
     <Input.Wrapper
       error={
         !tel.valid && (
-          <>
-            Should be a <i>phone-number-value</i> on p. 37, RFC 2426.
-          </>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: formatMessage({
+                defaultMessage:
+                  'Should be a <i>phone-number-value</i> on p. 37, RFC 2426.',
+              }),
+            }}
+          />
         )
       }
     >
@@ -64,7 +71,14 @@ const TelInput: React.FC<Props> = ({ telId }) => {
         <ActionIcon
           variant="light"
           onClick={() => {
-            if (confirm(`Delete the phone number: ${tel.value}`)) {
+            if (
+              confirm(
+                formatMessage(
+                  { defaultMessage: 'Delete the phone number: {tel}' },
+                  { tel: tel.value },
+                ),
+              )
+            ) {
               resetTel()
               setTelIds((telIds) => telIds.filter((t) => t !== telId))
             }
