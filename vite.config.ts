@@ -3,6 +3,7 @@ import { promisify } from 'node:util'
 import preact from '@preact/preset-vite'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import topLevelAwait from 'vite-plugin-top-level-await'
 
 const exec = promisify(execSync)
 
@@ -41,6 +42,10 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
+    }),
+    topLevelAwait({
+      promiseExportName: '__tla',
+      promiseImportName: (i) => `__tla_${i}`,
     }),
   ],
 })
