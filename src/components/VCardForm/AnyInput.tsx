@@ -2,7 +2,7 @@ import { Checkbox, Group, Input, TextInput } from '@mantine/core'
 import { useMemo } from 'react'
 import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
-import anyState from '../../recoil/atoms/anyState'
+import anyState from '../../recoil/atoms/any/anyState'
 import sharedState from '../../recoil/atoms/sharedState'
 
 interface Props {

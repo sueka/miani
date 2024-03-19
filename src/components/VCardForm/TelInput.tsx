@@ -8,8 +8,8 @@ import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
 import r from '../../lib/tags/r'
 import { phoneNumberValue } from '../../patterns'
 import sharedState from '../../recoil/atoms/sharedState'
-import telIdsState from '../../recoil/atoms/telIdsState'
-import telState from '../../recoil/atoms/telState'
+import telIdsState from '../../recoil/atoms/tel/telIdsState'
+import telState from '../../recoil/atoms/tel/telState'
 
 interface Props {
   telId: string

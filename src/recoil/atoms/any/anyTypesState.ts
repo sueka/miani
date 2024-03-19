@@ -1,11 +1,11 @@
 import { atom } from 'recoil'
 
-import makePersist from '../effects/makePersist'
+import makePersist from '../../effects/makePersist'
 
-const { persist, restore } = makePersist<string[]>('anyTypes')
+const { persist, restore } = makePersist<string[]>('any/types')
 
 const anyTypesState = atom({
-  key: 'anyTypes',
+  key: 'any/types',
   default: [],
   effects: [persist, restore],
 })

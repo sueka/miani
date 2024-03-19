@@ -1,7 +1,7 @@
 import { Fieldset, Stack, TagsInput } from '@mantine/core'
 import { FormattedMessage } from 'react-intl'
 import { useRecoilState } from 'recoil'
-import anyTypesState from '../../recoil/atoms/anyTypesState'
+import anyTypesState from '../../recoil/atoms/any/anyTypesState'
 import AnyInput from './AnyInput'
 
 const OtherInputs: React.FC = () => {

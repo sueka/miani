@@ -1,14 +1,14 @@
 import { TextInput } from '@mantine/core'
 import { FormattedMessage } from 'react-intl'
 import { useRecoilState } from 'recoil'
-import xState from '../../recoil/selectors/xState'
+import xAccessor from '../../recoil/selectors/xAccessor'
 
 const XPhoneticNamesInput: React.FC = () => {
   const [phoneticLastName, setPhoneticLastName] = useRecoilState(
-    xState('X-PHONETIC-LAST-NAME'),
+    xAccessor('X-PHONETIC-LAST-NAME'),
   )
   const [phoneticFirstName, setPhoneticFirstName] = useRecoilState(
-    xState('X-PHONETIC-FIRST-NAME'),
+    xAccessor('X-PHONETIC-FIRST-NAME'),
   )
 
   return (

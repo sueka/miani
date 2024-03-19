@@ -1,9 +1,9 @@
 import { selectorFamily } from 'recoil'
-import xNamesState from '../atoms/xNamesState'
-import xState from '../atoms/xState'
+import xNamesState from '../atoms/x/xNamesState'
+import xState from '../atoms/x/xState'
 
 export default selectorFamily({
-  key: 'selector/x',
+  key: 'x-accessor',
   get:
     (param: string) =>
     ({ get }) =>

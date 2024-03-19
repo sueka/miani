@@ -1,10 +1,10 @@
 import { atom } from 'recoil'
-import makePersist from '../effects/makePersist'
+import makePersist from '../../effects/makePersist'
 
-const { persist, restore } = makePersist<string[]>('telIds')
+const { persist, restore } = makePersist<string[]>('tel/ids')
 
 const telIdsState = atom({
-  key: 'telIds',
+  key: 'tel/ids',
   default: [],
   effects: [persist, restore],
 })
