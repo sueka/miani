@@ -1,5 +1,6 @@
 namespace VCard {
   interface VCard {
+    version: Version
     fn: string
     n: string
     bday: Temporal.PlainDate | null
@@ -13,6 +14,8 @@ namespace VCard {
   }
 
   type NVariant = 'plainText' | 'components'
+
+  type Version = '3.0' | '4.0'
 
   interface N {
     familyName: string | null
