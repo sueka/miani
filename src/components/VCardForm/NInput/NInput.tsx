@@ -1,11 +1,12 @@
 import { Input, SegmentedControl, Stack } from '@mantine/core'
 import { useMemo } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { v4 } from 'uuid'
 
 import assert from '../../../lib/assert'
 import variantState from '../../../recoil/atoms/n/variantState'
+import versionState from '../../../recoil/atoms/vCard/versionState'
 import AdditionalNamesInput from './AdditionalNamesInput'
 import FamilyNameInput from './FamilyNameInput'
 import GivenNameInput from './GivenNameInput'
@@ -15,11 +16,12 @@ import PlainNInput from './PlainNInput'
 
 const NInput: React.FC = () => {
   const [variant, setVariant] = useRecoilState(variantState)
+  const version = useRecoilValue(versionState)
   const inputId = useMemo(v4, [])
 
   return (
     <Input.Wrapper
-      withAsterisk
+      withAsterisk={version === '3.0'}
       label={<FormattedMessage defaultMessage="Name" />}
       labelProps={{ htmlFor: inputId }}
     >

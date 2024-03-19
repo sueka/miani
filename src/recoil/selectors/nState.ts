@@ -1,14 +1,16 @@
 import { DefaultValue, selector } from 'recoil'
 
 import assert from '../../lib/assert'
+import exit from '../../lib/exit'
 import r from '../../lib/tags/r'
-import { nValue } from '../../patterns'
+import { nValueV3, nValueV4Partial } from '../../patterns'
 import additionalNamesState from '../atoms/n/additionalNamesState'
 import familyNameState from '../atoms/n/familyNameState'
 import givenNameState from '../atoms/n/givenNameState'
 import honorificPrefixesState from '../atoms/n/honorificPrefixesState'
 import honorificSuffixesState from '../atoms/n/honorificSuffixesState'
 import restState from '../atoms/n/restState'
+import versionState from '../atoms/vCard/versionState'
 
 const nState = selector<string>({
   key: 'n',
@@ -29,10 +31,12 @@ const nState = selector<string>({
       rest,
     })
   },
-  set({ set }, newValue) {
+  set({ set, get }, newValue) {
     if (newValue instanceof DefaultValue) {
       throw new Error('DefaultValue not supported.')
     }
+
+    const version = get(versionState)
 
     const {
       familyName,
@@ -41,7 +45,7 @@ const nState = selector<string>({
       honorificPrefixes,
       honorificSuffixes,
       rest,
-    } = extract(newValue)
+    } = extract(newValue, { version })
 
     set(familyNameState, familyName)
     set(givenNameState, givenName)
@@ -80,8 +84,14 @@ function build(n: Partial<VCard.N>): string {
   )
 }
 
-function extract(n: string): VCard.N {
-  const matched = n.match(r`^${nValue}(?<rest>.*)$`)
+function extract(n: string, { version }: { version: VCard.Version }): VCard.N {
+  const matched =
+    version === '3.0'
+      ? n.match(r`^${nValueV3}(?<rest>.*)$`)
+      : version === '4.0'
+        ? n.match(r`^${nValueV4Partial}(?<rest>.*)$`)
+        : exit()
+
   assert(matched?.groups != null)
 
   const {

@@ -4,12 +4,12 @@ import r from './lib/tags/r'
 
 const dateGrouped = r`^(?<year>${year})-?(?<month>${month})-?(?<day>${day})$`
 
-export default function* vCardLines(
+export default function* vCard3Lines(
   vCardObject: VCard.VCard,
   options?: Partial<VCard.Options>,
 ) {
   yield 'BEGIN:VCARD'
-  yield 'VERSION:3.0'
+  yield `VERSION:${vCardObject.version}`
 
   const { noYear = false } = options ?? {}
 
