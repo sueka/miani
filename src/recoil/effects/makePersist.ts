@@ -1,5 +1,5 @@
 import { type AtomEffect } from 'recoil'
-import assert, { AssertionError } from '../../lib/assert'
+import assert from '../../lib/assert'
 
 type FamilyKey<K extends string> = `${K}__${string}`
 
@@ -39,7 +39,7 @@ export default function makePersist<K extends string, V>(
   return {
     persist({ onSet, node }) {
       onSet((newValue) => {
-        checkKey(node.key, atomKey)
+        assert(compareKeys(node.key, atomKey))
 
         const store = storage.getItem(key)
 
@@ -60,7 +60,7 @@ export default function makePersist<K extends string, V>(
     },
 
     restore({ setSelf, node }) {
-      checkKey(node.key, atomKey)
+      assert(compareKeys(node.key, atomKey))
 
       const store = storage.getItem(key)
 
@@ -81,28 +81,25 @@ export default function makePersist<K extends string, V>(
 }
 
 // TODO: Remove it
-export function checkKey<K extends string>(
+export function compareKeys<K extends string>(
   nodeKey: string,
   atomKey: K,
-): asserts nodeKey is K | FamilyKey<K> {
+): nodeKey is K | FamilyKey<K> {
   const familyKey = /^(?<key>.*?)__(?<param>.*)$/
 
   // atom
   if (nodeKey === atomKey) {
-    return
+    return true
   }
 
   // atomFamily
   const matched = nodeKey.match(familyKey)
-  assert(matched?.groups != null)
+
+  if (matched?.groups == null) {
+    return false
+  }
 
   const { key } = matched.groups
 
-  if (key === atomKey) {
-    return
-  }
-
-  console.log(key, atomKey, nodeKey)
-
-  throw new AssertionError()
+  return key === atomKey
 }

@@ -9,6 +9,15 @@ import makePersist from '../../effects/makePersist'
 const { persist, restore } = makePersist<Temporal.PlainDate | null>(
   'bday/value',
   {
+    serialize(value) {
+      return JSON.stringify(value, (key, value) => {
+        if (key === 'bday/value' && value === null) {
+          return // omit
+        }
+
+        return value
+      })
+    },
     deserialize(text) {
       return JSON.parse(text, (key, value: Json) => {
         if (key === 'bday/value') {

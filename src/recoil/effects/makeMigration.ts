@@ -1,5 +1,5 @@
 import { type AtomEffect } from 'recoil'
-import { checkKey } from './makePersist'
+import { compareKeys } from './makePersist'
 
 /**
  * @implNote `newDeserialize()` returns a `Record<K, V>` but it need not be a `Record<K, V>`.
@@ -62,7 +62,7 @@ export default function makeMigration<
   return {
     migrate({ setSelf, node, trigger }) {
       if (trigger === 'get') {
-        checkKey(node.key, atomKey)
+        compareKeys(node.key, atomKey)
 
         const oldStore = oldStorage.getItem(key)
         const newStore = newStorage.getItem(key)
