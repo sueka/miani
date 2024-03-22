@@ -100,12 +100,16 @@ function extract(n: string, { version }: { version: VCard.Version }): VCard.N {
     additionalNames: additionalNamesJoined,
     honorificPrefixes: honorificPrefixesJoined,
     honorificSuffixes: honorificSuffixesJoined,
-    rest,
+    rest: _rest,
   } = matched.groups
 
   const additionalNames = additionalNamesJoined?.split(',') ?? null
   const honorificPrefixes = honorificPrefixesJoined?.split(',') ?? null
   const honorificSuffixes = honorificSuffixesJoined?.split(',') ?? null
+
+  // NOTE: This lines may remove if nValueV3/nValueV4Partial has (?<rest>.*) in its optional clauses but we have had priority for better appearances of the regexes.
+  assert(_rest !== undefined)
+  const rest = honorificSuffixes !== null ? _rest : undefined
 
   return {
     familyName,
