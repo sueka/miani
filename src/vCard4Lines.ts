@@ -17,7 +17,7 @@ export default function* vCard4Lines(
     yield `FN:${vCardObject.fn}`
   }
 
-  if (vCardObject.n !== null) {
+  if (vCardObject.n !== '') {
     const sortKeys = [
       vCardObject.x['X-PHONETIC-LAST-NAME'],
       vCardObject.x['X-PHONETIC-FIRST-NAME'],
