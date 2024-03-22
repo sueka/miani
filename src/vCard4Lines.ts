@@ -23,7 +23,7 @@ export default function* vCard4Lines(
       vCardObject.x['X-PHONETIC-FIRST-NAME'],
     ]
 
-    if (sortKeys.length !== 0) {
+    if (sortKeys.some((key) => key !== undefined)) {
       yield `N;SORT-AS="${sortKeys.join(',')}":${vCardObject.n}`
     } else {
       yield `N:${vCardObject.n}`
