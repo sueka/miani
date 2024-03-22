@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
 
+import nes from '../../lib/nes'
 import r from '../../lib/tags/r'
 import { phoneNumberValue } from '../../patterns'
 import sharedState from '../../recoil/atoms/sharedState'
@@ -63,8 +64,8 @@ const TelInput: React.FC<Props> = ({ telId }) => {
           placeholder="+81-3-0123-4567"
           value={tel.value}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setTel(event.currentTarget.value)
-            setRecoilTel(event.currentTarget.value)
+            setTel(nes(event.currentTarget.value))
+            setRecoilTel(nes(event.currentTarget.value))
           }}
           error={!tel.valid}
         />

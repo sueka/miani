@@ -1,6 +1,7 @@
 import { TextInput } from '@mantine/core'
 import { FormattedMessage } from 'react-intl'
 import { useRecoilState } from 'recoil'
+import nes from '../../lib/nes'
 import xAccessor from '../../recoil/selectors/xAccessor'
 
 const XPhoneticNamesInput: React.FC = () => {
@@ -17,14 +18,14 @@ const XPhoneticNamesInput: React.FC = () => {
         label={<FormattedMessage defaultMessage="Phonetic Last Name" />}
         value={phoneticLastName}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setPhoneticLastName(event.currentTarget.value)
+          setPhoneticLastName(nes(event.currentTarget.value))
         }}
       />
       <TextInput
         label={<FormattedMessage defaultMessage="Phonetic First Name" />}
         value={phoneticFirstName}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setPhoneticFirstName(event.currentTarget.value)
+          setPhoneticFirstName(nes(event.currentTarget.value))
         }}
       />
     </>

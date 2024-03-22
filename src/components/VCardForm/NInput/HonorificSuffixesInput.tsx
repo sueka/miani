@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import exit from '../../../lib/exit'
+import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { listComponent, textValues } from '../../../patterns'
 import honorificSuffixesState from '../../../recoil/atoms/n/honorificSuffixesState'
@@ -59,8 +60,10 @@ const HonorificSuffixesInput: React.FC = () => {
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        setHonorificSuffixes(event.currentTarget.value)
-        setRecoilHonorificSuffixes(event.currentTarget.value.split(',')) //
+        setHonorificSuffixes(nes(event.currentTarget.value))
+        setRecoilHonorificSuffixes(
+          nes(event.currentTarget.value)?.split(',') ?? null, //
+        )
       }}
     />
   )

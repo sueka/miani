@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import exit from '../../../lib/exit'
+import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { listComponent, textValues } from '../../../patterns'
 import honorificPrefixesState from '../../../recoil/atoms/n/honorificPrefixesState'
@@ -59,8 +60,10 @@ const HonorificPrefixesInput: React.FC = () => {
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        setHonorificPrefixes(event.currentTarget.value)
-        setRecoilHonorificPrefixes(event.currentTarget.value.split(',')) //
+        setHonorificPrefixes(nes(event.currentTarget.value))
+        setRecoilHonorificPrefixes(
+          nes(event.currentTarget.value)?.split(',') ?? null, //
+        )
       }}
     />
   )

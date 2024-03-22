@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import exit from '../../../lib/exit'
+import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { listComponent, textValues } from '../../../patterns'
 import givenNameState from '../../../recoil/atoms/n/givenNameState'
@@ -58,8 +59,8 @@ const GivenNameInput: React.FC = () => {
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        setGivenName(event.currentTarget.value)
-        setRecoilGivenName(event.currentTarget.value)
+        setGivenName(nes(event.currentTarget.value))
+        setRecoilGivenName(nes(event.currentTarget.value))
       }}
     />
   )

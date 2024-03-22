@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import exit from '../../../lib/exit'
+import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { listComponent, textValues } from '../../../patterns'
 import additionalNamesState from '../../../recoil/atoms/n/additionalNamesState'
@@ -58,8 +59,10 @@ const AdditionalNamesInput: React.FC = () => {
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        setAdditionalNames(event.currentTarget.value)
-        setRecoilAdditionalNames(event.currentTarget.value.split(',')) //
+        setAdditionalNames(nes(event.currentTarget.value))
+        setRecoilAdditionalNames(
+          nes(event.currentTarget.value)?.split(',') ?? null, //
+        )
       }}
     />
   )

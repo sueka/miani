@@ -2,6 +2,7 @@ import { Checkbox, Group, Input, TextInput } from '@mantine/core'
 import { useMemo } from 'react'
 import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
+import nes from '../../lib/nes'
 import anyState from '../../recoil/atoms/any/anyState'
 import sharedState from '../../recoil/atoms/sharedState'
 
@@ -28,7 +29,7 @@ const AnyInput: React.FC<Props> = ({ type }) => {
           flex={1}
           value={any}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setAny(event.currentTarget.value)
+            setAny(nes(event.currentTarget.value))
           }}
         />
       </Group>

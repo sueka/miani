@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import exit from '../../../lib/exit'
+import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { listComponent, textValues } from '../../../patterns'
 import familyNameState from '../../../recoil/atoms/n/familyNameState'
@@ -62,8 +63,8 @@ const FamilyNameInput: React.FC<Props> = ({ id }) => {
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        setFamilyName(event.currentTarget.value)
-        setRecoilFamilyName(event.currentTarget.value)
+        setFamilyName(nes(event.currentTarget.value))
+        setRecoilFamilyName(nes(event.currentTarget.value))
       }}
     />
   )
