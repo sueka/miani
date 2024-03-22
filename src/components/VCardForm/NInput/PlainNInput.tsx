@@ -23,7 +23,7 @@ const PlainNInput: React.FC<Props> = ({ id }) => {
         return r`^${nValueV3}$`.test(value)
 
       case '4.0':
-        return r`^${nValueV4}$`.test(value)
+        return value === '' || r`^${nValueV4}$`.test(value)
     }
   })
 
