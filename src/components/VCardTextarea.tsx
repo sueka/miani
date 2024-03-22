@@ -9,10 +9,11 @@ import {
   Tooltip,
   rem,
 } from '@mantine/core'
-import { IconCheck, IconCopy } from '@tabler/icons-react'
+import { IconCheck, IconCopy, IconDownload } from '@tabler/icons-react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import assert from '../lib/assert'
+import fnState from '../recoil/atoms/fnState'
 import versionState from '../recoil/atoms/vCard/versionState'
 import vCardState from '../recoil/selectors/vCardState'
 
@@ -20,6 +21,7 @@ type Props = Pick<TextareaProps, 'classNames'>
 
 const VCardTextarea: React.FC<Props> = ({ classNames }) => {
   const vCard = useRecoilValue(vCardState)
+  const fn = useRecoilValue(fnState)
   const [version, setVersion] = useRecoilState(versionState)
 
   return (
@@ -48,23 +50,36 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
           value={vCard}
           classNames={classNames}
           rightSection={
-            <CopyButton value={vCard}>
-              {({ copied, copy }) => (
-                <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow>
-                  <ActionIcon
-                    color={copied ? 'green' : 'gray'}
-                    variant="subtle"
-                    onClick={copy}
-                  >
-                    {copied ? (
-                      <IconCheck style={{ width: rem(16) }} />
-                    ) : (
-                      <IconCopy style={{ width: rem(16) }} />
-                    )}
-                  </ActionIcon>
-                </Tooltip>
-              )}
-            </CopyButton>
+            <Stack gap="xs">
+              <CopyButton value={vCard}>
+                {({ copied, copy }) => (
+                  <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow>
+                    <ActionIcon
+                      color={copied ? 'green' : 'gray'}
+                      variant="subtle"
+                      onClick={copy}
+                    >
+                      {copied ? (
+                        <IconCheck style={{ width: rem(16) }} />
+                      ) : (
+                        <IconCopy style={{ width: rem(16) }} />
+                      )}
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+              </CopyButton>
+              <Tooltip label="Download" withArrow>
+                <ActionIcon
+                  color="gray"
+                  variant="subtle"
+                  component="a"
+                  download={`${fn !== '' ? fn : 'Unnamed'}.vcf`}
+                  href={`data:text/plain,${encodeURIComponent(vCard)}`}
+                >
+                  <IconDownload style={{ width: rem(16) }} />
+                </ActionIcon>
+              </Tooltip>
+            </Stack>
           }
         />
       </Stack>
