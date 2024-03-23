@@ -14,20 +14,36 @@ export default function* vCard4Lines(
   const { noYear = false } = options ?? {}
 
   if (vCardObject.fn !== '') {
-    yield `FN:${vCardObject.fn}`
+    let params = ''
+
+    if (hasNonAscii(vCardObject.fn)) {
+      params += ';CHARSET=UTF-8'
+    }
+
+    yield `FN${params}:${vCardObject.fn}`
   }
 
   if (vCardObject.n !== '') {
+    let params = ''
+
+    if (
+      hasNonAscii(vCardObject.x['X-PHONETIC-LAST-NAME']) ||
+      hasNonAscii(vCardObject.x['X-PHONETIC-FIRST-NAME']) ||
+      hasNonAscii(vCardObject.n)
+    ) {
+      params += ';CHARSET=UTF-8'
+    }
+
     const sortKeys = [
       vCardObject.x['X-PHONETIC-LAST-NAME'],
       vCardObject.x['X-PHONETIC-FIRST-NAME'],
     ]
 
     if (sortKeys.some((key) => key !== undefined)) {
-      yield `N;SORT-AS="${sortKeys.join(',')}":${vCardObject.n}`
-    } else {
-      yield `N:${vCardObject.n}`
+      params += `;SORT-AS="${sortKeys.join(',')}"`
     }
+
+    yield `N${params}:${vCardObject.n}`
   }
 
   if (vCardObject.bday !== null) {
@@ -59,7 +75,13 @@ export default function* vCard4Lines(
       continue // Already used in N
     }
 
-    yield `${name}:${value}`
+    let params = ''
+
+    if (hasNonAscii(value)) {
+      params += ';CHARSET=UTF-8'
+    }
+
+    yield `${name}${params}:${value}`
   }
 
   for (const [type, value] of Object.entries(vCardObject.any)) {
@@ -67,8 +89,22 @@ export default function* vCard4Lines(
       continue
     }
 
-    yield `${type}:${value}`
+    let params = ''
+
+    if (hasNonAscii(value)) {
+      params += ';CHARSET=UTF-8'
+    }
+
+    yield `${type}${params}:${value}`
   }
 
   yield 'END:VCARD'
+}
+
+// TODO: Remove it
+// NON-ASCII = UTF8-2 / UTF8-3 / UTF8-4 ; 3.3, RFC 6350
+const encoder = new TextEncoder()
+
+function hasNonAscii(text = '') {
+  return encoder.encode(text).some((byte) => 0x80 <= byte && byte <= 0xbf)
 }
