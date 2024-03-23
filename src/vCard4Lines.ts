@@ -72,7 +72,9 @@ export default function* vCard4Lines(
     }
 
     if (name === 'X-PHONETIC-LAST-NAME' || name === 'X-PHONETIC-FIRST-NAME') {
-      continue // Already used in N
+      if (vCardObject.n !== '') {
+        continue // Already used in N
+      }
     }
 
     let params = ''
