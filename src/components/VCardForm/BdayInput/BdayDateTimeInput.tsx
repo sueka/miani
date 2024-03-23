@@ -44,7 +44,7 @@ const BdayDateTimeInput: React.FC = () => {
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setMonthDay(event.currentTarget.checked)
         }}
-        label={<FormattedMessage defaultMessage="Omits the year of birth." />}
+        label={<FormattedMessage defaultMessage="Omits the year of birth" />}
       />
     </>
   )
