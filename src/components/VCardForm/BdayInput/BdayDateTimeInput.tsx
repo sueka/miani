@@ -1,24 +1,24 @@
-import { Checkbox, Group, Input } from '@mantine/core'
+import { Checkbox, Group } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
 import React, { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
-import toLegacyDate from '../../lib/Temporal/toLegacyDate'
-import toPlainDate from '../../lib/Temporal/toPlainDate'
-import bdayState from '../../recoil/atoms/bday/bdayState'
-import noYearState from '../../recoil/atoms/bday/noYearState'
-import sharedState from '../../recoil/atoms/sharedState'
+import toLegacyDate from '../../../lib/Temporal/toLegacyDate'
+import toPlainDate from '../../../lib/Temporal/toPlainDate'
+import bdayDateTimeState from '../../../recoil/atoms/bday/bdayDateTimeState'
+import noYearState from '../../../recoil/atoms/bday/noYearState'
+import sharedState from '../../../recoil/atoms/sharedState'
 
-const BdayInput: React.FC = () => {
+const BdayDateTimeInput: React.FC = () => {
   const { locale } = useIntl()
-  const [bday, setBday] = useRecoilState(bdayState)
+  const [bday, setBday] = useRecoilState(bdayDateTimeState)
   const [date, setDate] = useState(bday !== null ? toLegacyDate(bday) : null)
-  const [shared, setShared] = useRecoilState(sharedState(bdayState.key))
+  const [shared, setShared] = useRecoilState(sharedState(bdayDateTimeState.key))
   const [noYear, setMonthDay] = useRecoilState(noYearState)
 
   return (
-    <Input.Wrapper label={<FormattedMessage defaultMessage="Birth date" />}>
+    <>
       <Group gap="sm" wrap="nowrap">
         <Checkbox
           checked={shared}
@@ -46,8 +46,8 @@ const BdayInput: React.FC = () => {
         }}
         label={<FormattedMessage defaultMessage="Omits the year of birth." />}
       />
-    </Input.Wrapper>
+    </>
   )
 }
 
-export default BdayInput
+export default BdayDateTimeInput

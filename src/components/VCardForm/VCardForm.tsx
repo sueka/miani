@@ -1,5 +1,5 @@
 import { Stack } from '@mantine/core'
-import BdayInput from './BdayInput'
+import BdayInput from './BdayInput/BdayInput'
 import FnInput from './FnInput'
 import NInput from './NInput/NInput'
 import OtherInputs from './OtherInputs'

@@ -22,11 +22,13 @@ export default function* vCard3Lines(
   }
 
   if (vCardObject.bday !== null) {
+    const { value } = vCardObject.bday
+
     if (!noYear) {
-      yield `BDAY:${vCardObject.bday.toString()}`
+      yield `BDAY:${value.toString()}`
     } else {
       // TODO: Do it in more normal ways
-      const matched = vCardObject.bday.toString().match(dateGrouped)
+      const matched = value.toString().match(dateGrouped)
       assert(matched?.groups !== undefined)
 
       const { month, day } = matched.groups

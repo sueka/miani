@@ -3,7 +3,7 @@ namespace VCard {
     version: Version
     fn: string
     n: string
-    bday: Temporal.PlainDate | null
+    bday: Bday | null
     tels: Tel[] | null
     x: Record<string, string> // non-standard types
     any: Record<string, string>
@@ -24,6 +24,11 @@ namespace VCard {
     honorificPrefixes: string[] | null
     honorificSuffixes: string[] | null
     rest?: string // Substring to the right of the fifth semicolon (if any)
+  }
+
+  interface Bday {
+    value: Temporal.PlainDate | string
+    valueParam?: 'date-and-or-time' | 'text' // default to 'date-and-or-time'
   }
 
   interface Tel {

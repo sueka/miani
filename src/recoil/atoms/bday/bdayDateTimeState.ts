@@ -7,11 +7,11 @@ import assert from '../../../lib/assert'
 import makePersist from '../../effects/makePersist'
 
 const { persist, restore } = makePersist<Temporal.PlainDate | null>(
-  'bday/value',
+  'bday/date-and-or-time-value',
   {
     serialize(value) {
       return JSON.stringify(value, (key, value) => {
-        if (key === 'bday/value' && value === null) {
+        if (key === 'bday/date-and-or-time-value' && value === null) {
           return // omit
         }
 
@@ -20,7 +20,7 @@ const { persist, restore } = makePersist<Temporal.PlainDate | null>(
     },
     deserialize(text) {
       return JSON.parse(text, (key, value: Json) => {
-        if (key === 'bday/value') {
+        if (key === 'bday/date-and-or-time-value') {
           if (value === null) {
             return null
           }
@@ -44,10 +44,10 @@ const { persist, restore } = makePersist<Temporal.PlainDate | null>(
   },
 )
 
-const bdayState = atom<Temporal.PlainDate | null>({
-  key: 'bday/value',
+const bdayDateTimeState = atom<Temporal.PlainDate | null>({
+  key: 'bday/date-and-or-time-value',
   default: null,
   effects: [persist, restore],
 })
 
-export default bdayState
+export default bdayDateTimeState

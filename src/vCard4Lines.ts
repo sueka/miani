@@ -47,16 +47,27 @@ export default function* vCard4Lines(
   }
 
   if (vCardObject.bday !== null) {
-    // TODO: Do it in more normal ways
-    const matched = vCardObject.bday.toString().match(dateGrouped)
-    assert(matched?.groups !== undefined)
+    const { value, valueParam } = vCardObject.bday
 
-    const { year, month, day } = matched.groups
+    switch (valueParam) {
+      case 'date-and-or-time': {
+        // TODO: Do it in more normal ways
+        const matched = value.toString().match(dateGrouped)
+        assert(matched?.groups !== undefined)
 
-    if (!noYear) {
-      yield `BDAY:${year}${month}${day}`
-    } else {
-      yield `BDAY:--${month}${day}`
+        const { year, month, day } = matched.groups
+
+        if (!noYear) {
+          yield `BDAY:${year}${month}${day}`
+        } else {
+          yield `BDAY:--${month}${day}`
+        }
+
+        break
+      }
+
+      case 'text':
+        yield `BDAY;VALUE=text:${value}`
     }
   }
 
