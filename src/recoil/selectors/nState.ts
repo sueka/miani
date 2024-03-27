@@ -1,73 +1,58 @@
-import { DefaultValue, selector } from 'recoil'
+import { type RecoilState, selector } from 'recoil'
 
-import assert from '../../lib/assert'
-import exit from '../../lib/exit'
-import r from '../../lib/tags/r'
-import { nValueV3, nValueV4Partial } from '../../patterns'
 import additionalNamesState from '../atoms/n/additionalNamesState'
 import familyNameState from '../atoms/n/familyNameState'
 import givenNameState from '../atoms/n/givenNameState'
 import honorificPrefixesState from '../atoms/n/honorificPrefixesState'
 import honorificSuffixesState from '../atoms/n/honorificSuffixesState'
-import restState from '../atoms/n/restState'
+import sharedState from '../atoms/sharedState'
 import versionState from '../atoms/vCard/versionState'
 
 const nState = selector<string>({
   key: 'n',
   get({ get }) {
-    const familyName = get(familyNameState)
-    const givenName = get(givenNameState)
-    const additionalNames = get(additionalNamesState)
-    const honorificPrefixes = get(honorificPrefixesState)
-    const honorificSuffixes = get(honorificSuffixesState)
-    const rest = get(restState) ?? undefined
+    const getOrNull = <T>(state: RecoilState<T>) =>
+      get(sharedState(state.key)) ? get(state) : null
 
-    return build({
-      familyName,
-      givenName,
-      additionalNames,
-      honorificPrefixes,
-      honorificSuffixes,
-      rest,
-    })
-  },
-  set({ set, get }, newValue) {
-    if (newValue instanceof DefaultValue) {
-      throw new Error('DefaultValue not supported.')
-    }
-
+    const familyName = getOrNull(familyNameState)
+    const givenName = getOrNull(givenNameState)
+    const additionalNames = getOrNull(additionalNamesState)
+    const honorificPrefixes = getOrNull(honorificPrefixesState)
+    const honorificSuffixes = getOrNull(honorificSuffixesState)
     const version = get(versionState)
 
-    const {
-      familyName,
-      givenName,
-      additionalNames,
-      honorificPrefixes,
-      honorificSuffixes,
-      rest,
-    } = extract(newValue, { version })
-
-    set(familyNameState, familyName)
-    set(givenNameState, givenName)
-    set(additionalNamesState, additionalNames)
-    set(honorificPrefixesState, honorificPrefixes)
-    set(honorificSuffixesState, honorificSuffixes)
-    set(restState, rest ?? null)
+    return build(
+      {
+        familyName,
+        givenName,
+        additionalNames,
+        honorificPrefixes,
+        honorificSuffixes,
+      },
+      {
+        version,
+      },
+    )
   },
 })
 
 export default nState
 
+interface Options {
+  version: VCard.Version
+}
+
 // TODO: Remove them
-function build(n: Partial<VCard.N>): string {
+function build(n: Partial<VCard.N>, options: Options): string {
   const {
     familyName,
     givenName,
     additionalNames,
     honorificPrefixes,
     honorificSuffixes,
-    rest,
   } = n
+
+  const { version } = options
 
   const textComponents = [
     familyName,
@@ -77,46 +62,13 @@ function build(n: Partial<VCard.N>): string {
     honorificSuffixes?.join(','),
   ]
 
-  return (
-    textComponents
-      .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
-      .join(';') + (rest ?? '')
-  )
-}
+  switch (version) {
+    case '3.0':
+      return textComponents
+        .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
+        .join(';')
 
-function extract(n: string, { version }: { version: VCard.Version }): VCard.N {
-  const matched =
-    version === '3.0'
-      ? n.match(r`^${nValueV3}(?<rest>.*)$`)
-      : version === '4.0'
-        ? n.match(r`^${nValueV4Partial}(?<rest>.*)$`)
-        : exit()
-
-  assert(matched?.groups != null)
-
-  const {
-    familyName = null,
-    givenName = null,
-    additionalNames: additionalNamesJoined,
-    honorificPrefixes: honorificPrefixesJoined,
-    honorificSuffixes: honorificSuffixesJoined,
-    rest: _rest,
-  } = matched.groups
-
-  const additionalNames = additionalNamesJoined?.split(',') ?? null
-  const honorificPrefixes = honorificPrefixesJoined?.split(',') ?? null
-  const honorificSuffixes = honorificSuffixesJoined?.split(',') ?? null
-
-  // NOTE: This lines may remove if nValueV3/nValueV4Partial has (?<rest>.*) in its optional clauses but we have had priority for better appearances of the regexes.
-  assert(_rest !== undefined)
-  const rest = honorificSuffixes !== null ? _rest : undefined
-
-  return {
-    familyName,
-    givenName,
-    additionalNames,
-    honorificPrefixes,
-    honorificSuffixes,
-    rest,
+    case '4.0':
+      return textComponents.join(';')
   }
 }

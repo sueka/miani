@@ -1,0 +1,4 @@
+.Required {
+  /* Same as of .mantine-InputWrapper-required */
+  color: var(--input-asterisk-color, var(--mantine-color-error));
+}
