@@ -23,7 +23,7 @@ export default function* vCard4Lines(
     yield `FN${params}:${vCardObject.fn}`
   }
 
-  if (vCardObject.n !== '') {
+  if (isNOmitted(vCardObject.n)) {
     let params = ''
 
     if (
@@ -83,7 +83,7 @@ export default function* vCard4Lines(
     }
 
     if (name === 'X-PHONETIC-LAST-NAME' || name === 'X-PHONETIC-FIRST-NAME') {
-      if (vCardObject.n !== '') {
+      if (isNOmitted(vCardObject.n)) {
         continue // Already used in N
       }
     }
@@ -120,4 +120,12 @@ const encoder = new TextEncoder()
 
 function hasNonAscii(text = '') {
   return encoder.encode(text).some((byte) => 0x80 <= byte && byte <= 0xbf)
+}
+
+// TODO: Remove it
+function isNOmitted(n: string | null) {
+  return (
+    n !== null && // omitted
+    !/^;*$/.test(n) // all components omitted
+  )
 }
