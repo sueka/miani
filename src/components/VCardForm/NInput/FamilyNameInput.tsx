@@ -1,14 +1,9 @@
-import {
-  Checkbox,
-  Group,
-  Input,
-  TextInput,
-  type TextInputProps,
-} from '@mantine/core'
+import { Checkbox, Group, Input, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import { v4 } from 'uuid'
 
 import exit from '../../../lib/exit'
 import nes from '../../../lib/nes'
@@ -18,14 +13,13 @@ import familyNameState from '../../../recoil/atoms/n/familyNameState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
 
-type Props = Partial<Pick<TextInputProps, 'id'>>
-
-const FamilyNameInput: React.FC<Props> = ({ id: inputId }) => {
+const FamilyNameInput: React.FC = () => {
   const { formatMessage } = useIntl()
   const version = useRecoilValue(versionState)
   const [recoilFamilyName, setRecoilFamilyName] =
     useRecoilState(familyNameState)
   const [shared, setShared] = useRecoilState(sharedState(familyNameState.key))
+  const inputId = useMemo(v4, [])
 
   const [familyName, setFamilyName] = useValidatedState<string | null>(
     recoilFamilyName,
