@@ -1,6 +1,6 @@
 import { Checkbox, Group, Input, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
-import { useEffect, useMemo } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
@@ -33,7 +33,7 @@ const GivenNameInput: React.FC = () => {
     },
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setGivenName(recoilGivenName)
   }, [setGivenName, recoilGivenName])
 

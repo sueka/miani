@@ -1,7 +1,7 @@
 import { ActionIcon, Checkbox, Group, Input, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { IconBackspace } from '@tabler/icons-react'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
 
@@ -32,7 +32,7 @@ const TelInput: React.FC<Props> = ({ telId }) => {
       r`^${phoneNumberValue}$`.test(value),
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTel(recoilTel)
   }, [setTel, recoilTel])
 

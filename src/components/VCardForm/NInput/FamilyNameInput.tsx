@@ -1,6 +1,6 @@
 import { Checkbox, Group, Input, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
-import { useEffect, useMemo } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { v4 } from 'uuid'
@@ -34,7 +34,7 @@ const FamilyNameInput: React.FC = () => {
     },
   )
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setFamilyName(recoilFamilyName)
   }, [setFamilyName, recoilFamilyName])
 
