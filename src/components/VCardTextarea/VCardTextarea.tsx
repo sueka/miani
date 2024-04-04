@@ -9,14 +9,21 @@ import {
   Tooltip,
   rem,
 } from '@mantine/core'
-import { IconCheck, IconCopy, IconDownload } from '@tabler/icons-react'
+import { useDisclosure } from '@mantine/hooks'
+import {
+  IconCheck,
+  IconCopy,
+  IconDownload,
+  IconSettings,
+} from '@tabler/icons-react'
 import { FormattedMessage } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
-import assert from '../lib/assert'
-import fnState from '../recoil/atoms/fnState'
-import versionState from '../recoil/atoms/vCard/versionState'
-import vCardState from '../recoil/selectors/vCardState'
+import assert from '../../lib/assert'
+import fnState from '../../recoil/atoms/fnState'
+import versionState from '../../recoil/atoms/vCard/versionState'
+import vCardState from '../../recoil/selectors/vCardState'
+import Settings from './Settings'
 
 type Props = Pick<TextareaProps, 'classNames'>
 
@@ -24,6 +31,8 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
   const vCard = useRecoilValue(vCardState)
   const fn = useRecoilValue(fnState)
   const [version, setVersion] = useRecoilState(versionState)
+  const [settingsOpen, { open: openSettings, close: closeSettings }] =
+    useDisclosure()
 
   return (
     <Input.Wrapper label="vCard">
@@ -90,6 +99,19 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
                   href={`data:text/plain,${encodeURIComponent(vCard)}`}
                 >
                   <IconDownload style={{ width: rem(16) }} />
+                </ActionIcon>
+              </Tooltip>
+              <Settings open={settingsOpen} onClose={closeSettings} />
+              <Tooltip
+                label={<FormattedMessage defaultMessage="Settings" />}
+                withArrow
+              >
+                <ActionIcon
+                  color="gray"
+                  variant="subtle"
+                  onClick={openSettings}
+                >
+                  <IconSettings style={{ width: rem(16) }} />
                 </ActionIcon>
               </Tooltip>
             </Stack>

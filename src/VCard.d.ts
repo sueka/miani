@@ -11,7 +11,12 @@ namespace VCard {
 
   interface Options {
     noYear: boolean // omits year of bday if true
+    charset?: Charset
   }
+
+  // > It is invalid to specify a value other than "UTF-8" in the "charset" MIME parameter (see Section 10.1).
+  // p. 5, 3.1, RFC 6350.
+  type Charset = 'UTF-8'
 
   type NVariant = 'plainText' | 'components'
 

@@ -11,13 +11,13 @@ export default function* vCard4Lines(
   yield 'BEGIN:VCARD'
   yield `VERSION:${vCardObject.version}` // NOTE: It appears immediately after BEGIN, according to 3.3, RFC 6350.
 
-  const { noYear = false } = options ?? {}
+  const { charset, noYear = false } = options ?? {}
 
   if (vCardObject.fn !== '') {
     let params = ''
 
-    if (hasNonAscii(vCardObject.fn)) {
-      params += ';CHARSET=UTF-8'
+    if (charset !== undefined && hasNonAscii(vCardObject.fn)) {
+      params += `;CHARSET=${charset}`
     }
 
     yield `FN${params}:${vCardObject.fn}`
@@ -27,11 +27,12 @@ export default function* vCard4Lines(
     let params = ''
 
     if (
-      hasNonAscii(vCardObject.x['X-PHONETIC-LAST-NAME']) ||
-      hasNonAscii(vCardObject.x['X-PHONETIC-FIRST-NAME']) ||
-      hasNonAscii(vCardObject.n)
+      charset !== undefined &&
+      (hasNonAscii(vCardObject.x['X-PHONETIC-LAST-NAME']) ||
+        hasNonAscii(vCardObject.x['X-PHONETIC-FIRST-NAME']) ||
+        hasNonAscii(vCardObject.n))
     ) {
-      params += ';CHARSET=UTF-8'
+      params += `;CHARSET=${charset}`
     }
 
     const sortKeys = [
@@ -92,8 +93,8 @@ export default function* vCard4Lines(
 
     let params = ''
 
-    if (hasNonAscii(value)) {
-      params += ';CHARSET=UTF-8'
+    if (charset !== undefined && hasNonAscii(value)) {
+      params += `;CHARSET=${charset}`
     }
 
     yield `${name}${params}:${value}`
@@ -106,8 +107,8 @@ export default function* vCard4Lines(
 
     let params = ''
 
-    if (hasNonAscii(value)) {
-      params += ';CHARSET=UTF-8'
+    if (charset !== undefined && hasNonAscii(value)) {
+      params += `;CHARSET=${charset}`
     }
 
     yield `${type}${params}:${value}`

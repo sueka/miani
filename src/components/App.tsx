@@ -4,7 +4,7 @@ import cls from 'classnames'
 import classes from './App.module.css'
 import VCardForm from './VCardForm/VCardForm'
 import VCardQrCode from './VCardQrCode'
-import VCardTextarea from './VCardTextarea'
+import VCardTextarea from './VCardTextarea/VCardTextarea'
 
 const App = () => (
   <Container>
