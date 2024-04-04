@@ -10,6 +10,7 @@ import {
   rem,
 } from '@mantine/core'
 import { IconCheck, IconCopy, IconDownload } from '@tabler/icons-react'
+import { FormattedMessage } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import assert from '../lib/assert'
@@ -53,7 +54,16 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
             <Stack gap="xs">
               <CopyButton value={vCard}>
                 {({ copied, copy }) => (
-                  <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow>
+                  <Tooltip
+                    label={
+                      copied ? (
+                        <FormattedMessage defaultMessage="Copied" />
+                      ) : (
+                        <FormattedMessage defaultMessage="Copy" />
+                      )
+                    }
+                    withArrow
+                  >
                     <ActionIcon
                       color={copied ? 'green' : 'gray'}
                       variant="subtle"
@@ -68,7 +78,10 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
                   </Tooltip>
                 )}
               </CopyButton>
-              <Tooltip label="Download" withArrow>
+              <Tooltip
+                label={<FormattedMessage defaultMessage="Download" />}
+                withArrow
+              >
                 <ActionIcon
                   color="gray"
                   variant="subtle"

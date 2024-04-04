@@ -1,5 +1,7 @@
 {
   "2zQ/Df": "Birth date",
+  "4l6vz1": "Copy",
+  "5q3qC0": "Download",
   "9Z9n47": "Should be a <i>text</i> on p. 10, RFC 6350.",
   "EfKJ3q": "Honorific Suffixes",
   "HAlOn1": "Name",
@@ -15,6 +17,7 @@
   "kFexDf": "Should be a <i>text-value</i> on p. 37, RFC 2426.",
   "lZgsbc": "Phonetic Last Name",
   "oFJGBM": "Telephone numbers",
+  "p556q3": "Copied",
   "qc4yE9": "Delete the phone number: {tel}",
   "sk++0P": "Omits the year of birth",
   "soGG5b": "Should be a <i>list-component</i> on p. 10, RFC 6350.",
