@@ -25,9 +25,16 @@ namespace VCard {
     honorificSuffixes: string[] | null
   }
 
-  interface Bday {
-    value: Temporal.PlainDate | string
-    valueParam?: 'date-and-or-time' | 'text' // default to 'date-and-or-time'
+  type Bday = BdayDateTime | BdayText
+
+  interface BdayDateTime {
+    value: Temporal.PlainDate
+    valueParam?: 'date-and-or-time' // default to 'date-and-or-time'
+  }
+
+  interface BdayText {
+    value: string
+    valueParam: 'text'
   }
 
   interface Tel {

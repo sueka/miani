@@ -67,7 +67,9 @@ export default function* vCard4Lines(
       }
 
       case 'text':
-        yield `BDAY;VALUE=text:${value}`
+        if (value !== '') {
+          yield `BDAY;VALUE=text:${value}`
+        }
     }
   }
 

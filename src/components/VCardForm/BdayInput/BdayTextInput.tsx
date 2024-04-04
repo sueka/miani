@@ -4,6 +4,7 @@ import { useLayoutEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import assert from '../../../lib/assert'
+import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { text } from '../../../patterns'
 import bdayTextState from '../../../recoil/atoms/bday/bdayTextState'
@@ -40,8 +41,8 @@ const BdayTextInput: React.FC = () => {
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        setBday(event.currentTarget.value)
-        setRecoilBday(event.currentTarget.value)
+        setBday(nes(event.currentTarget.value))
+        setRecoilBday(nes(event.currentTarget.value))
       }}
     />
   )

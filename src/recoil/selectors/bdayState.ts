@@ -20,20 +20,31 @@ export default selector<VCard.Bday | null>({
           ? get(valueParamState)
           : exit()
 
-    const value =
-      valueParam === 'date-and-or-time'
-        ? getOrNull(bdayDateTimeState)
-        : valueParam === 'text'
-          ? getOrNull(bdayTextState)
-          : exit()
+    switch (valueParam) {
+      case 'date-and-or-time': {
+        const value = getOrNull(bdayDateTimeState)
 
-    if (value === null) {
-      return null
-    }
+        if (value === null) {
+          return null
+        }
 
-    return {
-      value,
-      valueParam,
+        return {
+          value,
+          valueParam,
+        }
+      }
+      case 'text': {
+        const value = getOrNull(bdayTextState)
+
+        if (value === null) {
+          return null
+        }
+
+        return {
+          value,
+          valueParam,
+        }
+      }
     }
   },
 })
