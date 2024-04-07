@@ -1,6 +1,12 @@
-import { Checkbox, Group, Input, TextInput } from '@mantine/core'
+import {
+  Checkbox,
+  Group,
+  Input,
+  TextInput,
+  type TextInputProps,
+} from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
-import { useLayoutEffect, useMemo } from 'react'
+import { useLayoutEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { v4 } from 'uuid'
@@ -13,13 +19,14 @@ import familyNameState from '../../../recoil/atoms/n/familyNameState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
 
-const FamilyNameInput: React.FC = () => {
+type Props = Partial<Pick<TextInputProps, 'id'>>
+
+const FamilyNameInput: React.FC<Props> = ({ id = v4() }) => {
   const { formatMessage } = useIntl()
   const version = useRecoilValue(versionState)
   const [recoilFamilyName, setRecoilFamilyName] =
     useRecoilState(familyNameState)
   const [shared, setShared] = useRecoilState(sharedState(familyNameState.key))
-  const inputId = useMemo(v4, [])
 
   const [familyName, setFamilyName] = useValidatedState<string | null>(
     recoilFamilyName,
@@ -41,7 +48,7 @@ const FamilyNameInput: React.FC = () => {
   return (
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Family Name" />}
-      labelProps={{ htmlFor: inputId }}
+      labelProps={{ htmlFor: id }}
     >
       <Group gap="xs">
         <Checkbox
@@ -51,7 +58,7 @@ const FamilyNameInput: React.FC = () => {
           }}
         />
         <TextInput
-          id={inputId}
+          id={id}
           flex={1}
           placeholder="Public"
           value={familyName.value}
