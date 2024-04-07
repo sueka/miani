@@ -1,3 +1,4 @@
+import isNOmitted from './isNOmitted'
 import { day, month, year } from './lib/Iso8601DateTime/isIso8601Date'
 import assert from './lib/assert'
 import r from './lib/tags/r'
@@ -17,7 +18,7 @@ export default function* vCard3Lines(
     yield `FN:${vCardObject.fn}`
   }
 
-  if (vCardObject.n !== '') {
+  if (isNOmitted(vCardObject.n)) {
     yield `N:${vCardObject.n}`
   }
 

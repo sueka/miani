@@ -10,14 +10,22 @@ import givenNameState from '../atoms/n/givenNameState'
 import honorificPrefixesState from '../atoms/n/honorificPrefixesState'
 import honorificSuffixesState from '../atoms/n/honorificSuffixesState'
 import restState from '../atoms/n/restState'
+import variantState from '../atoms/n/variantState'
 import sharedState from '../atoms/sharedState'
 import versionState from '../atoms/vCard/versionState'
 
 const nState = selector<string>({
   key: 'n',
   get({ get }) {
-    const getOrNull = <T>(state: RecoilState<T>) =>
-      get(sharedState(state.key)) ? get(state) : null
+    const nVariant = get(variantState)
+
+    const getOrNull = <T>(state: RecoilState<T>) => {
+      assert(/^n\/.+$/.test(state.key))
+
+      return nVariant === 'plainText' || get(sharedState(state.key))
+        ? get(state)
+        : null
+    }
 
     const familyName = getOrNull(familyNameState)
     const givenName = getOrNull(givenNameState)
@@ -73,7 +81,7 @@ interface Options {
 }
 
 // TODO: Remove them
-function build(n: Partial<VCard.N>, options: Options): string {
+function build(n: Partial<VCard.N>, _options: Options): string {
   const {
     familyName,
     givenName,
@@ -83,8 +91,6 @@ function build(n: Partial<VCard.N>, options: Options): string {
     rest,
   } = n
 
-  const { version } = options
-
   const textComponents = [
     familyName,
     givenName,
@@ -93,20 +99,14 @@ function build(n: Partial<VCard.N>, options: Options): string {
     honorificSuffixes?.join(','),
   ]
 
-  switch (version) {
-    case '3.0':
-      return (
-        textComponents
-          .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
-          .join(';') + (rest ?? '')
-      )
-
-    case '4.0':
-      return textComponents.join(';') + (rest ?? '')
-  }
+  return (
+    textComponents
+      .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
+      .join(';') + (rest ?? '')
+  )
 }
 
-function extract(n: string, { version }: { version: VCard.Version }): VCard.N {
+function extract(n: string, { version }: Options): VCard.N {
   const matched =
     version === '3.0'
       ? n.match(r`^${nValueV3}(?<rest>.*)$`)

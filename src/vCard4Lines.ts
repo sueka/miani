@@ -1,3 +1,4 @@
+import isNOmitted from './isNOmitted'
 import { day, month, year } from './lib/Iso8601DateTime/isIso8601Date'
 import assert from './lib/assert'
 import r from './lib/tags/r'
@@ -123,12 +124,4 @@ const encoder = new TextEncoder()
 
 function hasNonAscii(text = '') {
   return encoder.encode(text).some((byte) => 0x80 <= byte && byte <= 0xbf)
-}
-
-// TODO: Remove it
-function isNOmitted(n: string | null) {
-  return (
-    n !== null && // omitted
-    !/^;*$/.test(n) // all components omitted
-  )
 }
