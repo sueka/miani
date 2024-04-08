@@ -1,4 +1,5 @@
 import { Stack } from '@mantine/core'
+import AdrInput from './AdrInput/AdrInput'
 import BdayInput from './BdayInput/BdayInput'
 import FnInput from './FnInput'
 import NInput from './NInput/NInput'
@@ -12,6 +13,7 @@ const VCardForm: React.FC = () => (
     <NInput />
     <XPhoneticNamesInput />
     <BdayInput />
+    <AdrInput />
     <TelInputs />
     <OtherInputs />
   </Stack>

@@ -4,6 +4,7 @@ namespace VCard {
     fn: string
     n: string
     bday: Bday | null
+    adr: string | null
     tels: Tel[] | null
     x: Record<string, string> // non-standard types
     any: Record<string, string>
@@ -19,6 +20,7 @@ namespace VCard {
   type Charset = 'UTF-8'
 
   type NVariant = 'plainText' | 'components'
+  type AdrVariant = 'plainText' | 'components'
 
   type Version = '3.0' | '4.0'
 
@@ -41,6 +43,17 @@ namespace VCard {
   interface BdayText {
     value: string
     valueParam: 'text'
+  }
+
+  interface Adr {
+    postOfficeBox: string | null
+    extendedAddress: string | null
+    streetAddress: string | null
+    locality: string | null
+    region: string | null
+    postalCode: string | null
+    countryName: string | null
+    rest?: string // Substring to the right of the seventh semicolon (if any)
   }
 
   interface Tel {

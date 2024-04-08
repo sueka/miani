@@ -75,6 +75,16 @@ export default function* vCard4Lines(
     }
   }
 
+  if (vCardObject.adr !== null) {
+    let params = ''
+
+    if (charset !== undefined && hasNonAscii(vCardObject.adr)) {
+      params += `;CHARSET=${charset}`
+    }
+
+    yield `ADR${params}:${vCardObject.adr}`
+  }
+
   if (vCardObject.tels !== null) {
     for (const tel of vCardObject.tels) {
       yield `TEL:${tel.value}`

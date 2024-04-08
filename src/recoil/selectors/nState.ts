@@ -81,7 +81,7 @@ interface Options {
 }
 
 // TODO: Remove them
-function build(n: Partial<VCard.N>, _options: Options): string {
+function build(n: VCard.N, _options: Options): string {
   const {
     familyName,
     givenName,

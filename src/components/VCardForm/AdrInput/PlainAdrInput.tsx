@@ -6,52 +6,66 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { v4 } from 'uuid'
 
 import exit from '../../../lib/exit'
+import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
-import { nValueV3, nValueV4 } from '../../../patterns'
+import { adrValueV3, adrValueV4 } from '../../../patterns'
 import versionState from '../../../recoil/atoms/vCard/versionState'
-import nState from '../../../recoil/selectors/nState'
+import adrState from '../../../recoil/selectors/adrState'
 
 type Props = Partial<Pick<TextInputProps, 'id'>>
 
-const PlainNInput: React.FC<Props> = ({ id = v4() }) => {
+const PlainAdrInput: React.FC<Props> = ({ id = v4() }) => {
   const { formatMessage } = useIntl()
   const version = useRecoilValue(versionState)
-  const [recoilN, setRecoilN] = useRecoilState(nState)
+  const [recoilAdr, setRecoilAdr] = useRecoilState(adrState)
 
-  const [n, setN] = useValidatedState<string>(recoilN, (value) => {
+  const [adr, setAdr] = useValidatedState<string | null>(recoilAdr, (value) => {
     switch (version) {
       case '3.0':
-        return r`^${nValueV3}$`.test(value)
+        return (
+          value === null ||
+          // value === '' ||
+          r`^${adrValueV3}$`.test(value)
+        )
 
       case '4.0':
-        return value === '' || r`^${nValueV4}$`.test(value) //
+        return (
+          value === null ||
+          // value === '' ||
+          r`^${adrValueV4}$`.test(value)
+        )
     }
   })
 
   useLayoutEffect(() => {
-    setN(recoilN)
-  }, [setN, recoilN])
+    setAdr(recoilAdr)
+  }, [setAdr, recoilAdr])
 
   return (
     <TextInput
       id={id}
-      required={version === '3.0'}
-      placeholder="Public;John;Quinlan;Mr.;Esq."
-      value={n.value}
+      placeholder={
+        version === '3.0'
+          ? ';;123 Main Street;Any Town;CA;91921-1234'
+          : version === '4.0'
+            ? ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.'
+            : exit()
+      }
+      value={adr.value}
       error={
-        !n.valid && (
+        !adr.valid && (
           <span
             dangerouslySetInnerHTML={{
               __html:
                 version === '3.0'
                   ? formatMessage({
                       defaultMessage:
-                        'Should be an <i>n-value</i> on p. 30, RFC 2426.',
+                        'Should be an <i>adr-value</i> on p. 36, RFC 2426.',
                     })
                   : version === '4.0'
                     ? formatMessage({
                         defaultMessage:
-                          'Should be an <i>N-value</i> on p. 29, RFC 6350.',
+                          'Should be an <i>ADR-value</i> on p. 34, RFC 6350.',
                       })
                     : exit(),
             }}
@@ -59,11 +73,11 @@ const PlainNInput: React.FC<Props> = ({ id = v4() }) => {
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        setN(event.currentTarget.value)
-        setRecoilN(event.currentTarget.value)
+        setAdr(nes(event.currentTarget.value))
+        setRecoilAdr(nes(event.currentTarget.value))
       }}
     />
   )
 }
 
-export default PlainNInput
+export default PlainAdrInput

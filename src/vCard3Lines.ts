@@ -39,6 +39,10 @@ export default function* vCard3Lines(
     }
   }
 
+  if (vCardObject.adr !== null) {
+    yield `ADR:${vCardObject.adr}`
+  }
+
   if (vCardObject.tels !== null) {
     for (const tel of vCardObject.tels) {
       yield `TEL:${tel.value}`
