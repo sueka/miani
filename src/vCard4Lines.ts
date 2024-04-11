@@ -1,4 +1,4 @@
-import isNOmitted from './isNOmitted'
+import areComponentsOmitted from './areComponentsOmitted'
 import { day, month, year } from './lib/Iso8601DateTime/isIso8601Date'
 import assert from './lib/assert'
 import r from './lib/tags/r'
@@ -24,7 +24,7 @@ export default function* vCard4Lines(
     yield `FN${params}:${vCardObject.fn}`
   }
 
-  if (isNOmitted(vCardObject.n)) {
+  if (!areComponentsOmitted(vCardObject.n)) {
     let params = ''
 
     if (
@@ -75,7 +75,7 @@ export default function* vCard4Lines(
     }
   }
 
-  if (vCardObject.adr !== null) {
+  if (vCardObject.adr !== null && !areComponentsOmitted(vCardObject.adr)) {
     let params = ''
 
     if (charset !== undefined && hasNonAscii(vCardObject.adr)) {
@@ -97,7 +97,7 @@ export default function* vCard4Lines(
     }
 
     if (name === 'X-PHONETIC-LAST-NAME' || name === 'X-PHONETIC-FIRST-NAME') {
-      if (isNOmitted(vCardObject.n)) {
+      if (areComponentsOmitted(vCardObject.n)) {
         continue // Already used in N
       }
     }

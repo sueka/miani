@@ -81,7 +81,7 @@ interface Options {
 }
 
 // TODO: Remove them
-function build(n: VCard.N, _options: Options): string {
+function build(n: VCard.N, { version }: Options): string {
   const {
     familyName,
     givenName,
@@ -99,11 +99,13 @@ function build(n: VCard.N, _options: Options): string {
     honorificSuffixes?.join(','),
   ]
 
-  return (
-    textComponents
-      .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
-      .join(';') + (rest ?? '')
-  )
+  return version === '3.0'
+    ? textComponents
+        .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
+        .join(';') + (rest ?? '')
+    : version === '4.0'
+      ? textComponents.join(';') + (rest ?? '')
+      : exit()
 }
 
 function extract(n: string, { version }: Options): VCard.N {

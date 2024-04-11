@@ -51,7 +51,8 @@ const PlainAdrInput: React.FC<Props> = ({ id = v4() }) => {
             ? ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.'
             : exit()
       }
-      value={adr.value}
+      // NOTE: <TextInput value={null}> can cause no re-rendering, esp. if it is changed twice and the first time there are no changes.
+      value={adr.value ?? undefined}
       error={
         !adr.valid && (
           <span

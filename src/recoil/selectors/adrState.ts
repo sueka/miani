@@ -93,7 +93,7 @@ interface Options {
 }
 
 // TODO: Remove them
-function build(adr: VCard.Adr, _options: Options): string | null {
+function build(adr: VCard.Adr, { version }: Options): string {
   const {
     postOfficeBox,
     extendedAddress,
@@ -115,11 +115,13 @@ function build(adr: VCard.Adr, _options: Options): string | null {
     countryName,
   ]
 
-  return (
-    textComponents
-      .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
-      .join(';') + (rest ?? '')
-  )
+  return version === '3.0'
+    ? textComponents
+        .slice(0, textComponents.findLastIndex((c) => c != null) + 1)
+        .join(';') + (rest ?? '')
+    : version === '4.0'
+      ? textComponents.join(';') + (rest ?? '')
+      : exit()
 }
 
 function extract(adr: string, { version }: Options): VCard.Adr {
