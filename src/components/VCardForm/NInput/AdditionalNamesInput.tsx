@@ -55,6 +55,7 @@ const AdditionalNamesInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder="Quinlan"
+          autocomplete="additional-name"
           value={additionalNames.value ?? undefined}
           error={
             !additionalNames.valid && (

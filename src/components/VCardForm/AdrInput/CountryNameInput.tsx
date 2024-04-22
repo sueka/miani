@@ -58,6 +58,7 @@ const CountryNameInput: React.FC<Props> = ({ id }) => {
           id={inputId}
           flex={1}
           placeholder="U.S.A."
+          autocomplete="country-name"
           value={countryName.value}
           error={
             !countryName.valid && (

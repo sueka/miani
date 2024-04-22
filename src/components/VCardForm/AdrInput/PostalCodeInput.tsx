@@ -54,6 +54,7 @@ const PostalCodeInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder="91921-1234"
+          autocomplete="postal-code"
           value={postalCode.value}
           error={
             !postalCode.valid && (

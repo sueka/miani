@@ -53,6 +53,7 @@ const LocalityInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder="Any Town"
+          autocomplete="address-level2"
           value={locality.value}
           error={
             !locality.valid && (

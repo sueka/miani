@@ -34,6 +34,7 @@ const FnInput: React.FC = () => {
       required
       label={<FormattedMessage defaultMessage="Formatted name" />}
       placeholder="Mr. John Q. Public\, Esq."
+      autocomplete="name"
       value={fn.value}
       error={
         !fn.valid && (

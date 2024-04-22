@@ -61,6 +61,7 @@ const FamilyNameInput: React.FC<Props> = ({ id = v4() }) => {
           id={id}
           flex={1}
           placeholder="Public"
+          autocomplete="family-name"
           value={familyName.value}
           error={
             !familyName.valid && (

@@ -53,6 +53,7 @@ const RegionInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder="CA"
+          autocomplete="address-level1"
           value={region.value}
           error={
             !region.valid && (
