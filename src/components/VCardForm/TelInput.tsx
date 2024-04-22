@@ -115,9 +115,11 @@ const TelInput: React.FC<Props> = ({ telId }) => {
           variant="transparent"
           ref={handle}
           {...listeners}
+          style={{
+            touchAction: 'none',
+          }}
         >
-          {' '}
-          <IconGripVertical />{' '}
+          <IconGripVertical />
         </ThemeIcon>
       </Group>
     </Input.Wrapper>

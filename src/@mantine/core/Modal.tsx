@@ -83,7 +83,13 @@ const Modal: React.FC<ModalProps> = ({
         classNames={draggableClasses}
         {...attributes}
       >
-        <OrigModal.Header ref={handler} {...listeners}>
+        <OrigModal.Header
+          ref={handler}
+          {...listeners}
+          style={{
+            touchAction: 'none',
+          }}
+        >
           <OrigModal.Title>{title}</OrigModal.Title>
           <OrigModal.CloseButton data-no-dnd />
         </OrigModal.Header>
