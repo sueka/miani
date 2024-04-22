@@ -1,5 +1,6 @@
 import { type RecoilState, selector } from 'recoil'
 import compact from '../../lib/compact'
+import exit from '../../lib/exit'
 import sharedState from '../atoms/sharedState'
 import telIdsState from '../atoms/tel/telIdsState'
 import telState from '../atoms/tel/telState'
@@ -12,11 +13,21 @@ export default selector({
 
     const telIds = get(telIdsState)
 
-    return compact(
+    const tels = compact(
       telIds.map<VCard.Tel | null>((telId) => {
         const tel = getOrNull(telState(telId))
-        return tel !== null ? { value: tel } : null
+        const types: never[] = [] // TODO
+
+        return tel !== null ? { value: tel, types } : null
       }),
     )
+
+    if (tels.length >= 2) {
+      const carTel = tels[0] ?? exit()
+
+      carTel.types.push('pref')
+    }
+
+    return tels
   },
 })

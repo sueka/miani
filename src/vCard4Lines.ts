@@ -87,7 +87,13 @@ export default function* vCard4Lines(
 
   if (vCardObject.tels !== null) {
     for (const tel of vCardObject.tels) {
-      yield `TEL:${tel.value}`
+      let params = ''
+
+      if (tel.types.length !== 0) {
+        params += `;TYPE=${tel.types.join(',')}`
+      }
+
+      yield `TEL${params}:${tel.value}`
     }
   }
 

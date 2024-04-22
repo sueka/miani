@@ -58,5 +58,23 @@ namespace VCard {
 
   interface Tel {
     value: string // phone number
+    types: TelType[] // The default type is "voice". (3.3.1, RFC 2426)
   }
+
+  // 3.3.1, RFC 2426 lists
+  type TelType =
+    | 'home'
+    | 'msg'
+    | 'work'
+    | 'pref'
+    | 'voice'
+    | 'fax'
+    | 'cell'
+    | 'video'
+    | 'pager'
+    | 'bbs'
+    | 'modem'
+    | 'car'
+    | 'isdn'
+    | 'pcs'
 }
