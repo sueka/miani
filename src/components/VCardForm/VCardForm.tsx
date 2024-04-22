@@ -4,7 +4,7 @@ import BdayInput from './BdayInput/BdayInput'
 import FnInput from './FnInput'
 import NInput from './NInput/NInput'
 import OtherInputs from './OtherInputs'
-import TelInputs from './TelInputs'
+import TelInputs from './TelsInput/TelInputs'
 import XPhoneticNamesInput from './XPhoneticNamesInput'
 
 const VCardForm: React.FC = () => (

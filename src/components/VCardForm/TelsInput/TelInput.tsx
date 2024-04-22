@@ -13,12 +13,12 @@ import { IconBackspace, IconGripVertical } from '@tabler/icons-react'
 import { useLayoutEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
-import nes from '../../lib/nes'
-import r from '../../lib/tags/r'
-import { phoneNumberValue } from '../../patterns'
-import sharedState from '../../recoil/atoms/sharedState'
-import telIdsState from '../../recoil/atoms/tel/telIdsState'
-import telState from '../../recoil/atoms/tel/telState'
+import nes from '../../../lib/nes'
+import r from '../../../lib/tags/r'
+import { phoneNumberValue } from '../../../patterns'
+import sharedState from '../../../recoil/atoms/sharedState'
+import telIdsState from '../../../recoil/atoms/tel/telIdsState'
+import telState from '../../../recoil/atoms/tel/telState'
 
 interface Props {
   telId: string
