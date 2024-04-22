@@ -68,7 +68,7 @@ const Modal: React.FC<ModalProps> = ({
         })
       }
     }
-  }, [active, active?.rect.current])
+  }, [active, active?.rect.current, id])
 
   return (
     <OrigModal.Root
