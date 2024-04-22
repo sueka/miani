@@ -1,10 +1,18 @@
-import { ActionIcon, Checkbox, Group, Input, TextInput } from '@mantine/core'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import {
+  ActionIcon,
+  Checkbox,
+  Group,
+  Input,
+  TextInput,
+  ThemeIcon,
+} from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
-import { IconBackspace } from '@tabler/icons-react'
+import { IconBackspace, IconGripVertical } from '@tabler/icons-react'
 import { useLayoutEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
-
 import nes from '../../lib/nes'
 import r from '../../lib/tags/r'
 import { phoneNumberValue } from '../../patterns'
@@ -35,8 +43,23 @@ const TelInput: React.FC<Props> = ({ telId }) => {
     setTel(recoilTel)
   }, [setTel, recoilTel])
 
+  const {
+    attributes,
+    listeners,
+    setNodeRef: draggable,
+    setActivatorNodeRef: handle,
+    transform,
+    transition,
+  } = useSortable({ id: telId })
+
   return (
     <Input.Wrapper
+      ref={draggable}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition,
+      }}
+      {...attributes}
       error={
         !tel.valid && (
           <span
@@ -61,7 +84,7 @@ const TelInput: React.FC<Props> = ({ telId }) => {
           flex={1}
           // NOTE: This phone number does not exist because "3" (and "6") are exclusive area codes and local codes do not start with "0" in Japan (+81).
           placeholder="+81-3-0123-4567"
-          value={tel.value}
+          value={tel.value ?? ''}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setTel(nes(event.currentTarget.value))
             setRecoilTel(nes(event.currentTarget.value))
@@ -87,6 +110,15 @@ const TelInput: React.FC<Props> = ({ telId }) => {
         >
           <IconBackspace />
         </ActionIcon>
+        <ThemeIcon
+          color="gray"
+          variant="transparent"
+          ref={handle}
+          {...listeners}
+        >
+          {' '}
+          <IconGripVertical />{' '}
+        </ThemeIcon>
       </Group>
     </Input.Wrapper>
   )
