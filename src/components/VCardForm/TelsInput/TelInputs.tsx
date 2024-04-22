@@ -1,4 +1,11 @@
-import { DndContext, type DragEndEvent, closestCenter } from '@dnd-kit/core'
+import {
+  DndContext,
+  type DragEndEvent,
+  DragOverlay,
+  type DragStartEvent,
+  closestCenter,
+  defaultDropAnimationSideEffects,
+} from '@dnd-kit/core'
 import { restrictToParentElement } from '@dnd-kit/modifiers'
 import {
   SortableContext,
@@ -6,6 +13,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { Button, Input, Stack } from '@mantine/core'
+import { useState } from 'preact/hooks'
 import { FormattedMessage } from 'react-intl'
 import { useRecoilState } from 'recoil'
 import { ulid } from 'ulid'
@@ -15,6 +23,7 @@ import TelInput from './TelInput'
 
 const TelInputs: React.FC = () => {
   const [telIds, setTelIds] = useRecoilState(telIdsState)
+  const [actionId, setActionId] = useState<string | null>(null)
 
   return (
     <Input.Wrapper
@@ -23,9 +32,15 @@ const TelInputs: React.FC = () => {
       <Stack gap="xs">
         <DndContext
           collisionDetection={closestCenter}
+          onDragStart={({ active }: DragStartEvent) => {
+            assert(typeof active.id === 'string')
+            setActionId(active.id)
+          }}
           onDragEnd={({ active, over }: DragEndEvent) => {
+            setActionId(null)
+
             if (over === null) {
-              return // noop for no moves
+              return // noop for no collisions detected
             }
 
             if (active.id !== over.id) {
@@ -51,6 +66,19 @@ const TelInputs: React.FC = () => {
                 <TelInput key={telId} {...{ telId }} />
               ))}
             </Stack>
+            <DragOverlay
+              dropAnimation={{
+                sideEffects: defaultDropAnimationSideEffects({
+                  styles: {
+                    active: {
+                      opacity: '0.2',
+                    },
+                  },
+                }),
+              }}
+            >
+              {actionId !== null && <TelInput telId={actionId} />}
+            </DragOverlay>
           </SortableContext>
         </DndContext>
         <Button

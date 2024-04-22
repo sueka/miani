@@ -50,6 +50,7 @@ const TelInput: React.FC<Props> = ({ telId }) => {
     setActivatorNodeRef: handle,
     transform,
     transition,
+    isDragging,
   } = useSortable({ id: telId })
 
   return (
@@ -58,6 +59,7 @@ const TelInput: React.FC<Props> = ({ telId }) => {
       style={{
         transform: CSS.Transform.toString(transform),
         transition,
+        opacity: isDragging ? 0.2 : undefined,
       }}
       {...attributes}
       error={
