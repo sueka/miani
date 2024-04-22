@@ -13,13 +13,17 @@ import countryNameState from '../../../recoil/atoms/adr/countryNameState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
 
-const CountryNameInput: React.FC = () => {
+interface Props {
+  id?: string
+}
+
+const CountryNameInput: React.FC<Props> = ({ id }) => {
   const { formatMessage } = useIntl()
   const version = useRecoilValue(versionState)
   const [recoilCountryName, setRecoilCountryName] =
     useRecoilState(countryNameState)
   const [shared, setShared] = useRecoilState(sharedState(countryNameState.key))
-  const inputId = useMemo(v4, [])
+  const inputId = useMemo(() => id ?? v4(), [id])
 
   const [countryName, setCountryName] = useValidatedState<string | null>(
     recoilCountryName,

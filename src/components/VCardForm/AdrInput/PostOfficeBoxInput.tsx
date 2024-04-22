@@ -3,10 +3,9 @@ import {
   Group,
   Input,
   TextInput,
-  type TextInputProps,
 } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { v4 } from 'uuid'
@@ -19,9 +18,11 @@ import postOfficeBoxState from '../../../recoil/atoms/adr/postOfficeBoxState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
 
-type Props = Partial<Pick<TextInputProps, 'id'>>
+interface Props {
+  id?: string
+}
 
-const PostOfficeBoxInput: React.FC<Props> = ({ id = v4() }) => {
+const PostOfficeBoxInput: React.FC<Props> = ({ id }) => {
   const { formatMessage } = useIntl()
   const version = useRecoilValue(versionState)
   const [recoilPostOfficeBox, setRecoilPostOfficeBox] =
@@ -29,6 +30,7 @@ const PostOfficeBoxInput: React.FC<Props> = ({ id = v4() }) => {
   const [shared, setShared] = useRecoilState(
     sharedState(postOfficeBoxState.key),
   )
+  const inputId = useMemo(() => id ?? v4(), [id])
 
   const [postOfficeBox, setPostOfficeBox] = useValidatedState<string | null>(
     recoilPostOfficeBox,
@@ -50,7 +52,7 @@ const PostOfficeBoxInput: React.FC<Props> = ({ id = v4() }) => {
   return (
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Post Office Box" />}
-      labelProps={{ htmlFor: id }}
+      labelProps={{ htmlFor: inputId }}
     >
       <Group gap="xs">
         <Checkbox
@@ -60,7 +62,7 @@ const PostOfficeBoxInput: React.FC<Props> = ({ id = v4() }) => {
           }}
         />
         <TextInput
-          id={id}
+          id={inputId}
           flex={1}
           placeholder=""
           value={postOfficeBox.value}

@@ -1,6 +1,6 @@
 import { Divider, Input, SegmentedControl, Stack } from '@mantine/core'
 import { useMemo } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
 
@@ -18,6 +18,7 @@ import StreetAddressInput from './StreetAddressInput'
 const AdrInput: React.FC = () => {
   const [variant, setVariant] = useRecoilState(variantState)
   const inputId = useMemo(v4, [])
+  const { locale } = useIntl()
 
   return (
     <>
@@ -44,17 +45,28 @@ const AdrInput: React.FC = () => {
             }}
           />
           {variant === 'plainText' && <PlainAdrInput id={inputId} />}
-          {variant === 'components' && (
-            <>
-              <PostOfficeBoxInput id={inputId} />
-              <ExtendedAddressInput />
-              <StreetAddressInput />
-              <LocalityInput />
-              <RegionInput />
-              <PostalCodeInput />
-              <CountryNameInput />
-            </>
-          )}
+          {variant === 'components' &&
+            (locale === 'ja' ? (
+              <>
+                <CountryNameInput id={inputId} />
+                <PostalCodeInput />
+                <RegionInput />
+                <LocalityInput />
+                <StreetAddressInput />
+                <ExtendedAddressInput />
+                <PostOfficeBoxInput />
+              </>
+            ) : ( // for 'en' or otherwise
+              <>
+                <PostOfficeBoxInput id={inputId} />
+                <ExtendedAddressInput />
+                <StreetAddressInput />
+                <LocalityInput />
+                <RegionInput />
+                <PostalCodeInput />
+                <CountryNameInput />
+              </>
+            ))}
         </Stack>
       </Input.Wrapper>
       <Divider />
