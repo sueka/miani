@@ -1,4 +1,4 @@
-import { TextInput, type TextInputProps } from '@mantine/core'
+import { Textarea, type TextInputProps } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect } from 'react'
 import { useIntl } from 'react-intl'
@@ -42,7 +42,9 @@ const PlainAdrInput: React.FC<Props> = ({ id = v4() }) => {
   }, [setAdr, recoilAdr])
 
   return (
-    <TextInput
+    <Textarea
+      minRows={1}
+      autosize
       id={id}
       placeholder={
         version === '3.0'
@@ -51,7 +53,7 @@ const PlainAdrInput: React.FC<Props> = ({ id = v4() }) => {
             ? ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.'
             : exit()
       }
-      // NOTE: <TextInput value={null}> can cause no re-rendering, esp. if it is changed twice and the first time there are no changes.
+      // NOTE: <TextInput value={null}> can cause no re-rendering, esp. if it is changed twice and the first time there are no changes. This NOTE can have expired.
       value={adr.value ?? undefined}
       error={
         !adr.valid && (
