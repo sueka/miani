@@ -56,7 +56,8 @@ const AdrInput: React.FC = () => {
                 <ExtendedAddressInput />
                 <PostOfficeBoxInput />
               </>
-            ) : ( // for 'en' or otherwise
+            ) : (
+              // for 'en' or otherwise
               <>
                 <PostOfficeBoxInput id={inputId} />
                 <ExtendedAddressInput />

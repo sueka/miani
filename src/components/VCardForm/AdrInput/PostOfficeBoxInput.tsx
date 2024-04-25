@@ -1,9 +1,4 @@
-import {
-  Checkbox,
-  Group,
-  Input,
-  TextInput,
-} from '@mantine/core'
+import { Checkbox, Group, Input, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'

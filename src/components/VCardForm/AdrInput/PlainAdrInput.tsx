@@ -1,4 +1,4 @@
-import { Textarea, type TextInputProps } from '@mantine/core'
+import { type TextInputProps, Textarea } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect } from 'react'
 import { useIntl } from 'react-intl'
