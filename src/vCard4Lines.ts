@@ -103,7 +103,7 @@ export default function* vCard4Lines(
     }
 
     if (name === 'X-PHONETIC-LAST-NAME' || name === 'X-PHONETIC-FIRST-NAME') {
-      if (areComponentsOmitted(vCardObject.n)) {
+      if (!areComponentsOmitted(vCardObject.n)) {
         continue // Already used in N
       }
     }
