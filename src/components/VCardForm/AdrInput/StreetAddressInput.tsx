@@ -1,4 +1,4 @@
-import { Checkbox, Group, Input, TextInput } from '@mantine/core'
+import { Checkbox, Group, Input, Text, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -12,6 +12,7 @@ import { listComponent, textValue } from '../../../patterns'
 import streetAddressState from '../../../recoil/atoms/adr/streetAddressState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
+import Hint from '../../lib/Hint'
 
 const StreetAddressInput: React.FC = () => {
   const { formatMessage } = useIntl()
@@ -42,7 +43,16 @@ const StreetAddressInput: React.FC = () => {
 
   return (
     <Input.Wrapper
-      label={<FormattedMessage defaultMessage="Street Address" />}
+      label={
+        <>
+          <FormattedMessage defaultMessage="Street Address" />
+          <Hint popoverProps={{ position: 'top' }}>
+            <Text size="xs">
+              <FormattedMessage defaultMessage="You may separate them with commas if it has multiple lines." />
+            </Text>
+          </Hint>
+        </>
+      }
       labelProps={{ htmlFor: inputId }}
     >
       <Group gap="xs">

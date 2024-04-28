@@ -1,4 +1,12 @@
-import { Checkbox, Group, Input, TextInput } from '@mantine/core'
+import {
+  Checkbox,
+  Divider,
+  Group,
+  Input,
+  Stack,
+  Text,
+  TextInput,
+} from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -12,6 +20,7 @@ import { listComponent, textValue } from '../../../patterns'
 import regionState from '../../../recoil/atoms/adr/regionState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
+import Hint from '../../lib/Hint'
 
 const RegionInput: React.FC = () => {
   const { formatMessage } = useIntl()
@@ -39,7 +48,22 @@ const RegionInput: React.FC = () => {
 
   return (
     <Input.Wrapper
-      label={<FormattedMessage defaultMessage="Region" />}
+      label={
+        <>
+          <FormattedMessage defaultMessage="Region" />
+          <Hint popoverProps={{ position: 'top' }}>
+            <Stack gap="xs">
+              <Text size="sm">
+                <FormattedMessage defaultMessage="A first-level administrative division of the country" />
+              </Text>
+              <Divider />
+              <Text size="xs">
+                <FormattedMessage defaultMessage="State in the US, prefecture (todōfuken 都道府県) in Japan, etc." />
+              </Text>
+            </Stack>
+          </Hint>
+        </>
+      }
       labelProps={{ htmlFor: inputId }}
     >
       <Group gap="xs">

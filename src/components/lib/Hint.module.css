@@ -1,0 +1,4 @@
+.ActionIcon {
+  /* Since m="xs" is too broader, */
+  margin: 6px;
+}

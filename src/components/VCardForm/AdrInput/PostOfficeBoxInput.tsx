@@ -1,4 +1,4 @@
-import { Checkbox, Group, Input, TextInput } from '@mantine/core'
+import { Checkbox, Group, Input, Text, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -12,6 +12,7 @@ import { listComponent, textValue } from '../../../patterns'
 import postOfficeBoxState from '../../../recoil/atoms/adr/postOfficeBoxState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
+import Hint from '../../lib/Hint'
 
 interface Props {
   id?: string
@@ -85,6 +86,22 @@ const PostOfficeBoxInput: React.FC<Props> = ({ id }) => {
             setPostOfficeBox(nes(event.currentTarget.value))
             setRecoilPostOfficeBox(nes(event.currentTarget.value))
           }}
+          rightSection={
+            version === '4.0' ? (
+              <Hint variant="alert">
+                <Text size="xs">
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: formatMessage({
+                        defaultMessage:
+                          'For interoperability, it SHOULD be left empty.',
+                      }),
+                    }}
+                  />
+                </Text>
+              </Hint>
+            ) : null
+          }
         />
       </Group>
     </Input.Wrapper>

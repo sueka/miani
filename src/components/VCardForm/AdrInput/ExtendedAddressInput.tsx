@@ -1,4 +1,4 @@
-import { Checkbox, Group, Input, TextInput } from '@mantine/core'
+import { Checkbox, Group, Input, Text, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -12,6 +12,7 @@ import { listComponent, textValue } from '../../../patterns'
 import extendedAddressState from '../../../recoil/atoms/adr/extendedAddressState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
+import Hint from '../../lib/Hint'
 
 const ExtendedAddressInput: React.FC = () => {
   const { formatMessage } = useIntl()
@@ -41,7 +42,16 @@ const ExtendedAddressInput: React.FC = () => {
 
   return (
     <Input.Wrapper
-      label={<FormattedMessage defaultMessage="Extended Address" />}
+      label={
+        <>
+          <FormattedMessage defaultMessage="Extended Address" />
+          <Hint popoverProps={{ position: 'top' }}>
+            <Text size="xs">
+              <FormattedMessage defaultMessage="Building name, apartment or suite number, etc." />
+            </Text>
+          </Hint>
+        </>
+      }
       labelProps={{ htmlFor: inputId }}
     >
       <Group gap="xs">
@@ -80,6 +90,22 @@ const ExtendedAddressInput: React.FC = () => {
             setExtendedAddress(nes(event.currentTarget.value))
             setRecoilExtendedAddress(nes(event.currentTarget.value))
           }}
+          rightSection={
+            version === '4.0' ? (
+              <Hint variant="alert">
+                <Text size="xs">
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: formatMessage({
+                        defaultMessage:
+                          'For interoperability, it SHOULD be left empty.',
+                      }),
+                    }}
+                  />
+                </Text>
+              </Hint>
+            ) : null
+          }
         />
       </Group>
     </Input.Wrapper>

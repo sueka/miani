@@ -1,4 +1,4 @@
-import { Checkbox, Group, Input, TextInput } from '@mantine/core'
+import { Checkbox, Group, Input, Text, TextInput } from '@mantine/core'
 import { useValidatedState } from '@mantine/hooks'
 import { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -12,6 +12,7 @@ import { listComponent, textValues } from '../../../patterns'
 import additionalNamesState from '../../../recoil/atoms/n/additionalNamesState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
+import Hint from '../../lib/Hint'
 
 const AdditionalNamesInput: React.FC = () => {
   const { formatMessage } = useIntl()
@@ -41,7 +42,16 @@ const AdditionalNamesInput: React.FC = () => {
 
   return (
     <Input.Wrapper
-      label={<FormattedMessage defaultMessage="Additional Names" />}
+      label={
+        <>
+          <FormattedMessage defaultMessage="Additional Names" />
+          <Hint popoverProps={{ position: 'top' }}>
+            <Text size="xs">
+              <FormattedMessage defaultMessage="Often middle names." />
+            </Text>
+          </Hint>
+        </>
+      }
       labelProps={{ htmlFor: inputId }}
     >
       <Group gap="xs">
