@@ -60,7 +60,7 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
           value={vCard}
           classNames={classNames}
           rightSection={
-            <Stack gap="xs">
+            <ActionIcon.Group orientation="vertical">
               <CopyButton value={vCard}>
                 {({ copied, copy }) => (
                   <Tooltip
@@ -72,6 +72,7 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
                       )
                     }
                     withArrow
+                    position="right"
                   >
                     <ActionIcon
                       color={copied ? 'green' : 'gray'}
@@ -90,6 +91,7 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
               <Tooltip
                 label={<FormattedMessage defaultMessage="Download" />}
                 withArrow
+                position="right"
               >
                 <ActionIcon
                   color="gray"
@@ -105,6 +107,7 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
               <Tooltip
                 label={<FormattedMessage defaultMessage="Settings" />}
                 withArrow
+                position="right"
               >
                 <ActionIcon
                   color="gray"
@@ -114,7 +117,7 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
                   <IconSettings style={{ width: rem(16) }} />
                 </ActionIcon>
               </Tooltip>
-            </Stack>
+            </ActionIcon.Group>
           }
         />
       </Stack>
