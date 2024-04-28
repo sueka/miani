@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { v4 } from 'uuid'
 
+import Hint from '../../../lib/components/Hint'
 import exit from '../../../lib/exit'
 import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
@@ -12,7 +13,6 @@ import { listComponent, textValue } from '../../../patterns'
 import postOfficeBoxState from '../../../recoil/atoms/adr/postOfficeBoxState'
 import sharedState from '../../../recoil/atoms/sharedState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
-import Hint from '../../lib/Hint'
 
 interface Props {
   id?: string

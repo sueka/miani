@@ -1,6 +1,6 @@
 import { ActionIcon, HoverCard, type PopoverProps, rem } from '@mantine/core'
 import { IconAlertTriangle, IconInfoCircle } from '@tabler/icons-react'
-import exit from '../../lib/exit'
+import exit from '../exit'
 import classes from './Hint.module.css'
 
 interface HintProps {
