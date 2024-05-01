@@ -1,18 +1,22 @@
+import { restrictToWindowEdges } from '@dnd-kit/modifiers'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import {
   ActionIcon,
+  Button,
   Checkbox,
   Group,
   Input,
   TextInput,
   ThemeIcon,
 } from '@mantine/core'
-import { useValidatedState } from '@mantine/hooks'
+import { useDisclosure, useValidatedState } from '@mantine/hooks'
 import { IconBackspace, IconGripVertical } from '@tabler/icons-react'
 import { useLayoutEffect } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
+import DndContext from '../../../@dnd-kit/providers/DndContext'
+import Modal from '../../../@mantine/core/Modal'
 import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { phoneNumberValue } from '../../../patterns'
@@ -52,6 +56,11 @@ const TelInput: React.FC<Props> = ({ telId }) => {
     transition,
     isDragging,
   } = useSortable({ id: telId })
+
+  const [
+    deleteConfirmOpen,
+    { open: openDeleteConfirm, close: closeDeleteConfirm },
+  ] = useDisclosure()
 
   return (
     <Input.Wrapper
@@ -97,15 +106,9 @@ const TelInput: React.FC<Props> = ({ telId }) => {
         <ActionIcon
           variant="light"
           onClick={() => {
-            if (
-              (tel.value ?? '').match(/^\s*$/) ||
-              confirm(
-                formatMessage(
-                  { defaultMessage: 'Delete the phone number: {tel}' },
-                  { tel: tel.value },
-                ),
-              )
-            ) {
+            if (!(tel.value ?? '').match(/^\s*$/)) {
+              openDeleteConfirm()
+            } else {
               resetTel()
               setTelIds((telIds) => telIds.filter((t) => t !== telId))
             }
@@ -113,6 +116,28 @@ const TelInput: React.FC<Props> = ({ telId }) => {
         >
           <IconBackspace />
         </ActionIcon>
+        <DndContext modifiers={[restrictToWindowEdges]}>
+          <Modal
+            opened={deleteConfirmOpen}
+            onClose={closeDeleteConfirm}
+            title={
+              <FormattedMessage
+                defaultMessage="Delete the phone number: {tel}"
+                values={{ tel: tel.value }}
+              />
+            }
+          >
+            <Button
+              color="red"
+              onClick={() => {
+                resetTel()
+                setTelIds((telIds) => telIds.filter((t) => t !== telId))
+              }}
+            >
+              <FormattedMessage defaultMessage="Delete" />
+            </Button>
+          </Modal>
+        </DndContext>
         <ThemeIcon
           color="gray"
           variant="transparent"

@@ -1,5 +1,4 @@
 import {
-  DndContext,
   KeyboardSensor,
   TouchSensor,
   useSensor,
@@ -9,6 +8,7 @@ import { restrictToParentElement } from '@dnd-kit/modifiers'
 import { Container, Group, Stack, Text, Title } from '@mantine/core'
 import cls from 'classnames'
 
+import DndContext from '../@dnd-kit/providers/DndContext'
 import MouseSensor from '../@dnd-kit/sensors/MouseSensor'
 import classes from './App.module.css'
 import VCardForm from './VCardForm/VCardForm'
