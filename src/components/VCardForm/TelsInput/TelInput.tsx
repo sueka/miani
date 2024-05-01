@@ -127,15 +127,17 @@ const TelInput: React.FC<Props> = ({ telId }) => {
               />
             }
           >
-            <Button
-              color="red"
-              onClick={() => {
-                resetTel()
-                setTelIds((telIds) => telIds.filter((t) => t !== telId))
-              }}
-            >
-              <FormattedMessage defaultMessage="Delete" />
-            </Button>
+            <Group justify="end">
+              <Button
+                color="red"
+                onClick={() => {
+                  resetTel()
+                  setTelIds((telIds) => telIds.filter((t) => t !== telId))
+                }}
+              >
+                <FormattedMessage defaultMessage="Delete" />
+              </Button>
+            </Group>
           </Modal>
         </DndContext>
         <ThemeIcon
