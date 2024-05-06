@@ -1,7 +1,7 @@
 import areComponentsOmitted from './areComponentsOmitted'
-import { day, month, year } from './lib/Iso8601DateTime/isIso8601Date'
-import assert from './lib/assert'
-import r from './lib/tags/r'
+import { day, month, year } from '../lib/Iso8601DateTime/isIso8601Date'
+import assert from '../lib/assert'
+import r from '../lib/tags/r'
 
 const dateGrouped = r`^(?<year>${year})-?(?<month>${month})-?(?<day>${day})$`
 

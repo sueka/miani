@@ -3,7 +3,7 @@ import { Modal as OrigModal, type ModalProps } from '@mantine/core'
 import { useLayoutEffect, useMemo, useState } from 'react'
 import { tss } from 'tss-react'
 import { v4 } from 'uuid'
-import assert from '../../lib/assert'
+import assert from '../../../lib/assert'
 
 interface Inset {
   top: number

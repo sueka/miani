@@ -3,7 +3,7 @@ import {
   type DndContextProps,
 } from '@dnd-kit/core'
 import { useContext, useMemo } from 'react'
-import DndSensorsContext from '../../contexts/DndSensorsContext'
+import DndSensorsContext from '../../../contexts/DndSensorsContext'
 
 // <DndContext> that propagates sensors.
 const DndContext: React.FC<DndContextProps> = ({
