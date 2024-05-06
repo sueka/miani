@@ -3,7 +3,8 @@ import { DefaultValue, type RecoilState, selector } from 'recoil'
 import assert from '../../lib/assert'
 import exit from '../../lib/exit'
 import r from '../../lib/tags/r'
-import { adrValueV3, adrValueV4Partial } from '../../patterns'
+import { adrValue } from '../../patterns/vCard'
+import { adrValuePartial } from '../../patterns/vCard4'
 import countryNameState from '../atoms/adr/countryNameState'
 import extendedAddressState from '../atoms/adr/extendedAddressState'
 import localityState from '../atoms/adr/localityState'
@@ -127,9 +128,9 @@ function build(adr: VCard.Adr, { version }: Options): string {
 function extract(adr: string, { version }: Options): VCard.Adr {
   const matched =
     version === '3.0'
-      ? adr.match(r`^${adrValueV3}(?<rest>.*)$`)
+      ? adr.match(r`^${adrValue}(?<rest>.*)$`)
       : version === '4.0'
-        ? adr.match(r`^${adrValueV4Partial}(?<rest>.*)$`)
+        ? adr.match(r`^${adrValuePartial}(?<rest>.*)$`)
         : exit()
 
   assert(matched?.groups != null)

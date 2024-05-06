@@ -7,7 +7,8 @@ import { v4 } from 'uuid'
 
 import exit from '../../../lib/exit'
 import r from '../../../lib/tags/r'
-import { nValueV3, nValueV4 } from '../../../patterns'
+import { nValue as nValueV3 } from '../../../patterns/vCard'
+import { nValue as nValueV4 } from '../../../patterns/vCard4'
 import versionState from '../../../recoil/atoms/vCard/versionState'
 import nState from '../../../recoil/selectors/nState'
 

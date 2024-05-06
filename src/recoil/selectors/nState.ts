@@ -3,7 +3,8 @@ import { DefaultValue, type RecoilState, selector } from 'recoil'
 import assert from '../../lib/assert'
 import exit from '../../lib/exit'
 import r from '../../lib/tags/r'
-import { nValueV3, nValueV4Partial } from '../../patterns'
+import { nValue } from '../../patterns/vCard'
+import { nValuePartial } from '../../patterns/vCard4'
 import additionalNamesState from '../atoms/n/additionalNamesState'
 import familyNameState from '../atoms/n/familyNameState'
 import givenNameState from '../atoms/n/givenNameState'
@@ -111,9 +112,9 @@ function build(n: VCard.N, { version }: Options): string {
 function extract(n: string, { version }: Options): VCard.N {
   const matched =
     version === '3.0'
-      ? n.match(r`^${nValueV3}(?<rest>.*)$`)
+      ? n.match(r`^${nValue}(?<rest>.*)$`)
       : version === '4.0'
-        ? n.match(r`^${nValueV4Partial}(?<rest>.*)$`)
+        ? n.match(r`^${nValuePartial}(?<rest>.*)$`)
         : exit()
 
   assert(matched?.groups != null)

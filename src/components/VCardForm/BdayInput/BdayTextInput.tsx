@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import assert from '../../../lib/assert'
 import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
-import { text } from '../../../patterns'
+import { text } from '../../../patterns/vCard4'
 import bdayTextState from '../../../recoil/atoms/bday/bdayTextState'
 import versionState from '../../../recoil/atoms/vCard/versionState'
 

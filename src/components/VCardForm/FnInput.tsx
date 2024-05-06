@@ -6,7 +6,8 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import exit from '../../lib/exit'
 import r from '../../lib/tags/r'
-import { text, textValue } from '../../patterns'
+import { textValue } from '../../patterns/vCard'
+import { text } from '../../patterns/vCard4'
 import fnState from '../../recoil/atoms/fnState'
 import versionState from '../../recoil/atoms/vCard/versionState'
 
