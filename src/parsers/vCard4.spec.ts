@@ -1,10 +1,6 @@
 import { describe, expect, it } from 'bun:test'
 import stripMargin from '../lib/stripMargin'
-import {
-  type Contentline,
-  parseContentlines,
-  parseVCard,
-} from './vCard4'
+import { type Contentline, parseContentlines, parseVCard } from './vCard4'
 
 describe('parseContentlines()', () => {
   it('works', () => {
