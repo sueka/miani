@@ -5,9 +5,12 @@ import zip from '../zip'
  * @throws `Error` if {substitutions} have different flags
  */
 export default function r(
-  [carSegment, ...segments]: TemplateStringsArray,
+  cooked: TemplateStringsArray,
   ...substitutions: RegExp[]
 ): RegExp {
+  // Uses raw (i.e., w/o processing escape sequences) segments.
+  const [carSegment, ...segments] = cooked.raw
+
   assert(carSegment !== undefined)
   assert(segments.length === substitutions.length)
 
