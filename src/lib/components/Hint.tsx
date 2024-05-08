@@ -14,7 +14,7 @@ const Hint: React.FC<HintProps> = ({
   popoverProps,
   children,
 }) => (
-  <HoverCard withArrow shadow="md" {...popoverProps} openDelay={1000}>
+  <HoverCard withArrow shadow="md" {...popoverProps} openDelay={300}>
     <HoverCard.Target>
       <ActionIcon
         variant="subtle"

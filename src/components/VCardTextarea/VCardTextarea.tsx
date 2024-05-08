@@ -73,6 +73,7 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
                     }
                     withArrow
                     position="right"
+                    openDelay={300}
                   >
                     <ActionIcon
                       color={copied ? 'green' : 'gray'}
@@ -92,6 +93,7 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
                 label={<FormattedMessage defaultMessage="Download" />}
                 withArrow
                 position="right"
+                openDelay={300}
               >
                 <ActionIcon
                   color="gray"
@@ -108,6 +110,7 @@ const VCardTextarea: React.FC<Props> = ({ classNames }) => {
                 label={<FormattedMessage defaultMessage="Settings" />}
                 withArrow
                 position="right"
+                openDelay={300}
               >
                 <ActionIcon
                   color="gray"
