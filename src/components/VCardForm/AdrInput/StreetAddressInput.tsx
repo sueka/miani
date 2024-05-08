@@ -67,8 +67,8 @@ const StreetAddressInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder="123 Main Street"
-          autocomplete="street-address"
-          value={streetAddress.value}
+          autoComplete="street-address"
+          value={streetAddress.value ?? undefined}
           error={
             !streetAddress.valid && (
               <span

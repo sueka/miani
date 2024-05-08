@@ -66,7 +66,7 @@ const ExtendedAddressInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder=""
-          value={extendedAddress.value}
+          value={extendedAddress.value ?? undefined}
           error={
             !extendedAddress.valid && (
               <span

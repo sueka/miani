@@ -57,7 +57,7 @@ const HonorificPrefixesInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder="Mr."
-          autocomplete="honorific-prefix"
+          autoComplete="honorific-prefix"
           value={honorificPrefixes.value ?? undefined}
           error={
             !honorificPrefixes.valid && (

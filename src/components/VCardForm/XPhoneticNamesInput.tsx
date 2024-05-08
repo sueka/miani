@@ -40,8 +40,8 @@ const XPhoneticNamesInput: React.FC = () => {
           <TextInput
             id={phoneticLastNameInputId}
             flex={1}
-            autocomplete="family-name"
-            value={phoneticLastName}
+            autoComplete="family-name"
+            value={phoneticLastName ?? undefined}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setPhoneticLastName(nes(event.currentTarget.value))
             }}
@@ -62,8 +62,8 @@ const XPhoneticNamesInput: React.FC = () => {
           <TextInput
             id={phoneticFirstNameInputId}
             flex={1}
-            autocomplete="given-name"
-            value={phoneticFirstName}
+            autoComplete="given-name"
+            value={phoneticFirstName ?? undefined}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setPhoneticFirstName(nes(event.currentTarget.value))
             }}

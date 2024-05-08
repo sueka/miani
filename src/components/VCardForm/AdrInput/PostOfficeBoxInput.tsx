@@ -62,7 +62,7 @@ const PostOfficeBoxInput: React.FC<Props> = ({ id }) => {
           id={inputId}
           flex={1}
           placeholder=""
-          value={postOfficeBox.value}
+          value={postOfficeBox.value ?? undefined}
           error={
             !postOfficeBox.valid && (
               <span

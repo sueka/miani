@@ -28,7 +28,7 @@ const BdayTextInput: React.FC = () => {
   return (
     <TextInput
       placeholder="circa 1800"
-      value={bday.value}
+      value={bday.value ?? undefined}
       error={
         !bday.valid && (
           <span

@@ -1,9 +1,7 @@
 import { MouseSensor as OrigMouseSensor } from '@dnd-kit/core'
 
-type HandlerFunction = (typeof OrigMouseSensor.activators)[number]['handler']
-
 // Inspired by https://github.com/clauderic/dnd-kit/issues/477#issuecomment-1713536492
-export const handler: HandlerFunction = ({ nativeEvent: event }) => {
+export const handler = ({ nativeEvent: event }: { nativeEvent: MouseEvent | TouchEvent }) => {
   if (!(event.target instanceof HTMLElement) && event.target !== null) {
     return false // Anything that is not an HTML element is not a handler.
   }

@@ -3,7 +3,8 @@ import '@mantine/core/styles.layer.css'
 import { DatesProvider } from '@mantine/dates'
 import '@mantine/dates/styles.layer.css'
 import 'dayjs/locale/ja'
-import React, { render } from 'react'
+import React from 'react'
+import { createRoot } from 'react-dom/client'
 import { IntlProvider } from 'react-intl'
 import { RecoilRoot } from 'recoil'
 import 'temporal-polyfill/global'
@@ -25,7 +26,9 @@ const theme = createTheme({
   },
 })
 
-render(
+const root = createRoot(document.getElementById('app') ?? exit())
+
+root.render(
   <React.StrictMode>
     <MantineProvider theme={theme} defaultColorScheme="auto">
       <RecoilRoot>
@@ -43,7 +46,6 @@ render(
       </RecoilRoot>
     </MantineProvider>
   </React.StrictMode>,
-  document.getElementById('app') ?? exit(),
 )
 
 function loadLocaleData(locale: string) {

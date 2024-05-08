@@ -27,7 +27,7 @@ const AnyInput: React.FC<Props> = ({ type }) => {
         <TextInput
           id={inputId}
           flex={1}
-          value={any}
+          value={any ?? undefined}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setAny(nes(event.currentTarget.value))
           }}

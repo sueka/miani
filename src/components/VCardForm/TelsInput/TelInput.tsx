@@ -95,7 +95,7 @@ const TelInput: React.FC<Props> = ({ telId }) => {
           flex={1}
           // NOTE: This phone number does not exist because "3" (and "6") are exclusive area codes and local codes do not start with "0" in Japan (+81).
           placeholder="+81-3-0123-4567"
-          autocomplete="tel"
+          autoComplete="tel"
           value={tel.value ?? ''}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setTel(nes(event.currentTarget.value))

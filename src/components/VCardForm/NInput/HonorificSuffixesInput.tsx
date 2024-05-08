@@ -57,7 +57,7 @@ const HonorificSuffixesInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder="Esq."
-          autocomplete="honorific-suffix"
+          autoComplete="honorific-suffix"
           value={honorificSuffixes.value ?? undefined}
           error={
             !honorificSuffixes.valid && (

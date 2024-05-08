@@ -38,7 +38,7 @@ const Settings: React.FC<Props> = ({ open, onClose }) => {
             },
           ]}
           value={version}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
             assert(
               event.currentTarget.value === '3.0' ||
                 event.currentTarget.value === '4.0',

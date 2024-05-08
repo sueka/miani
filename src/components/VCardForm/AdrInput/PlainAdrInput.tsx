@@ -76,7 +76,7 @@ const PlainAdrInput: React.FC<Props> = ({ id = v4() }) => {
           />
         )
       }
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+      onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setAdr(nes(event.currentTarget.value))
         setRecoilAdr(nes(event.currentTarget.value))
       }}

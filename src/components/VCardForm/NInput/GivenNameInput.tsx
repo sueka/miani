@@ -54,7 +54,7 @@ const GivenNameInput: React.FC = () => {
           id={inputId}
           flex={1}
           placeholder="John"
-          autocomplete="given-name"
+          autoComplete="given-name"
           value={givenName.value ?? undefined}
           error={
             !givenName.valid && (
