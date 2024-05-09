@@ -28,7 +28,7 @@ const App: React.FC = () => {
         header={{ height: 60 }}
         padding="md" // Same as <Group px>
       >
-        <AppShell.Header>
+        <AppShell.Header style={{ position: 'revert' }}>
           <Group
             h="100%"
             px="md" // Same as <AppShell padding>
@@ -45,7 +45,7 @@ const App: React.FC = () => {
             <Text>{__APP_VERSION__}</Text>
           </Group>
         </AppShell.Header>
-        <AppShell.Main>
+        <AppShell.Main pt={`var(--mantine-spacing-md)`}>
           <Group align="start">
             <Stack classNames={{ root: classes['FormStack'] }}>
               <VCardForm />

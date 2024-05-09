@@ -10,5 +10,5 @@
   position: sticky;
 
   /* Same as padding-top of .AppShell-main */
-  top: calc(var(--app-shell-header-offset, 0px) + var(--app-shell-padding));
+  top: var(--app-shell-padding);
 }
