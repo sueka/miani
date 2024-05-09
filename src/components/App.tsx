@@ -45,7 +45,7 @@ const App: React.FC = () => {
             <Text>{__APP_VERSION__}</Text>
           </Group>
         </AppShell.Header>
-        <AppShell.Main pt={`var(--mantine-spacing-md)`}>
+        <AppShell.Main pt="var(--mantine-spacing-md)">
           <Group align="start">
             <Stack classNames={{ root: classes['FormStack'] }}>
               <VCardForm />
