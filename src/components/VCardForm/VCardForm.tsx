@@ -1,10 +1,10 @@
 import { Stack } from '@mantine/core'
-import AdrInput from './AdrInput/AdrInput'
-import BdayInput from './BdayInput/BdayInput'
+import AdrInput from './Adr/AdrInput'
+import OtherInputs from './Any/OtherInputs'
+import BdayInput from './Bday/BdayInput'
 import FnInput from './FnInput'
-import NInput from './NInput/NInput'
-import OtherInputs from './OtherInputs'
-import TelInputs from './TelsInput/TelInputs'
+import NInput from './N/NInput'
+import TelInputs from './Tel/TelInputs'
 import XPhoneticNamesInput from './XPhoneticNamesInput'
 
 const VCardForm: React.FC = () => (
