@@ -8,5 +8,7 @@
 
 .Sticky {
   position: sticky;
-  top: 0;
+
+  /* Same as padding-top of .AppShell-main */
+  top: calc(var(--app-shell-header-offset, 0px) + var(--app-shell-padding));
 }

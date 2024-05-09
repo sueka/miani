@@ -5,7 +5,7 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { restrictToParentElement } from '@dnd-kit/modifiers'
-import { Container, Group, Stack, Text, Title } from '@mantine/core'
+import { AppShell, Group, Stack, Text, Title, rem } from '@mantine/core'
 import cls from 'classnames'
 
 import DndContext from '../extensions/@dnd-kit/providers/DndContext'
@@ -24,25 +24,43 @@ const App: React.FC = () => {
 
   return (
     <DndContext sensors={sensors} modifiers={[restrictToParentElement]}>
-      <Container>
-        <Group align="baseline">
-          <Title>Miani</Title>
-          <Text>{__APP_VERSION__}</Text>
-        </Group>
-        <Group align="start">
-          <Stack classNames={{ root: classes['FormStack'] }}>
-            <VCardForm />
-          </Stack>
-          <Stack
-            classNames={{
-              root: cls(classes['VCardStack'], classes['Sticky']),
+      <AppShell
+        header={{ height: 60 }}
+        padding="md" // Same as <Group px>
+      >
+        <AppShell.Header>
+          <Group
+            h="100%"
+            px="md" // Same as <AppShell padding>
+            vars={() => ({
+              root: {
+                '--group-align': 'baseline',
+              },
+            })}
+            style={{
+              alignContent: 'center',
             }}
           >
-            <VCardTextarea />
-            <VCardQrCode />
-          </Stack>
-        </Group>
-      </Container>
+            <Title size={rem(((1 + Math.sqrt(5)) / 2) * 16)}>Miani</Title>
+            <Text>{__APP_VERSION__}</Text>
+          </Group>
+        </AppShell.Header>
+        <AppShell.Main>
+          <Group align="start">
+            <Stack classNames={{ root: classes['FormStack'] }}>
+              <VCardForm />
+            </Stack>
+            <Stack
+              classNames={{
+                root: cls(classes['VCardStack'], classes['Sticky']),
+              }}
+            >
+              <VCardTextarea />
+              <VCardQrCode />
+            </Stack>
+          </Group>
+        </AppShell.Main>
+      </AppShell>
     </DndContext>
   )
 }
