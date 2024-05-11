@@ -58,8 +58,8 @@ const adrState = selector<string | null>({
 
     return built !== '' ? built : null
   },
-  set({ set, get }, newValue) {
-    if (newValue instanceof DefaultValue) {
+  set({ set, get }, newAdr) {
+    if (newAdr instanceof DefaultValue) {
       throw new Error('DefaultValue not supported.')
     }
 
@@ -74,7 +74,7 @@ const adrState = selector<string | null>({
       postalCode,
       countryName,
       rest,
-    } = extract(newValue ?? '', { version })
+    } = extract(newAdr ?? '', { version })
 
     set(postOfficeBoxState, postOfficeBox)
     set(extendedAddressState, extendedAddress)

@@ -50,8 +50,8 @@ const nState = selector<string>({
       },
     )
   },
-  set({ set, get }, newValue) {
-    if (newValue instanceof DefaultValue) {
+  set({ set, get }, newN) {
+    if (newN instanceof DefaultValue) {
       throw new Error('DefaultValue not supported.')
     }
 
@@ -64,7 +64,7 @@ const nState = selector<string>({
       honorificPrefixes,
       honorificSuffixes,
       rest,
-    } = extract(newValue, { version })
+    } = extract(newN, { version })
 
     set(familyNameState, familyName)
     set(givenNameState, givenName)
