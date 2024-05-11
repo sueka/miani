@@ -1,11 +1,13 @@
 import { Fieldset, Stack, TagsInput } from '@mantine/core'
 import { FormattedMessage } from 'react-intl'
-import { useRecoilState } from 'recoil'
-import anyTypesState from '../../../recoil/atoms/any/anyTypesState'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import anyIdsState from '../../../recoil/atoms/any/anyIdsState'
+import anyTypesState from '../../../recoil/selectors/any/anyTypesState'
 import AnyInput from './AnyInput'
 
 const OtherInputs: React.FC = () => {
   const [anyTypes, setAnyTypes] = useRecoilState(anyTypesState)
+  const anyIds = useRecoilValue(anyIdsState)
 
   return (
     <Fieldset
@@ -15,8 +17,8 @@ const OtherInputs: React.FC = () => {
     >
       <Stack gap="xs">
         <TagsInput value={anyTypes} onChange={setAnyTypes} />
-        {anyTypes.map((type) => (
-          <AnyInput {...{ type }} />
+        {anyIds.map((anyId) => (
+          <AnyInput {...{ anyId }} />
         ))}
       </Stack>
     </Fieldset>
