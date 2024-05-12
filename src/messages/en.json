@@ -11,7 +11,6 @@
   "D3idYv": "Settings",
   "EfKJ3q": "Honorific Suffixes",
   "HAlOn1": "Name",
-  "HqV5g9": "Delete the line: {type}:{value}",
   "HvG99+": "Building name, apartment or suite number, etc.",
   "HxFErY": "Family Name",
   "I3b4hn": "Version",
@@ -52,6 +51,7 @@
   "soGG5b": "Should be a <i>list-component</i> on p. 10, RFC 6350.",
   "tmPL2X": "Honorific Prefixes",
   "vPLJtX": "Formatted name",
+  "vW3sl1": "Delete the line: {name}:{value}",
   "z18e7p": "Given Name",
   "z7rCX7": "Post Office Box"
 }

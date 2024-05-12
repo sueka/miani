@@ -1,8 +1,8 @@
 import { type RecoilState, selector } from 'recoil'
 import compact from '../../lib/compact'
 import anyIdsState from '../atoms/any/anyIdsState'
-import anyState from '../atoms/any/anyState'
-import anyTypeState from '../atoms/any/anyTypeState'
+import anyValueState from '../atoms/any/anyValueState'
+import anyNameState from '../atoms/any/anyNameState'
 import sharedState from '../atoms/sharedState'
 
 export default selector({
@@ -15,10 +15,10 @@ export default selector({
 
     return compact(
       anyIds.map<VCard.Line | null>((id) => {
-        const type = get(anyTypeState(id))
-        const any = getOrNull(anyState(id))
+        const name = get(anyNameState(id))
+        const value = getOrNull(anyValueState(id))
 
-        return type !== null && any !== null ? { name: type, value: any } : null
+        return name !== null && value !== null ? { name, value } : null
       }),
     )
   },

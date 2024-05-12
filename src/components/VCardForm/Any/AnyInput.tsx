@@ -17,8 +17,8 @@ import DndContext from '../../../extensions/@dnd-kit/providers/DndContext'
 import Modal from '../../../extensions/@mantine/core/Modal'
 import nes from '../../../lib/nes'
 import anyIdsState from '../../../recoil/atoms/any/anyIdsState'
-import anyState from '../../../recoil/atoms/any/anyState'
-import anyTypeState from '../../../recoil/atoms/any/anyTypeState'
+import anyValueState from '../../../recoil/atoms/any/anyValueState'
+import anyNameState from '../../../recoil/atoms/any/anyNameState'
 import sharedState from '../../../recoil/atoms/sharedState'
 
 interface Props {
@@ -27,11 +27,11 @@ interface Props {
 
 const AnyInput: React.FC<Props> = ({ anyId }) => {
   const { formatMessage } = useIntl()
-  const [type, setType] = useRecoilState(anyTypeState(anyId))
-  const [value, setValue] = useRecoilState(anyState(anyId))
-  const [shared, setShared] = useRecoilState(sharedState(anyState(anyId).key))
-  const resetType = useResetRecoilState(anyTypeState(anyId))
-  const resetValue = useResetRecoilState(anyState(anyId))
+  const [name, setName] = useRecoilState(anyNameState(anyId))
+  const [value, setValue] = useRecoilState(anyValueState(anyId))
+  const [shared, setShared] = useRecoilState(sharedState(anyValueState(anyId).key))
+  const resetName = useResetRecoilState(anyNameState(anyId))
+  const resetValue = useResetRecoilState(anyValueState(anyId))
   const setAnyIds = useSetRecoilState(anyIdsState)
   const inputId = useMemo(v4, [])
 
@@ -46,9 +46,9 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
         <TextInput
           variant="unstyled"
           placeholder={formatMessage({ defaultMessage: 'Type name' })}
-          value={type ?? undefined}
+          value={name ?? undefined}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setType(nes(event.currentTarget.value))
+            setName(nes(event.currentTarget.value))
           }}
         />
       }
@@ -72,10 +72,10 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
         <ActionIcon
           variant="light"
           onClick={() => {
-            if (!(type ?? '').match(/^\s*$/) || !(value ?? '').match(/^\s*$/)) {
+            if (!(name ?? '').match(/^\s*$/) || !(value ?? '').match(/^\s*$/)) {
               openDeleteConfirm()
             } else {
-              resetType()
+              resetName()
               resetValue()
               setAnyIds((anyIds) => anyIds.filter((t) => t !== anyId))
             }
@@ -89,8 +89,8 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
             onClose={closeDeleteConfirm}
             title={
               <FormattedMessage
-                defaultMessage="Delete the line: {type}:{value}"
-                values={{ type, value }}
+                defaultMessage="Delete the line: {name}:{value}"
+                values={{ name, value }}
               />
             }
           >
@@ -98,7 +98,7 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
               <Button
                 color="red"
                 onClick={() => {
-                  resetType()
+                  resetName()
                   resetValue()
                   setAnyIds((anyIds) => anyIds.filter((t) => t !== anyId))
                 }}

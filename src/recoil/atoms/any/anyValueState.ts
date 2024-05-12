@@ -14,10 +14,10 @@ const { persist, restore } = makePersist<string | null>('any/value', {
   },
 })
 
-const anyState = atomFamily<string | null, string>({
+const anyValueState = atomFamily<string | null, string>({
   key: 'any/value',
   default: null,
   effects: [persist, restore],
 })
 
-export default anyState
+export default anyValueState
