@@ -80,6 +80,12 @@ namespace VCard {
 
   interface Line {
     name: string
+    params: Param[]
     value: string
+  }
+
+  interface Param {
+    name: string
+    value: string //
   }
 }

@@ -18,7 +18,9 @@ export default selector({
         const name = get(anyNameState(id))
         const value = getOrNull(anyValueState(id))
 
-        return name !== null && value !== null ? { name, value } : null
+        return name !== null && value !== null
+          ? { name, params: [], value }
+          : null
       }),
     )
   },
