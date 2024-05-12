@@ -6,6 +6,14 @@
 
 import r from '../lib/tags/r'
 
+// VCHAR      = %x21-7E
+// VALUE-CHAR = WSP / VCHAR / NON-ASCII
+// biome-ignore lint/suspicious/noControlCharactersInRegex: RFC 2426 mentions control characters
+const valueChar = /[^\x00-\x08\x0A-\x1F\x7F]/
+
+// value = *VALUE-CHAR
+export const value = r`${valueChar}*`
+
 // SAFE-CHAR = WSP / %x21 / %x23-2B / %x2D-39 / %x3C-7E / NON-ASCII
 // biome-ignore lint/suspicious/noControlCharactersInRegex: RFC 2426 mentions control characters
 const safeChar = /[^\x00-\x08\x0A-\x1F\x22\x3B\x3A\x2C\x7F]/

@@ -14,6 +14,9 @@ const textChar = /\\\\|\\,|\\n|[^\x00-\x08\x0A-\x1F\x2C\x5C\x7F]/
 // text = *TEXT-CHAR
 export const text = r`${textChar}*`
 
+// text-list = text *("," text)
+export const textList = r`${text}(?:,${text})*`
+
 // NOTE: Probably this ABNF is wrong.
 // component = "\\" / "\," / "\;" / "\n" / WSP / NON-ASCII
 //           / %x21-2B / %x2D-3A / %x3C-5B / %x5D-7E

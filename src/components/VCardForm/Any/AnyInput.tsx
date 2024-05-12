@@ -7,19 +7,29 @@ import {
   Input,
   TextInput,
 } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { useDisclosure, useValidatedState } from '@mantine/hooks'
 import { IconBackspace } from '@tabler/icons-react'
-import React, { useMemo } from 'react'
+import React, { useLayoutEffect, useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState,
+} from 'recoil'
 import { v4 } from 'uuid'
 import DndContext from '../../../extensions/@dnd-kit/providers/DndContext'
 import Modal from '../../../extensions/@mantine/core/Modal'
+import exit from '../../../lib/exit'
 import nes from '../../../lib/nes'
+import r from '../../../lib/tags/r'
+import { value as valuePat } from '../../../patterns/vCard'
+import { textList } from '../../../patterns/vCard4'
 import anyIdsState from '../../../recoil/atoms/any/anyIdsState'
-import anyValueState from '../../../recoil/atoms/any/anyValueState'
 import anyNameState from '../../../recoil/atoms/any/anyNameState'
+import anyValueState from '../../../recoil/atoms/any/anyValueState'
 import sharedState from '../../../recoil/atoms/sharedState'
+import versionState from '../../../recoil/atoms/vCard/versionState'
 
 interface Props {
   anyId: string
@@ -27,9 +37,12 @@ interface Props {
 
 const AnyInput: React.FC<Props> = ({ anyId }) => {
   const { formatMessage } = useIntl()
+  const version = useRecoilValue(versionState)
   const [name, setName] = useRecoilState(anyNameState(anyId))
-  const [value, setValue] = useRecoilState(anyValueState(anyId))
-  const [shared, setShared] = useRecoilState(sharedState(anyValueState(anyId).key))
+  const [recoilValue, setRecoilValue] = useRecoilState(anyValueState(anyId))
+  const [shared, setShared] = useRecoilState(
+    sharedState(anyValueState(anyId).key),
+  )
   const resetName = useResetRecoilState(anyNameState(anyId))
   const resetValue = useResetRecoilState(anyValueState(anyId))
   const setAnyIds = useSetRecoilState(anyIdsState)
@@ -39,6 +52,23 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
     deleteConfirmOpen,
     { open: openDeleteConfirm, close: closeDeleteConfirm },
   ] = useDisclosure()
+
+  const [value, setValue] = useValidatedState<string | null>(
+    recoilValue,
+    (value) => {
+      switch (version) {
+        case '3.0':
+          return value === null || r`^${valuePat}$`.test(value)
+
+        case '4.0':
+          return value === null || r`^${textList}$`.test(value)
+      }
+    },
+  )
+
+  useLayoutEffect(() => {
+    setValue(recoilValue)
+  }, [setValue, recoilValue])
 
   return (
     <Input.Wrapper
@@ -64,15 +94,39 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
         <TextInput
           id={inputId}
           flex={1}
-          value={value ?? undefined}
+          value={value.value ?? undefined}
+          error={
+            !value.valid && (
+              <span
+                dangerouslySetInnerHTML={{
+                  __html:
+                    version === '3.0'
+                      ? formatMessage({
+                          defaultMessage:
+                            'Should be a <i>value</i> on p. 29, RFC 2426.',
+                        })
+                      : version === '4.0'
+                        ? formatMessage({
+                            defaultMessage:
+                              'Should be a <i>text-list</i> on p. 10, RFC 6350.',
+                          })
+                        : exit(),
+                }}
+              />
+            )
+          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setValue(nes(event.currentTarget.value))
+            setRecoilValue(nes(event.currentTarget.value))
           }}
         />
         <ActionIcon
           variant="light"
           onClick={() => {
-            if (!(name ?? '').match(/^\s*$/) || !(value ?? '').match(/^\s*$/)) {
+            if (
+              !(name ?? '').match(/^\s*$/) ||
+              !(value.value ?? '').match(/^\s*$/)
+            ) {
               openDeleteConfirm()
             } else {
               resetName()
@@ -90,7 +144,7 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
             title={
               <FormattedMessage
                 defaultMessage="Delete the line: {name}:{value}"
-                values={{ name, value }}
+                values={{ name, value: recoilValue }}
               />
             }
           >
