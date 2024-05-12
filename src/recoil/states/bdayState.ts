@@ -1,10 +1,10 @@
 import { type RecoilState, selector } from 'recoil'
 import exit from '../../lib/exit'
-import bdayDateTimeState from '../atoms/bday/bdayDateTimeState'
-import bdayTextState from '../atoms/bday/bdayTextState'
-import valueParamState from '../atoms/bday/valueParamState'
-import sharedState from '../atoms/sharedState'
-import versionState from '../atoms/vCard/versionState'
+import bdayDateTimeState from './bday/bdayDateTimeState'
+import bdayTextState from './bday/bdayTextState'
+import valueParamState from './bday/valueParamState'
+import sharedState from './sharedState'
+import versionState from './vCard/versionState'
 
 export default selector<VCard.Bday | null>({
   key: 'bday',

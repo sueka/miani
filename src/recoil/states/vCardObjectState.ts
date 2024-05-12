@@ -1,12 +1,12 @@
 import { selector } from 'recoil'
 
-import fnState from '../atoms/fnState'
-import versionState from '../atoms/vCard/versionState'
 import adrState from './adrState'
 import anyObjectState from './anyObjectState'
 import bdayState from './bdayState'
+import fnState from './fnState'
 import nState from './nState'
 import telsState from './telsState'
+import versionState from './vCard/versionState'
 import xObjectState from './xObjectState'
 
 const vCardObjectState = selector<VCard.VCard>({

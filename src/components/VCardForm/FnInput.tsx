@@ -8,8 +8,8 @@ import exit from '../../lib/exit'
 import r from '../../lib/tags/r'
 import { textValue } from '../../patterns/vCard'
 import { text } from '../../patterns/vCard4'
-import fnState from '../../recoil/atoms/fnState'
-import versionState from '../../recoil/atoms/vCard/versionState'
+import fnState from '../../recoil/states/fnState'
+import versionState from '../../recoil/states/vCard/versionState'
 
 const FnInput: React.FC = () => {
   const { formatMessage } = useIntl()

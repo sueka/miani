@@ -19,9 +19,9 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { textValue } from '../../../patterns/vCard'
 import { listComponent } from '../../../patterns/vCard4'
-import localityState from '../../../recoil/atoms/adr/localityState'
-import sharedState from '../../../recoil/atoms/sharedState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import localityState from '../../../recoil/states/adr/localityState'
+import sharedState from '../../../recoil/states/sharedState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 const LocalityInput: React.FC = () => {
   const { formatMessage } = useIntl()

@@ -10,9 +10,9 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { textValue } from '../../../patterns/vCard'
 import { listComponent } from '../../../patterns/vCard4'
-import countryNameState from '../../../recoil/atoms/adr/countryNameState'
-import sharedState from '../../../recoil/atoms/sharedState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import countryNameState from '../../../recoil/states/adr/countryNameState'
+import sharedState from '../../../recoil/states/sharedState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 interface Props {
   id?: string

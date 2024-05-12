@@ -9,8 +9,8 @@ import exit from '../../../lib/exit'
 import r from '../../../lib/tags/r'
 import { nValue as nValueV3 } from '../../../patterns/vCard'
 import { nValue as nValueV4 } from '../../../patterns/vCard4'
-import versionState from '../../../recoil/atoms/vCard/versionState'
-import nState from '../../../recoil/selectors/nState'
+import nState from '../../../recoil/states/nState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 type Props = Partial<Pick<TextInputProps, 'id'>>
 

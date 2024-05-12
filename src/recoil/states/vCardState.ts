@@ -2,9 +2,9 @@ import { selector } from 'recoil'
 
 import vCard3Lines from '../../gen/vCard3Lines'
 import vCard4Lines from '../../gen/vCard4Lines'
-import noYearState from '../atoms/bday/noYearState'
-import charsetState from '../atoms/vCard/charsetState'
-import versionState from '../atoms/vCard/versionState'
+import noYearState from './bday/noYearState'
+import charsetState from './vCard/charsetState'
+import versionState from './vCard/versionState'
 import vCardObjectState from './vCardObjectState'
 
 // NOTE: The AGENT type can have a text value of a vCard object, where the newline code is LF (%0A) and you MUST backslash-escape LF, comma, semicolon and colon.

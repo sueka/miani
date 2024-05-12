@@ -1,9 +1,9 @@
 import { type RecoilState, selector } from 'recoil'
 import compact from '../../lib/compact'
 import exit from '../../lib/exit'
-import sharedState from '../atoms/sharedState'
-import telIdsState from '../atoms/tel/telIdsState'
-import telState from '../atoms/tel/telState'
+import sharedState from './sharedState'
+import telIdsState from './tel/telIdsState'
+import telState from './tel/telState'
 
 export default selector({
   key: 'tels',

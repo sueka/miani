@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
 
 import assert from '../../../lib/assert'
-import variantState from '../../../recoil/atoms/adr/variantState'
+import variantState from '../../../recoil/states/adr/variantState'
 import CountryNameInput from './CountryNameInput'
 import ExtendedAddressInput from './ExtendedAddressInput'
 import LocalityInput from './LocalityInput'

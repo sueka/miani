@@ -2,7 +2,7 @@ import { Button, Fieldset, Stack } from '@mantine/core'
 import { FormattedMessage } from 'react-intl'
 import { useRecoilState } from 'recoil'
 import { ulid } from 'ulid'
-import anyIdsState from '../../../recoil/atoms/any/anyIdsState'
+import anyIdsState from '../../../recoil/states/any/anyIdsState'
 import AnyInput from './AnyInput'
 
 const OtherInputs: React.FC = () => {

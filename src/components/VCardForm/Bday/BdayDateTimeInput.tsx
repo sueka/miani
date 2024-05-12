@@ -6,9 +6,9 @@ import { useRecoilState } from 'recoil'
 
 import toLegacyDate from '../../../lib/Temporal/toLegacyDate'
 import toPlainDate from '../../../lib/Temporal/toPlainDate'
-import bdayDateTimeState from '../../../recoil/atoms/bday/bdayDateTimeState'
-import noYearState from '../../../recoil/atoms/bday/noYearState'
-import sharedState from '../../../recoil/atoms/sharedState'
+import bdayDateTimeState from '../../../recoil/states/bday/bdayDateTimeState'
+import noYearState from '../../../recoil/states/bday/noYearState'
+import sharedState from '../../../recoil/states/sharedState'
 
 const BdayDateTimeInput: React.FC = () => {
   const { locale } = useIntl()

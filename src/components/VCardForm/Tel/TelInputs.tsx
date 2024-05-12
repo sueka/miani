@@ -18,7 +18,7 @@ import { FormattedMessage } from 'react-intl'
 import { useRecoilState } from 'recoil'
 import { ulid } from 'ulid'
 import assert from '../../../lib/assert'
-import telIdsState from '../../../recoil/atoms/tel/telIdsState'
+import telIdsState from '../../../recoil/states/tel/telIdsState'
 import TelInput from './TelInput'
 
 const TelInputs: React.FC = () => {

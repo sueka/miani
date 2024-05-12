@@ -20,9 +20,9 @@ import Modal from '../../../extensions/@mantine/core/Modal'
 import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { phoneNumberValue } from '../../../patterns/vCard'
-import sharedState from '../../../recoil/atoms/sharedState'
-import telIdsState from '../../../recoil/atoms/tel/telIdsState'
-import telState from '../../../recoil/atoms/tel/telState'
+import sharedState from '../../../recoil/states/sharedState'
+import telIdsState from '../../../recoil/states/tel/telIdsState'
+import telState from '../../../recoil/states/tel/telState'
 
 interface Props {
   telId: string

@@ -7,8 +7,8 @@ import assert from '../../../lib/assert'
 import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { text } from '../../../patterns/vCard4'
-import bdayTextState from '../../../recoil/atoms/bday/bdayTextState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import bdayTextState from '../../../recoil/states/bday/bdayTextState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 const BdayTextInput: React.FC = () => {
   const { formatMessage } = useIntl()

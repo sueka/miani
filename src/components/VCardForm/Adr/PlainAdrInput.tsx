@@ -10,8 +10,8 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { adrValue as adrValueV3 } from '../../../patterns/vCard'
 import { adrValue as adrValueV4 } from '../../../patterns/vCard4'
-import versionState from '../../../recoil/atoms/vCard/versionState'
-import adrState from '../../../recoil/selectors/adrState'
+import adrState from '../../../recoil/states/adrState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 type Props = Partial<Pick<TextInputProps, 'id'>>
 

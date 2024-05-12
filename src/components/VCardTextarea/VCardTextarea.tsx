@@ -20,9 +20,9 @@ import { FormattedMessage } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import assert from '../../lib/assert'
-import fnState from '../../recoil/atoms/fnState'
-import versionState from '../../recoil/atoms/vCard/versionState'
-import vCardState from '../../recoil/selectors/vCardState'
+import fnState from '../../recoil/states/fnState'
+import versionState from '../../recoil/states/vCard/versionState'
+import vCardState from '../../recoil/states/vCardState'
 import Settings from './Settings'
 
 type Props = Pick<TextareaProps, 'classNames'>

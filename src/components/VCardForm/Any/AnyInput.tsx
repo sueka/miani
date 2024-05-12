@@ -25,11 +25,11 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { value as valuePat } from '../../../patterns/vCard'
 import { textList } from '../../../patterns/vCard4'
-import anyIdsState from '../../../recoil/atoms/any/anyIdsState'
-import anyNameState from '../../../recoil/atoms/any/anyNameState'
-import anyValueState from '../../../recoil/atoms/any/anyValueState'
-import sharedState from '../../../recoil/atoms/sharedState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import anyIdsState from '../../../recoil/states/any/anyIdsState'
+import anyNameState from '../../../recoil/states/any/anyNameState'
+import anyValueState from '../../../recoil/states/any/anyValueState'
+import sharedState from '../../../recoil/states/sharedState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 interface Props {
   anyId: string

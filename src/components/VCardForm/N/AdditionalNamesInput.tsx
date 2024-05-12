@@ -11,9 +11,9 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { textValues } from '../../../patterns/vCard'
 import { listComponent } from '../../../patterns/vCard4'
-import additionalNamesState from '../../../recoil/atoms/n/additionalNamesState'
-import sharedState from '../../../recoil/atoms/sharedState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import additionalNamesState from '../../../recoil/states/n/additionalNamesState'
+import sharedState from '../../../recoil/states/sharedState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 const AdditionalNamesInput: React.FC = () => {
   const { formatMessage } = useIntl()

@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl'
 import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
 import nes from '../../lib/nes'
-import sharedState from '../../recoil/atoms/sharedState'
-import xState from '../../recoil/atoms/x/xState'
-import xAccessor from '../../recoil/selectors/xAccessor'
+import sharedState from '../../recoil/states/sharedState'
+import xState from '../../recoil/states/x/xState'
+import xAccessor from '../../recoil/states/xAccessor'
 
 const XPhoneticNamesInput: React.FC = () => {
   const [phoneticLastName, setPhoneticLastName] = useRecoilState(

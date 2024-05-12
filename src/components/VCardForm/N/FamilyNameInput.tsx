@@ -16,9 +16,9 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { textValues } from '../../../patterns/vCard'
 import { listComponent } from '../../../patterns/vCard4'
-import familyNameState from '../../../recoil/atoms/n/familyNameState'
-import sharedState from '../../../recoil/atoms/sharedState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import familyNameState from '../../../recoil/states/n/familyNameState'
+import sharedState from '../../../recoil/states/sharedState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 type Props = Partial<Pick<TextInputProps, 'id'>>
 

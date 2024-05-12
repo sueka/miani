@@ -10,9 +10,9 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { textValues } from '../../../patterns/vCard'
 import { listComponent } from '../../../patterns/vCard4'
-import honorificSuffixesState from '../../../recoil/atoms/n/honorificSuffixesState'
-import sharedState from '../../../recoil/atoms/sharedState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import honorificSuffixesState from '../../../recoil/states/n/honorificSuffixesState'
+import sharedState from '../../../recoil/states/sharedState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 const HonorificSuffixesInput: React.FC = () => {
   const { formatMessage } = useIntl()

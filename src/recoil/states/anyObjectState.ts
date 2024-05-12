@@ -1,9 +1,9 @@
 import { type RecoilState, selector } from 'recoil'
 import compact from '../../lib/compact'
-import anyIdsState from '../atoms/any/anyIdsState'
-import anyNameState from '../atoms/any/anyNameState'
-import anyValueState from '../atoms/any/anyValueState'
-import sharedState from '../atoms/sharedState'
+import anyIdsState from './any/anyIdsState'
+import anyNameState from './any/anyNameState'
+import anyValueState from './any/anyValueState'
+import sharedState from './sharedState'
 
 export default selector({
   key: 'any',

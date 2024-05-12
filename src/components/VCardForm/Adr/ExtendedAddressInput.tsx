@@ -11,9 +11,9 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { textValue } from '../../../patterns/vCard'
 import { listComponent } from '../../../patterns/vCard4'
-import extendedAddressState from '../../../recoil/atoms/adr/extendedAddressState'
-import sharedState from '../../../recoil/atoms/sharedState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import extendedAddressState from '../../../recoil/states/adr/extendedAddressState'
+import sharedState from '../../../recoil/states/sharedState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 const ExtendedAddressInput: React.FC = () => {
   const { formatMessage } = useIntl()

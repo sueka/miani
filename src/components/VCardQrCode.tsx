@@ -4,7 +4,7 @@ import QRCode from 'qrcode'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import vCardState from '../recoil/selectors/vCardState'
+import vCardState from '../recoil/states/vCardState'
 import classes from './VCardQrCode.module.css'
 
 type Props = Pick<InputProps, 'classNames'>

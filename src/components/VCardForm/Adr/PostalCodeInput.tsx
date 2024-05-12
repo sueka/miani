@@ -10,9 +10,9 @@ import nes from '../../../lib/nes'
 import r from '../../../lib/tags/r'
 import { textValue } from '../../../patterns/vCard'
 import { listComponent } from '../../../patterns/vCard4'
-import postalCodeState from '../../../recoil/atoms/adr/postalCodeState'
-import sharedState from '../../../recoil/atoms/sharedState'
-import versionState from '../../../recoil/atoms/vCard/versionState'
+import postalCodeState from '../../../recoil/states/adr/postalCodeState'
+import sharedState from '../../../recoil/states/sharedState'
+import versionState from '../../../recoil/states/vCard/versionState'
 
 const PostalCodeInput: React.FC = () => {
   const { formatMessage } = useIntl()

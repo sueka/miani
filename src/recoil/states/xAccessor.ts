@@ -1,6 +1,6 @@
 import { selectorFamily } from 'recoil'
-import xNamesState from '../atoms/x/xNamesState'
-import xState from '../atoms/x/xState'
+import xNamesState from './x/xNamesState'
+import xState from './x/xState'
 
 export default selectorFamily({
   key: 'x-accessor',

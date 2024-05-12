@@ -4,8 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 import Modal from '../../extensions/@mantine/core/Modal'
 import assert from '../../lib/assert'
-import charsetState from '../../recoil/atoms/vCard/charsetState'
-import versionState from '../../recoil/atoms/vCard/versionState'
+import charsetState from '../../recoil/states/vCard/charsetState'
+import versionState from '../../recoil/states/vCard/versionState'
 import classes from './Settings.module.css'
 
 interface Props {
