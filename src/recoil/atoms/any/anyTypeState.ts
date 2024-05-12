@@ -2,7 +2,7 @@ import { atomFamily } from 'recoil'
 
 import makePersist, { compareKeys } from '../../effects/makePersist'
 
-const { persist, restore } = makePersist<string>('any/type', {
+const { persist, restore } = makePersist<string | null>('any/type', {
   serialize(value) {
     return JSON.stringify(value, (key, value) => {
       if (compareKeys(key, 'any/type') && value === null) {
@@ -14,9 +14,9 @@ const { persist, restore } = makePersist<string>('any/type', {
   },
 })
 
-// with no duplicates
-const anyTypeState = atomFamily<string, string>({
+const anyTypeState = atomFamily<string | null, string>({
   key: 'any/type',
+  default: null,
   effects: [persist, restore],
 })
 

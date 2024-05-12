@@ -117,7 +117,7 @@ export default function* vCard4Lines(
     yield `${name}${params}:${value}`
   }
 
-  for (const [type, value] of Object.entries(vCardObject.any)) {
+  for (const { name: type, value } of vCardObject.any) {
     if (value === '') {
       continue
     }

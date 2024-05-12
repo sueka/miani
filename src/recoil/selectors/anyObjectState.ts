@@ -13,15 +13,13 @@ export default selector({
 
     const anyIds = get(anyIdsState)
 
-    return Object.fromEntries(
-      compact(
-        anyIds.map<[string, string] | null>((id) => {
-          const type = get(anyTypeState(id))
-          const any = getOrNull(anyState(id))
+    return compact(
+      anyIds.map<VCard.Line | null>((id) => {
+        const type = get(anyTypeState(id))
+        const any = getOrNull(anyState(id))
 
-          return any !== null ? [type, any] : null
-        }),
-      ),
+        return type !== null && any !== null ? { name: type, value: any } : null
+      }),
     )
   },
 })

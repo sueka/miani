@@ -6,8 +6,8 @@ namespace VCard {
     bday: Bday | null
     adr: string | null
     tels: Tel[] | null
-    x: Record<string, string> // non-standard types
-    any: Record<string, string>
+    x: Record<string, string> // non-standard types //
+    any: Line[]
   }
 
   interface Options {
@@ -77,4 +77,9 @@ namespace VCard {
     | 'car'
     | 'isdn'
     | 'pcs'
+
+  interface Line {
+    name: string
+    value: string
+  }
 }
