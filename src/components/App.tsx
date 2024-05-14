@@ -5,11 +5,21 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { restrictToParentElement } from '@dnd-kit/modifiers'
-import { AppShell, Group, Stack, Text, Title, rem } from '@mantine/core'
+import {
+  ActionIcon,
+  AppShell,
+  Group,
+  Stack,
+  Text,
+  Title,
+  rem,
+} from '@mantine/core'
+import { IconBrandGithubFilled } from '@tabler/icons-react'
 import cls from 'classnames'
 
 import DndContext from '../extensions/@dnd-kit/providers/DndContext'
 import MouseSensor from '../extensions/@dnd-kit/sensors/MouseSensor'
+import Spacer from '../lib/components/Spacer'
 import classes from './App.module.css'
 import VCardForm from './VCardForm/VCardForm'
 import VCardQrCode from './VCardQrCode'
@@ -32,17 +42,30 @@ const App: React.FC = () => {
           <Group
             h="100%"
             px="md" // Same as <AppShell padding>
-            vars={() => ({
-              root: {
-                '--group-align': 'baseline',
-              },
-            })}
-            style={{
-              alignContent: 'center',
-            }}
           >
-            <Title size={rem(((1 + Math.sqrt(5)) / 2) * 16)}>Miani</Title>
-            <Text>{__APP_VERSION__}</Text>
+            <Group
+              h="100%"
+              vars={() => ({
+                root: {
+                  '--group-align': 'baseline',
+                },
+              })}
+              style={{
+                alignContent: 'center',
+              }}
+            >
+              <Title size={rem(((1 + Math.sqrt(5)) / 2) * 16)}>Miani</Title>
+              <Text>{__APP_VERSION__}</Text>
+            </Group>
+            <Spacer />
+            <ActionIcon
+              color="var(--mantine-color-text)"
+              variant="subtle"
+              component="a"
+              href={`${__GIT_REMOTE__}/tree/${__GIT_COMMIT_HASH__}`}
+            >
+              <IconBrandGithubFilled />
+            </ActionIcon>
           </Group>
         </AppShell.Header>
         <AppShell.Main pt="var(--mantine-spacing-md)">

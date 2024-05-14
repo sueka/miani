@@ -8,12 +8,18 @@ import topLevelAwait from 'vite-plugin-top-level-await'
 const exec = promisify(execSync)
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
     define: {
       __APP_VERSION__: JSON.stringify(env.npm_package_version),
+      __GIT_REMOTE__: JSON.stringify(
+        env.GIT_REMOTE ?? 'https://github.com/sueka/miani', //
+      ),
+      __GIT_COMMIT_HASH__: JSON.stringify(
+        (await exec('git show --no-patch --format=%H')).stdout.trimEnd(),
+      ),
     },
     plugins: [
       preact({
