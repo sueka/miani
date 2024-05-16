@@ -45,6 +45,26 @@ const HonorificPrefixesInput: React.FC = () => {
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Honorific Prefixes" />}
       labelProps={{ htmlFor: inputId }}
+      error={
+        !honorificPrefixes.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -59,32 +79,13 @@ const HonorificPrefixesInput: React.FC = () => {
           placeholder="Mr."
           autoComplete="honorific-prefix"
           value={honorificPrefixes.value ?? undefined}
-          error={
-            !honorificPrefixes.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setHonorificPrefixes(nes(event.currentTarget.value))
             setRecoilHonorificPrefixes(
               nes(event.currentTarget.value)?.split(',') ?? null, //
             )
           }}
+          error={!honorificPrefixes.valid}
         />
       </Group>
     </Input.Wrapper>

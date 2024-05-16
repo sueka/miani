@@ -47,6 +47,26 @@ const CountryNameInput: React.FC<Props> = ({ id }) => {
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Country Name" />}
       labelProps={{ htmlFor: inputId }}
+      error={
+        !countryName.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be a <i>text-value</i> on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -61,30 +81,11 @@ const CountryNameInput: React.FC<Props> = ({ id }) => {
           placeholder="U.S.A."
           autoComplete="country-name"
           value={countryName.value ?? undefined}
-          error={
-            !countryName.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be a <i>text-value</i> on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setCountryName(nes(event.currentTarget.value))
             setRecoilCountryName(nes(event.currentTarget.value))
           }}
+          error={!countryName.valid}
         />
       </Group>
     </Input.Wrapper>

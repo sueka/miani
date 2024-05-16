@@ -65,12 +65,12 @@ const TelInput: React.FC<Props> = ({ telId }) => {
   return (
     <Input.Wrapper
       ref={draggable}
+      {...attributes}
       style={{
         transform: CSS.Transform.toString(transform),
         transition,
         opacity: isDragging ? 0.2 : undefined,
       }}
-      {...attributes}
       error={
         !tel.valid && (
           <span

@@ -55,6 +55,26 @@ const StreetAddressInput: React.FC = () => {
         </>
       }
       labelProps={{ htmlFor: inputId }}
+      error={
+        !streetAddress.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be a <i>text-value</i> on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -69,30 +89,11 @@ const StreetAddressInput: React.FC = () => {
           placeholder="123 Main Street"
           autoComplete="street-address"
           value={streetAddress.value ?? undefined}
-          error={
-            !streetAddress.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be a <i>text-value</i> on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setStreetAddress(nes(event.currentTarget.value))
             setRecoilStreetAddress(nes(event.currentTarget.value))
           }}
+          error={!streetAddress.valid}
         />
       </Group>
     </Input.Wrapper>

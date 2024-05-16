@@ -66,6 +66,26 @@ const LocalityInput: React.FC = () => {
         </>
       }
       labelProps={{ htmlFor: inputId }}
+      error={
+        !locality.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be a <i>text-value</i> on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -80,30 +100,11 @@ const LocalityInput: React.FC = () => {
           placeholder="Any Town"
           autoComplete="address-level2"
           value={locality.value ?? undefined}
-          error={
-            !locality.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be a <i>text-value</i> on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setLocality(nes(event.currentTarget.value))
             setRecoilLocality(nes(event.currentTarget.value))
           }}
+          error={!locality.valid}
         />
       </Group>
     </Input.Wrapper>

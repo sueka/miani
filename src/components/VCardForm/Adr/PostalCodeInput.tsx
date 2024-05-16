@@ -43,6 +43,26 @@ const PostalCodeInput: React.FC = () => {
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Postal Code" />}
       labelProps={{ htmlFor: inputId }}
+      error={
+        !postalCode.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be a <i>text-value</i> on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -57,30 +77,11 @@ const PostalCodeInput: React.FC = () => {
           placeholder="91921-1234"
           autoComplete="postal-code"
           value={postalCode.value ?? undefined}
-          error={
-            !postalCode.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be a <i>text-value</i> on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setPostalCode(nes(event.currentTarget.value))
             setRecoilPostalCode(nes(event.currentTarget.value))
           }}
+          error={!postalCode.valid}
         />
       </Group>
     </Input.Wrapper>

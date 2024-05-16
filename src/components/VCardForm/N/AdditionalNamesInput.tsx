@@ -54,6 +54,26 @@ const AdditionalNamesInput: React.FC = () => {
         </>
       }
       labelProps={{ htmlFor: inputId }}
+      error={
+        !additionalNames.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -68,32 +88,14 @@ const AdditionalNamesInput: React.FC = () => {
           placeholder="Quinlan"
           autoComplete="additional-name"
           value={additionalNames.value ?? undefined}
-          error={
-            !additionalNames.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
+          labelProps={{ htmlFor: inputId }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setAdditionalNames(nes(event.currentTarget.value))
             setRecoilAdditionalNames(
               nes(event.currentTarget.value)?.split(',') ?? null, //
             )
           }}
+          error={!additionalNames.valid}
         />
       </Group>
     </Input.Wrapper>

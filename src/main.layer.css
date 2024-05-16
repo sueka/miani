@@ -1,4 +1,4 @@
-@layer reset;
+@layer reset, mantine;
 
 @layer reset {
   fieldset {
@@ -9,5 +9,25 @@
   textarea {
     margin-top: 0;
     margin-bottom: 0;
+  }
+}
+
+@layer mantine {
+  /* [x] [text input] */
+  /*     error */
+  .mantine-InputWrapper-root
+  > .mantine-Group-root:has(.mantine-Checkbox-root:first-child + .mantine-TextInput-root)
+  + .mantine-InputWrapper-error {
+    /* Same as for <Checkbox> of Mantine */
+    --checkbox-size-sm: calc(1.25rem * var(--mantine-scale));
+    --checkbox-size: var(--checkbox-size-sm);
+
+    /* Same as for <Group> of Mantine */
+    --group-gap: var(--mantine-spacing-xs);
+
+    margin-top: calc(var(--mantine-spacing-xs) / 2);
+    position: relative;
+    left: calc(var(--checkbox-size) + var(--group-gap));
+    max-width: calc(100% - (var(--checkbox-size) + var(--group-gap)));
   }
 }

@@ -83,6 +83,26 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
         />
       }
       labelProps={{ htmlFor: inputId }}
+      error={
+        !value.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be a <i>value</i> on p. 29, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>text-list</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -95,30 +115,11 @@ const AnyInput: React.FC<Props> = ({ anyId }) => {
           id={inputId}
           flex={1}
           value={value.value ?? undefined}
-          error={
-            !value.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be a <i>value</i> on p. 29, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>text-list</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setValue(nes(event.currentTarget.value))
             setRecoilValue(nes(event.currentTarget.value))
           }}
+          error={!value.valid}
         />
         <ActionIcon
           variant="light"

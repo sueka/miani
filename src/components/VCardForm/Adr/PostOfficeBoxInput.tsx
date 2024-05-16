@@ -50,6 +50,26 @@ const PostOfficeBoxInput: React.FC<Props> = ({ id }) => {
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Post Office Box" />}
       labelProps={{ htmlFor: inputId }}
+      error={
+        !postOfficeBox.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be a <i>text-value</i> on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -63,30 +83,11 @@ const PostOfficeBoxInput: React.FC<Props> = ({ id }) => {
           flex={1}
           placeholder=""
           value={postOfficeBox.value ?? undefined}
-          error={
-            !postOfficeBox.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be a <i>text-value</i> on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setPostOfficeBox(nes(event.currentTarget.value))
             setRecoilPostOfficeBox(nes(event.currentTarget.value))
           }}
+          error={!postOfficeBox.valid}
           rightSection={
             version === '4.0' ? (
               <Hint variant="alert">

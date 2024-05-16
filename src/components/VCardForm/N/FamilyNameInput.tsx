@@ -50,6 +50,26 @@ const FamilyNameInput: React.FC<Props> = ({ id = v4() }) => {
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Family Name" />}
       labelProps={{ htmlFor: id }}
+      error={
+        !familyName.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -64,30 +84,11 @@ const FamilyNameInput: React.FC<Props> = ({ id = v4() }) => {
           placeholder="Public"
           autoComplete="family-name"
           value={familyName.value ?? undefined}
-          error={
-            !familyName.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setFamilyName(nes(event.currentTarget.value))
             setRecoilFamilyName(nes(event.currentTarget.value))
           }}
+          error={!familyName.valid}
         />
       </Group>
     </Input.Wrapper>

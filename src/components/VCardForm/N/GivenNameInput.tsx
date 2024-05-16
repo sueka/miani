@@ -42,6 +42,26 @@ const GivenNameInput: React.FC = () => {
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Given Name" />}
       labelProps={{ htmlFor: inputId }}
+      error={
+        !givenName.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -56,30 +76,11 @@ const GivenNameInput: React.FC = () => {
           placeholder="John"
           autoComplete="given-name"
           value={givenName.value ?? undefined}
-          error={
-            !givenName.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setGivenName(nes(event.currentTarget.value))
             setRecoilGivenName(nes(event.currentTarget.value))
           }}
+          error={!givenName.valid}
         />
       </Group>
     </Input.Wrapper>

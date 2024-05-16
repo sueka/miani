@@ -45,6 +45,26 @@ const HonorificSuffixesInput: React.FC = () => {
     <Input.Wrapper
       label={<FormattedMessage defaultMessage="Honorific Suffixes" />}
       labelProps={{ htmlFor: inputId }}
+      error={
+        !honorificSuffixes.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -59,32 +79,13 @@ const HonorificSuffixesInput: React.FC = () => {
           placeholder="Esq."
           autoComplete="honorific-suffix"
           value={honorificSuffixes.value ?? undefined}
-          error={
-            !honorificSuffixes.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be comma-separated <i>text-value</i>s on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setHonorificSuffixes(nes(event.currentTarget.value))
             setRecoilHonorificSuffixes(
               nes(event.currentTarget.value)?.split(',') ?? null, //
             )
           }}
+          error={!honorificSuffixes.valid}
         />
       </Group>
     </Input.Wrapper>

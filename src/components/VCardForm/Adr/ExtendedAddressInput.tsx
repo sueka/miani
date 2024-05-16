@@ -54,6 +54,26 @@ const ExtendedAddressInput: React.FC = () => {
         </>
       }
       labelProps={{ htmlFor: inputId }}
+      error={
+        !extendedAddress.valid && (
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                version === '3.0'
+                  ? formatMessage({
+                      defaultMessage:
+                        'Should be a <i>text-value</i> on p. 37, RFC 2426.',
+                    })
+                  : version === '4.0'
+                    ? formatMessage({
+                        defaultMessage:
+                          'Should be a <i>list-component</i> on p. 10, RFC 6350.',
+                      })
+                    : exit(),
+            }}
+          />
+        )
+      }
     >
       <Group gap="xs">
         <Checkbox
@@ -67,30 +87,11 @@ const ExtendedAddressInput: React.FC = () => {
           flex={1}
           placeholder=""
           value={extendedAddress.value ?? undefined}
-          error={
-            !extendedAddress.valid && (
-              <span
-                dangerouslySetInnerHTML={{
-                  __html:
-                    version === '3.0'
-                      ? formatMessage({
-                          defaultMessage:
-                            'Should be a <i>text-value</i> on p. 37, RFC 2426.',
-                        })
-                      : version === '4.0'
-                        ? formatMessage({
-                            defaultMessage:
-                              'Should be a <i>list-component</i> on p. 10, RFC 6350.',
-                          })
-                        : exit(),
-                }}
-              />
-            )
-          }
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setExtendedAddress(nes(event.currentTarget.value))
             setRecoilExtendedAddress(nes(event.currentTarget.value))
           }}
+          error={!extendedAddress.valid}
           rightSection={
             version === '4.0' ? (
               <Hint variant="alert">
